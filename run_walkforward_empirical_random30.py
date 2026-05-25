@@ -1,0 +1,44 @@
+"""
+Walk-forward GRPO — empirical reward + **random 30 stocks** universe.
+
+Same settings as ``walkforward_202604_empirical`` (fixed reward weights,
+7-fold walk-forward, long-short Top5/Bottom5), but universe is 30 stocks
+sampled uniformly at random from CSI500 2026 pool (seed=42).
+
+Artifacts:
+  files/experiments/walkforward_202604_empirical_random30/
+"""
+
+import sys
+import warnings
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "files"))
+warnings.filterwarnings("ignore")
+
+from reward_model import empirical_reward_config
+from stock_select import select_random_n
+from walkforward import WalkForwardConfig, run_walkforward
+
+TAG = "walkforward_202604_empirical_random30"
+ROOT = Path(__file__).resolve().parent / "files" / "experiments" / TAG
+SEED = 42
+
+if __name__ == "__main__":
+    ROOT.mkdir(parents=True, exist_ok=True)
+    stock_ids, uni_df = select_random_n(
+        n=30,
+        seed=SEED,
+        save_path=ROOT / "universe" / "random30_seed42.csv",
+    )
+    print(f"Random-30 empirical experiment -> {ROOT}")
+    print(f"Universe ({len(stock_ids)}): {', '.join(stock_ids[:5])} ...\n")
+
+    run_walkforward(WalkForwardConfig(
+        experiment_tag=TAG,
+        experiment_root=ROOT,
+        stock_ids=stock_ids,
+        reward_mode="empirical",
+        reward_config=empirical_reward_config(top_k=5, bottom_k=5),
+        seed=SEED,
+    ))

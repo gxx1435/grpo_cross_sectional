@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+
+# IDE / OS
+.idea/
+.DS_Store
+*.swp
+
+# Large market data (see files/README.md for layout)
+files/2025/
+files/2026/
+files/csi500/
+
+# HF dataset caches and heavy artifacts
+**/.hf_cache/
+**/*.npz
+files/checkpoints/
+files/checkpoints_v2/
+files/logs/
+files/backtest_out*/
+files/backtest_out/
+
+# Experiment outputs (models, logs, stitched returns — regenerate locally)
+files/experiments/**/folds/
+files/experiments/**/backtest/
+files/experiments/**/shared_sft/
+files/experiments/**/run.log
+files/experiments/**/*.pt
+files/experiments/**/*.png
+files/experiments/**/*.csv
+
+# Keep experiment README/meta for reproducibility
+!files/experiments/**/README.txt
+!files/experiments/**/meta.json

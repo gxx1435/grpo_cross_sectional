@@ -1,0 +1,82 @@
+[transformers] Disabling PyTorch because PyTorch >= 2.4 is required but found 2.2.2
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+========================================================================================
+[1/4] SFT  -- 2026 first 30 days, 200 stocks (L=30, H=5)
+========================================================================================
+  -> SFT checkpoint already exists at /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/checkpoints_v2/best_sft_model.pt, skipping SFT.
+
+========================================================================================
+[2/4] GRPO -- IC + 1.0*Sharpe - 1.0*MaxDD, 8 generations, KL beta=0.10 (light touch on top of strong SFT)
+========================================================================================
+loaded SFT checkpoint: /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/checkpoints_v2/best_sft_model.pt
+device       : cpu
+data shape   : N=200, F=11, L=30, H=5
+episode len  : M=12
+episodes     : train=1417 val=2854
+GRPO config  : G=8 eps=0.2 beta=0.1 temp=1.0
+reward       : 1.0*IC + 1.0*Sharpe - 1.0*MaxDD
+[trl] GRPOConfig instantiation skipped: ImportError
+trl GRPOConfig: skipped (torch<2.4); using TRL-compatible local config.
+--------------------------------------------------------------------------------
+epoch 001/2 loss=2.9237 pg=0.0000 kl=29.2369 | reward=0.5079 ic=0.0462 sharpe=0.4650 dd=0.0032 | lr=5.41e-06
+epoch 002/2 loss=4.1666 pg=0.0000 kl=41.6662 | reward=0.5205 ic=0.0487 sharpe=0.4750 dd=0.0032 | lr=0.00e+00
+--------------------------------------------------------------------------------
+GRPO training done.
+[GRPO done in 5872.2s]
+
+========================================================================================
+[3/4] Backtest -- next 10 OOS days, rebalance every 10 bars, fee 5bps
+========================================================================================
+backtest config
+  pool_dir   : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/csi500/2026_1min
+  date range : start_day=30, num_days=10
+  N x F x L  : 200 x 11 x 30
+  rebalance  : every 10 bars (H=5)
+  fee        : 5.0 bps per rebalance one-side
+  policy     : GRPO (last_grpo_model.pt)
+--------------------------------------------------------------------------------
+=== summary (3-month OOS, 1-min bars) ===
+  policy  : bars=2355 total=-6.39% ann=-80.65% sharpe=-4.20 MDD=22.42% hit=50.7%
+  EW base : bars=2355 total=-1.70% ann=-34.71% sharpe=-0.98 MDD=21.23% hit=52.8%
+
+=== monthly returns (policy / equal-weight / alpha) ===
+  2026-02  policy=+7.88%   EW=+11.22%   alpha=-3.34%
+  2026-03  policy=-13.23%   EW=-11.62%   alpha=-1.62%
+
+=== daily NAV (last 10) ===
+      date  daily_return  cum_nav
+2026-02-24      0.035946 1.035946
+2026-02-25      0.028229 1.065189
+2026-02-26     -0.009473 1.055099
+2026-02-27      0.022501 1.078840
+2026-03-02      0.066059 1.150107
+2026-03-03     -0.178065 0.945313
+2026-03-04      0.031363 0.974961
+2026-03-05     -0.029738 0.945968
+2026-03-06      0.010702 0.956092
+2026-03-09     -0.020929 0.936082
+
+results saved to /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/backtest_out_v2
+[Backtest done in 70.2s]
+
+========================================================================================
+[4/4] Plot -- NAV curve + rolling Sharpe + summary bars
+========================================================================================
+policy   : GRPO (last_grpo_model.pt)
+shape    : N=200 F=11 L=30
+window   : start_day=30 num_days=10
+saved   : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/backtest_out_v2/bar_returns.csv
+saved   : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/backtest_out_v2/backtest_curves.png
+saved   : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/backtest_out_v2/backtest_summary_bar.png
+
+=== headline stats ===
+  policy : total=-6.39%  sharpe=-4.20  MDD=22.42%  hit=50.7%
+  EW     : total=-1.70%  sharpe=-0.98  MDD=21.23%  hit=52.8%
+[Plot done in 54.7s]
+
+========================================================================================
+All v2 artifacts saved under:
+  ckpts  : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/checkpoints_v2
+  logs   : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/logs_v2
+  output : /Users/gxx/Documents/2026/fudan/grpo_cross_sectional/files/backtest_out_v2
+========================================================================================
