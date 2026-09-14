@@ -14,9 +14,8 @@ venv/
 *.swp
 Thumbs.db
 
-# Local market data, caches, checkpoints, experiment outputs
+# Local market data, caches, checkpoints
 files/
-results/
 *.zip
 *.npz
 **/.hf_cache/
@@ -24,6 +23,13 @@ results/
 *.pt
 *.pth
 *.ckpt
+
+# results: keep 实验分析 + figures; drop weights, logs, tables, run dirs
+results/**
+!results/**/
+!results/**/*.md
+!results/**/*.png
+!results/**/*.svg
 
 # Legacy local scripts (old GitHub tree; keep on disk, do not publish)
 /diag.py

@@ -28,7 +28,7 @@ project/
 └── run_all_experiments.py
 ```
 
-行情数据、旧 `files/` 流水线和 `results/` 只留在本地，不进 GitHub。
+行情数据、checkpoint（`*.pt`）和旧 `files/` 流水线只留在本地。`results/` 里的实验分析文档和配图会进 GitHub。
 
 ## Setup
 
