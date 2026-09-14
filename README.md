@@ -1,38 +1,49 @@
 # grpo_cross_sectional
 
-Walk-forward cross-sectional stock selection with SFT + GRPO (Transformer / PatchTST), plus linear-factor baselines.
+中证 500 分钟级截面选股：SFT 预测、SS-FM 组合生成、PPO / GRPO 强化学习，按月 walk-forward。
 
 ## Layout
 
 ```
-grpo_cross_sectional/
-├── run_walkforward_*.py      # experiment entry scripts
-├── files/
-│   ├── *.py                  # training, data, backtest pipeline
-│   ├── README.md             # minute-bar data format (local only, not in git)
-│   ├── csi500/               # CSI500 subset (local, gitignored)
-│   └── experiments/          # experiment READMEs (outputs gitignored)
-└── README.md
+project/
+├── configs/
+│   ├── default.yaml
+│   ├── prediction.yaml
+│   ├── ssfm.yaml
+│   ├── rl.yaml
+│   └── experiments.yaml
+├── data/
+├── models/
+├── portfolio/
+├── flow_matching/
+├── rl/
+├── backtest/
+├── evaluation/
+├── utils/
+├── experiments/
+├── train_prediction.py
+├── train_ssfm.py
+├── train_rl.py
+├── run_backtest.py
+└── run_all_experiments.py
 ```
+
+行情数据、旧 `files/` 流水线和 `results/` 只留在本地，不进 GitHub。
 
 ## Setup
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install torch pandas numpy matplotlib
+python -m venv .venv
+.venv\Scripts\activate
+pip install torch pandas numpy pyyaml matplotlib
 ```
 
-Place minute-bar CSVs under `files/csi500/` as described in `files/README.md`.
-
-## Run examples
+## Run
 
 ```bash
-# Transformer L1d walk-forward (long-only, random 30)
-python3 run_walkforward_longonly_r30_semiannual_L1d.py
-
-# Linear factor baseline (same schedule, no training)
-python3 run_walkforward_longonly_r30_semiannual_L1d_linear.py
+python run_all_experiments.py
+python train_prediction.py
+python train_ssfm.py
+python train_rl.py
+python run_backtest.py
 ```
-
-See `files/experiments/SFT_GRPO模型详解.md` for model and pipeline details.

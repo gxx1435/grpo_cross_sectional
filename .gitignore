@@ -9,32 +9,34 @@ venv/
 
 # IDE / OS
 .idea/
+.vscode/
 .DS_Store
 *.swp
+Thumbs.db
 
-# Large market data (see files/README.md for layout)
-files/2025/
-files/2026/
-files/csi500/
-
-# HF dataset caches and heavy artifacts
+# Local market data, caches, checkpoints, experiment outputs
+files/
+results/
+*.zip
+*.npz
 **/.hf_cache/
-**/*.npz
-files/checkpoints/
-files/checkpoints_v2/
-files/logs/
-files/backtest_out*/
-files/backtest_out/
+**/checkpoints/
+*.pt
+*.pth
+*.ckpt
 
-# Experiment outputs (models, logs, stitched returns — regenerate locally)
-files/experiments/**/folds/
-files/experiments/**/backtest/
-files/experiments/**/shared_sft/
-files/experiments/**/run.log
-files/experiments/**/*.pt
-files/experiments/**/*.png
-files/experiments/**/*.csv
-
-# Keep experiment README/meta for reproducibility
-!files/experiments/**/README.txt
-!files/experiments/**/meta.json
+# Legacy local scripts (old GitHub tree; keep on disk, do not publish)
+/diag.py
+/post_train_eval.py
+/plot_model_compare_r30_regime_202604.py
+/weight_dist_check.py
+/run_demo.py
+/run_demo_v2.py
+/run_walkforward*.py
+/run_daily_*.py
+/run_ss_fm*.py
+/run_weekly*.py
+/wait_then_run*.py
+/watch_*.py
+/scripts/
+/tests/

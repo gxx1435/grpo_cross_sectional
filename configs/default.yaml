@@ -1,0 +1,85 @@
+experiment:
+  name: csi500_ssfm_research
+  seed: 42
+  deterministic: true
+  deterministic_warn_only: true
+
+paths:
+  root: .
+  results_dir: results
+  cache_dir: files/csi500/.hf_cache/ssfm_research
+  constituents_csv: files/csi500_constituents.csv
+  minute_pools:
+    - files/csi500/2024/2024
+    - files/csi500/csi500/2025
+    - files/csi500/csi500/2026_1min
+  auction_dirs:
+    - files/csi500/集合竞价_2024
+    - files/csi500/集合竞价_2025
+    - files/csi500/集合竞价_2026_截止到8月31
+
+universe:
+  index: CSI500
+  n_stocks_cap: 500
+  join_key: stock_code
+
+calendar:
+  bars_per_day: 240
+  lookback_days: 10
+  morning: ["09:31", "11:30"]
+  afternoon: ["13:00", "14:59"]
+  drop_minute_times: ["09:30"]
+  close_print: "15:00"
+  auction_available_clock: "09:25:00"
+  execution_clock: "09:30:00"
+  realization_clock: "15:00:00"
+
+panel:
+  start: "2024-01-01"
+  end: "2026-05-10"
+
+walkforward:
+  test_start: "2025-05"
+  test_end: "2026-05"
+  train_months: 12
+  val_months: 1
+  train_offset_months: 13
+
+oos_modes:
+  - sequential_oos_weekly_retrain
+
+portfolio:
+  top_k: 30
+  allocation_pools: [top30]
+  softmax_tau: 0.5
+  long_only: true
+  max_weight: 0.15
+  cost_bps: 3.0
+  cost_on_turnover_l1: true
+  initial_turnover_mode: vs_cash
+  return_type: log
+  hist_risk_lookback_days: 60
+  sharpe_min_obs: 10
+  sharpe_fallback: 0.0
+  smooth_dd_temperature: 20.0
+
+reward:
+  w_return: 0.4
+  w_sharpe: 0.4
+  w_turnover: 0.15
+  w_smooth_mdd: 0.15
+  zmax: 5.0
+  eps: 1.0e-8
+  fit_on: train_only
+
+gpu:
+  mixed_precision: true
+  gradient_checkpointing: false
+  allow_grad_accum: true
+  oom_max_retries: 4
+  monitor_interval_sec: 10.0
+  high_utilization: true
+  target_util_pct: 80
+  cudnn_benchmark: true
+  allow_tf32: true
+  progress_gpu_poll_sec: 30.0

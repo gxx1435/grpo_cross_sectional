@@ -1,0 +1,56 @@
+matrix:
+  A_prediction:
+    - lstm
+    - tcn
+    - standard_transformer
+    - patchtst
+    - minute_only
+    - concat
+    - cross_attention
+    - gated_residual
+  B_portfolio:
+    - equal_weight
+    - mvo
+    - max_sharpe
+    - risk_parity
+    - black_litterman
+    - kelly
+  C_generative:
+    - mlp
+    - gaussian
+    - diffusion
+    - standard_fm
+    - ssfm
+  D_rl:
+    - ssfm
+    - ssfm_ppo
+    - ssfm_grpo
+  E_g: [8, 16, 32, 64, 128]
+  F_oos:
+    - sequential_oos_weekly_retrain
+  allocation_pools:
+    - top30
+  softmax_tau: 0.5
+
+weekly_retrain:
+  weekday: Friday
+  after_close_only: true
+  apply_from_next_week: true
+  rewrite_past_decisions: false
+
+reports:
+  - cumulative_return
+  - performance_summary
+  - prediction_metrics
+  - prediction_distribution
+  - top30_stats
+  - gpu_time
+  - g_curves
+  - fm_vs_diffusion
+  - ppo_vs_grpo
+  - fusion_ablation
+  - minute_vs_auction
+  - attention_analysis
+  - gate_distribution
+  - leakage_audit
+  - oos_mode_comparison

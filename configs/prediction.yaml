@@ -1,0 +1,38 @@
+prediction:
+  target: intraday_log_return
+  formula: log(Close_D / Open_D)
+  auxiliary_close_to_close: true
+  lookback_bars: 2400
+  feat_dim: auto
+  d_model: 64
+  n_heads: 4
+  ff_mult: 2
+  n_layers_temporal: 2
+  n_layers_cross: 1
+  patch: 20
+  dropout: 0.1
+  stock_chunk: 0
+  optimizer: AdamW
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  epochs: 3
+  early_stopping_patience: 2
+  grad_clip: 1.0
+  batch_asofs: 1
+  rank_weight: 0.0
+  sft_cs_zscore: false
+  feat_standardize: false
+  feat_std_stride: 3
+  feat_std_bar_stride: 4
+  val_select: mse
+  seeds: [42]
+  models:
+    - lstm
+    - tcn
+    - standard_transformer
+    - patchtst
+    - minute_only
+    - concat
+    - cross_attention
+    - gated_residual
+  primary_model: gated_residual

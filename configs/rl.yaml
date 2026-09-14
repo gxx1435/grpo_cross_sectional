@@ -1,0 +1,22 @@
+rl:
+  primary: ppo
+  algorithms: [ppo, grpo]
+  init_from: ssfm
+  freeze_alpha: true
+  hidden: 96
+  epochs: 2
+  lr: 1.0e-4
+  noise_std: 0.5
+  group_size: 32
+  distill_steps: 80
+  ppo:
+    cliprange: 0.2
+    vf_coef: 0.5
+    entropy_coef: 0.01
+    inner_epochs: 4
+    kl_stop: 0.05
+  grpo:
+    weak_var_threshold: 1.0e-6
+    weak_adv_threshold: 1.0e-6
+  rollout_split: train_only
+  checkpoint_on: validation
