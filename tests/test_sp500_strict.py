@@ -11,6 +11,8 @@ from data.loaders import enumerate_month_members, read_month_member, regular_ses
 from data.minute_features import add_cross_sectional_features, compute_symbol_features, feature_names
 from data.splits import infer_test_months, split_for_test_month
 from data.store import ResearchStore
+from evaluation.analysis_spec import FALLBACK_COLOR, color_for
+from evaluation.plots import plot_grouped_bars
 from flow_matching.simplex import tangent_project
 from models.alpha_predictor import STRATEGY_NAME, build_predictor
 from portfolio.constraints import cap_and_simplex
@@ -124,3 +126,26 @@ def test_decision_universe_does_not_read_target_day_prices() -> None:
     store.cfg = {"universe": {"min_history_minutes": 1, "min_target_minutes": 1, "history_min_coverage": 0.5}}
     np.testing.assert_array_equal(store.decision_mask(pd.Timestamp("2025-01-06")), np.array([True, True]))
     np.testing.assert_array_equal(store.evaluation_mask(pd.Timestamp("2025-01-06")), np.array([False, False]))
+
+
+def test_sp500_display_names_use_stable_non_fallback_colors(tmp_path) -> None:
+    names = [
+        "Equal Weight",
+        "Black-Litterman",
+        "Gaussian Policy",
+        "Standard FM",
+        "SS-FM",
+        "SS-FM + PPO",
+        "SS-FM + GRPO",
+        "SS-FM G=128",
+    ]
+    colors = [color_for(name) for name in names]
+    assert FALLBACK_COLOR not in colors
+    assert len(set(colors)) >= 6
+
+    output = tmp_path / "sp500_colors.png"
+    plot_grouped_bars(output, "S&P500 colors", "Strategy", "Return", names, np.arange(len(names)), colors)
+    import matplotlib.image as mpimg
+
+    rgb = mpimg.imread(output)[..., :3]
+    assert np.any((rgb[..., 0] != rgb[..., 1]) | (rgb[..., 1] != rgb[..., 2]))

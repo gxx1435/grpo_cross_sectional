@@ -10,7 +10,20 @@ import numpy as np
 import pandas as pd
 
 from backtest.metrics import summarize_nav
-from evaluation.plots import plot_cum
+from evaluation.analysis_spec import color_for
+from evaluation.plots import plot_clustered_bars, plot_cum, plot_grouped_bars
+
+
+GENERATION_MODELS = ["Gaussian Policy", "MLP Policy", "Standard FM", "Diffusion", "SS-FM"]
+RL_MODELS = ["SS-FM", "SS-FM + PPO", "SS-FM + GRPO"]
+G_MODELS = [f"SS-FM G={g}" for g in (8, 16, 32, 64, 128)]
+FAMILY_METRICS = [
+    ("cumulative_return", "Cumulative Return", "return"),
+    ("sharpe", "Sharpe", "sharpe"),
+    ("max_drawdown", "Maximum Drawdown", "mdd"),
+    ("mean_turnover", "Mean Turnover", "turnover"),
+    ("total_transaction_cost", "Total Transaction Cost", "cost"),
+]
 
 
 def _read_json(path: Path, default: Any) -> Any:
@@ -36,6 +49,58 @@ def _md_table(frame: pd.DataFrame, columns: List[str]) -> str:
     separator = "|" + "|".join(["---"] + ["---:" for _ in view.columns[1:]]) + "|"
     rows = ["| " + " | ".join(str(v) for v in row) + " |" for row in view.itertuples(index=False, name=None)]
     return "\n".join([header, separator, *rows])
+
+
+def _monthly_metric_table(
+    frame: pd.DataFrame,
+    models: List[str],
+    months: List[str],
+    metric: str,
+) -> str:
+    """Render the Top30-style model x Test-month diagnostic table."""
+    if frame.empty or metric not in frame.columns:
+        return "无有效记录。"
+    view = frame[frame["model"].isin(models)].pivot(index="model", columns="test_month", values=metric)
+    view = view.reindex(index=models, columns=months).reset_index().rename(columns={"model": "Model"})
+    return _md_table(view, ["Model", *months])
+
+
+def _plot_strategy_family(
+    daily: pd.DataFrame,
+    performance: pd.DataFrame,
+    plots_dir: Path,
+    prefix: str,
+    title: str,
+    models: List[str],
+) -> None:
+    """Create the NAV + five colored metric charts used by the Top30 report."""
+    available = [name for name in models if name in set(performance["model"].astype(str))]
+    if not available:
+        return
+    plot_cum(
+        daily[daily["model"].isin(available)],
+        plots_dir / f"{prefix}_nav.png",
+        f"{title} cumulative net return",
+        focus=available,
+    )
+    lookup = performance.set_index("model")
+    colors = [color_for(name) for name in available]
+    for metric, ylabel, suffix in FAMILY_METRICS:
+        values = [lookup.at[name, metric] if name in lookup.index else None for name in available]
+        plot_grouped_bars(
+            plots_dir / f"{prefix}_bar_{suffix}.png",
+            f"{title}: {ylabel}",
+            "Strategy",
+            ylabel,
+            available,
+            values,
+            colors,
+        )
+
+
+def _value(frame: pd.DataFrame, model: str, metric: str) -> float:
+    hit = frame.loc[frame["model"].eq(model), metric]
+    return float(hit.iloc[0]) if len(hit) else float("nan")
 
 
 def write_month_report(out: Path, meta: Dict[str, Any], cfg: dict) -> None:
@@ -252,9 +317,16 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
     prediction_detail = pd.concat(prediction_details, ignore_index=True)
     prediction_monthly = pred.groupby("test_month", as_index=False).mean(numeric_only=True)
     performance = summarize_nav(all_daily)
+    monthly_performance_parts = []
+    for test_month, month_daily in all_daily.groupby("test_month", sort=True):
+        month_performance = summarize_nav(month_daily)
+        month_performance["test_month"] = str(test_month)
+        monthly_performance_parts.append(month_performance)
+    monthly_performance = pd.concat(monthly_performance_parts, ignore_index=True)
     prediction_monthly.to_csv(final / "annual_prediction_summary.csv", index=False)
     performance.to_csv(final / "annual_performance_summary.csv", index=False)
     performance.to_csv(final / "annual_strategy_comparison.csv", index=False)
+    monthly_performance.to_csv(final / "annual_monthly_performance.csv", index=False)
     audit_all.groupby(["test_month", "status"], as_index=False).size().to_csv(final / "annual_leakage_audit_summary.csv", index=False)
     runtime_all.groupby(["test_month", "phase"], as_index=False).sum(numeric_only=True).to_csv(final / "annual_runtime_summary.csv", index=False)
     annual_candidates = candidate_all.groupby("strategy_name", as_index=False, observed=True).agg(
@@ -286,15 +358,15 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
     )
     universe_sensitivity.to_csv(final / "annual_universe_sensitivity.csv", index=False)
     runtime_phase = runtime_all.groupby("phase", as_index=False, observed=True)["seconds"].sum()
-    try:
-        plot_cum(all_daily, final / "plots" / "annual_cumulative_return.png", "S&P500 strict fixed OOS")
-    except Exception:
-        pass
+    plots_dir = final / "plots"
+    plot_cum(all_daily, plots_dir / "annual_cumulative_return.png", "S&P500 strict fixed OOS")
+    _plot_strategy_family(all_daily, performance, plots_dir, "generation", "Generation models", GENERATION_MODELS)
+    _plot_strategy_family(all_daily, performance, plots_dir, "rl", "RL ablation", RL_MODELS)
 
     pred_mean = pred.mean(numeric_only=True)
     ic = prediction_monthly["IC"].to_numpy(float)
     ric = prediction_monthly["RankIC"].to_numpy(float)
-    strategy_cols = ["model", "ann_return", "ann_volatility", "sharpe", "max_drawdown", "calmar", "mean_turnover", "total_transaction_cost", "candidate_feasibility"]
+    strategy_cols = ["model", "cumulative_return", "ann_return", "ann_volatility", "sharpe", "max_drawdown", "calmar", "mean_turnover", "total_transaction_cost", "candidate_feasibility"]
     valid_months = [path.parent.name.split("=", 1)[-1] for path in valid_dirs]
     splits = [_read_json(path / "split_manifest.json", {}) for path in valid_dirs]
     train_range = f"{min(row['train_start_date'] for row in splits)} 至 {max(row['train_end_date'] for row in splits)}"
@@ -326,8 +398,97 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
     )
     g_annual = annual_candidates[annual_candidates["strategy_name"].str.startswith("SS-FM G=")].copy()
     g_annual["G"] = g_annual["strategy_name"].str.split("=").str[-1].astype(int)
-    g_annual = g_annual.sort_values("G")
+    g_performance = performance[performance["model"].isin(G_MODELS)].rename(columns={"model": "strategy_name"})
+    g_annual = g_annual.merge(g_performance, on="strategy_name", how="left").sort_values("G")
     top_intraday = temporal_by_minute.sort_values("normalized_attention", ascending=False).head(10).sort_values("minute_start_in_day")
+
+    # Focused diagnostic plots: all labels use explicit chromatic colors.  The
+    # G charts are post-hoc Test diagnostics only; they never feed selection.
+    plot_grouped_bars(
+        plots_dir / "g_bar_return.png",
+        "Fixed-G diagnostic: cumulative net return",
+        "G",
+        "Cumulative Return",
+        [f"G={g}" for g in g_annual["G"]],
+        g_annual["cumulative_return"].tolist(),
+        [color_for(f"SS-FM G={g}") for g in g_annual["G"]],
+    )
+    plot_grouped_bars(
+        plots_dir / "g_bar_sampling_time.png",
+        "Fixed-G diagnostic: sampling latency",
+        "G",
+        "Sampling Time (sec)",
+        [f"G={g}" for g in g_annual["G"]],
+        g_annual["sampling_time_sec"].tolist(),
+        [color_for(f"SS-FM G={g}") for g in g_annual["G"]],
+    )
+    plot_clustered_bars(
+        plots_dir / "alpha_monthly_ic_rankic.png",
+        "Alpha OOS correlation by Test month",
+        "Test month",
+        "Correlation",
+        valid_months,
+        ["IC", "RankIC"],
+        [prediction_monthly.set_index("test_month").reindex(valid_months)[metric].tolist() for metric in ("IC", "RankIC")],
+        ["#4C78A8", "#F58518"],
+    )
+    plot_grouped_bars(
+        plots_dir / "alpha_monthly_topk_excess.png",
+        "Top-K excess return by Test month",
+        "Test month",
+        "Mean Intraday Excess Return",
+        valid_months,
+        prediction_monthly.set_index("test_month").reindex(valid_months)["topk_excess_return_vs_universe"].tolist(),
+        ["#54A24B"] * len(valid_months),
+    )
+    plot_grouped_bars(
+        plots_dir / "temporal_day_attention.png",
+        "Temporal attention by history day",
+        "History Day Index",
+        "Normalized Attention",
+        temporal_by_day["history_day_index"].astype(int).astype(str).tolist(),
+        temporal_by_day["normalized_attention"].tolist(),
+        ["#4C78A8"] * len(temporal_by_day),
+    )
+    plot_grouped_bars(
+        plots_dir / "intraday_attention.png",
+        "Temporal attention by intraday patch",
+        "Minute Start",
+        "Normalized Attention",
+        temporal_by_minute["minute_start_in_day"].astype(int).astype(str).tolist(),
+        temporal_by_minute["normalized_attention"].tolist(),
+        ["#F58518"] * len(temporal_by_minute),
+    )
+    plot_clustered_bars(
+        plots_dir / "universe_sensitivity.png",
+        "Alpha sensitivity to effective universe size",
+        "Universe Size Quartile",
+        "Correlation",
+        universe_sensitivity["universe_size_group"].astype(str).tolist(),
+        ["IC", "RankIC"],
+        [universe_sensitivity[metric].tolist() for metric in ("mean_IC", "mean_RankIC")],
+        ["#4C78A8", "#F58518"],
+    )
+
+    generation_performance = performance.set_index("model").reindex(GENERATION_MODELS).reset_index()
+    rl_performance = performance.set_index("model").reindex(RL_MODELS).reset_index()
+    generation_best_return = generation_performance.loc[generation_performance["cumulative_return"].idxmax()]
+    generation_best_sharpe = generation_performance.loc[generation_performance["sharpe"].idxmax()]
+    best_ic_row = prediction_monthly.loc[prediction_monthly["IC"].idxmax()]
+    worst_ic_row = prediction_monthly.loc[prediction_monthly["IC"].idxmin()]
+    positive_ic_months = int((prediction_monthly["IC"] > 0).sum())
+    audit_total = int(len(audit_all))
+    audit_pass = int(audit_all["status"].eq("PASS").sum())
+    high_audit_failures = int(((audit_all["severity"] == "high") & (audit_all["status"] == "FAIL")).sum())
+    test_update_count = sum(
+        int(row.get("test_updates", 0))
+        for path in valid_dirs
+        for row in _read_json(path / "model_updates.json", [])
+    )
+    best_fixed_g = g_annual.loc[g_annual["cumulative_return"].idxmax()]
+    ssfm_return = _value(performance, "SS-FM", "cumulative_return")
+    ppo_return = _value(performance, "SS-FM + PPO", "cumulative_return")
+    grpo_return = _value(performance, "SS-FM + GRPO", "cumulative_return")
     lines = [
         "# S&P500全年实验分析",
         "",
@@ -349,12 +510,95 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
         f"- 平均 RankIC / RankICIR：`{_fmt(np.nanmean(ric))}` / `{_fmt(np.nanmean(ric) / (np.nanstd(ric) + 1e-12))}`。",
         f"- MSE / MAE：`{_fmt(pred_mean.get('MSE'))}` / `{_fmt(pred_mean.get('MAE'))}`。",
         f"- Top-K 平均收益 / 超额 / hit rate：`{_fmt(pred_mean.get('topk_mean_true_return'))}` / `{_fmt(pred_mean.get('topk_excess_return_vs_universe'))}` / `{_fmt(pred_mean.get('topk_hit_rate'))}`。",
+        f"- `{positive_ic_months}/{len(prediction_monthly)}` 个 Test 月 IC 为正；最高为 `{best_ic_row['test_month']}`（`{_fmt(best_ic_row['IC'])}`），最低为 `{worst_ic_row['test_month']}`（`{_fmt(worst_ic_row['IC'])}`）。月间符号不稳定，因此全年均值接近零不能解释为稳定 alpha。",
         "",
         _md_table(prediction_monthly, ["test_month", "IC", "RankIC", "MSE", "MAE", "topk_mean_true_return", "topk_excess_return_vs_universe", "topk_hit_rate"]),
+        "",
+        "![Alpha 月度 IC 与 RankIC](plots/alpha_monthly_ic_rankic.png)",
+        "",
+        "![Alpha 月度 Top-K 超额收益](plots/alpha_monthly_topk_excess.png)",
         "",
         "## 3. Portfolio 策略总览",
         "",
         _md_table(performance, strategy_cols),
+        "",
+        "![全部策略累计净收益](plots/annual_cumulative_return.png)",
+        "",
+        "### 3.1 Generation Model Ablation（全年拼接）",
+        "",
+        _md_table(generation_performance, strategy_cols),
+        "",
+        "#### Question 1：Portfolio Generation",
+        "",
+        f"Generation 组累计净收益最高的是 **{generation_best_return['model']}**（`{_fmt(generation_best_return['cumulative_return'], 4)}`），Sharpe 最高的是 **{generation_best_sharpe['model']}**（`{_fmt(generation_best_sharpe['sharpe'], 4)}`）。SS-FM 相对 Standard FM 的累计净收益差为 `{_fmt(_value(performance, 'SS-FM', 'cumulative_return') - _value(performance, 'Standard FM', 'cumulative_return'), 4)}`，但两者全年累计净收益均为负，不能据此宣称生成主线已稳定获得正收益。",
+        "",
+        "![Generation 累计净收益](plots/generation_nav.png)",
+        "",
+        "![Generation 收益](plots/generation_bar_return.png)",
+        "",
+        "![Generation Sharpe](plots/generation_bar_sharpe.png)",
+        "",
+        "![Generation 最大回撤](plots/generation_bar_mdd.png)",
+        "",
+        "![Generation 换手](plots/generation_bar_turnover.png)",
+        "",
+        "![Generation 交易成本](plots/generation_bar_cost.png)",
+        "",
+        "#### Generation 月度表现",
+        "",
+        "##### Cumulative Return",
+        "",
+        _monthly_metric_table(monthly_performance, GENERATION_MODELS, valid_months, "cumulative_return"),
+        "",
+        "##### Sharpe",
+        "",
+        _monthly_metric_table(monthly_performance, GENERATION_MODELS, valid_months, "sharpe"),
+        "",
+        "##### Maximum Drawdown",
+        "",
+        _monthly_metric_table(monthly_performance, GENERATION_MODELS, valid_months, "max_drawdown"),
+        "",
+        "##### Mean Turnover",
+        "",
+        _monthly_metric_table(monthly_performance, GENERATION_MODELS, valid_months, "mean_turnover"),
+        "",
+        "### 3.2 RL Ablation（全年拼接）",
+        "",
+        _md_table(rl_performance, strategy_cols),
+        "",
+        "#### Question 2：RL Optimization",
+        "",
+        f"PPO 相对 Pure SS-FM 的全年累计净收益差为 `{_fmt(ppo_return - ssfm_return, 4)}`，GRPO 相对 Pure SS-FM 为 `{_fmt(grpo_return - ssfm_return, 4)}`。两种 RL 都改善了默认 SS-FM 路径，但全年累计净收益仍为负；PPO 收益较高，GRPO 最大回撤较低，结论必须同时结合收益、风险、换手和成本。",
+        "",
+        "![RL 累计净收益](plots/rl_nav.png)",
+        "",
+        "![RL 收益](plots/rl_bar_return.png)",
+        "",
+        "![RL Sharpe](plots/rl_bar_sharpe.png)",
+        "",
+        "![RL 最大回撤](plots/rl_bar_mdd.png)",
+        "",
+        "![RL 换手](plots/rl_bar_turnover.png)",
+        "",
+        "![RL 交易成本](plots/rl_bar_cost.png)",
+        "",
+        "#### RL 月度表现",
+        "",
+        "##### Cumulative Return",
+        "",
+        _monthly_metric_table(monthly_performance, RL_MODELS, valid_months, "cumulative_return"),
+        "",
+        "##### Sharpe",
+        "",
+        _monthly_metric_table(monthly_performance, RL_MODELS, valid_months, "sharpe"),
+        "",
+        "##### Maximum Drawdown",
+        "",
+        _monthly_metric_table(monthly_performance, RL_MODELS, valid_months, "max_drawdown"),
+        "",
+        "##### Mean Turnover",
+        "",
+        _monthly_metric_table(monthly_performance, RL_MODELS, valid_months, "mean_turnover"),
         "",
         "## 4. SS-FM 主线",
         "",
@@ -373,7 +617,13 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
         "",
         "各月默认 G 仅由该月 Validation 平均净收益选择。下表汇总所有预先指定 G 的 Test 表现辅助诊断，不参与选择。",
         "",
-        _md_table(g_annual, ["G", "candidate_diversity", "reward_diversity", "constraint_violation", "sampling_time_sec"]),
+        _md_table(g_annual, ["G", "candidate_diversity", "reward_diversity", "constraint_violation", "sampling_time_sec", "cumulative_return", "sharpe", "max_drawdown", "mean_turnover", "total_transaction_cost"]),
+        "",
+        f"固定 G 的事后 Test 诊断中，`G={int(best_fixed_g['G'])}` 累计净收益最高（`{_fmt(best_fixed_g['cumulative_return'], 4)}`）。这只是 OOS 诊断，不能反向替换各月由 Validation 选出的默认 G，否则会构成 Test 选择偏差。",
+        "",
+        "![固定 G 收益诊断](plots/g_bar_return.png)",
+        "",
+        "![固定 G 采样耗时](plots/g_bar_sampling_time.png)",
         "",
         "## 5. Alpha 解释",
         "",
@@ -384,13 +634,19 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
         f"- 历史 minute mask rate 均值/最大值：`{_fmt(attention_all['temporal_mask_rate'].mean())}` / `{_fmt(attention_all['temporal_mask_rate'].max())}`；横截面 mask rate 均值/最大值：`{_fmt(attention_all['cross_stock_mask_rate'].mean())}` / `{_fmt(attention_all['cross_stock_mask_rate'].max())}`。",
         f"- 因果 Top-K 中因目标日开盘不可用而在执行时置零的股票记录：`{selected_execution_exclusions}/{selected_count}`；剩余股票重新归一化，计划权重和执行权重均已保留。",
         "",
+        "![历史交易日注意力](plots/temporal_day_attention.png)",
+        "",
         "历史交易日注意力（`history_day_index=0` 为窗口最早日）：",
         "",
         _md_table(temporal_by_day, ["history_day_index", "normalized_attention"]),
         "",
+        "![日内分钟注意力](plots/intraday_attention.png)",
+        "",
         "注意力最高的日内 30 分钟 patch 起点：",
         "",
         _md_table(top_intraday, ["minute_start_in_day", "normalized_attention"]),
+        "",
+        "![股票池规模敏感性](plots/universe_sensitivity.png)",
         "",
         "有效股票池规模敏感性（月度四分组）：",
         "",
@@ -402,7 +658,14 @@ def write_annual_report(out_root: Path, cfg: dict) -> Dict[str, Any]:
         "",
         "注意力权重用于解释模型关注的历史时段和股票关系，不等同于单特征因果重要性；本实验未用 Test 标签拟合额外的特征归因器。分钟缺失通过 mask 显式处理；横截面 mask rate 为零，但历史分钟 mask 仍非零，股票池规模变化也会影响横截面 attention 与指标稳定性。",
         "",
-        "## 6. 风险和局限",
+        "## 6. Strict OOS 与审计结论",
+        "",
+        f"- Leakage Audit：`{audit_pass}/{audit_total} PASS`；高严重度失败数：`{high_audit_failures}`。",
+        f"- Test-period model update：`{test_update_count}`。Alpha、SS-FM、PPO、GRPO、normalizer、covariance 与 teacher state 在每个 Test 月内均冻结。",
+        "- 月度结果仅在高严重度审计全部通过后进入全年拼接；全年数字来自各 Test 月日收益顺序拼接，没有使用全年数据重新训练或选择 checkpoint。",
+        "- 本报告的固定 G Test 横向比较和月度表现均为事后诊断，不参与 checkpoint、G 或策略选择。",
+        "",
+        "## 7. 风险和局限",
         "",
         "- 历史 S&P 500 membership 不可得，代理股票池存在 survivorship/selection bias。",
         "- 数据覆盖与 Test 月数量有限，2026-05 还是不完整月份；分钟缺失通过 mask 显式处理，但仍可能影响结果。",
