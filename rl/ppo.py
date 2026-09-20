@@ -71,7 +71,7 @@ def ppo_update(policy, critic, cond, sample_logits, rewards, optimizer, cfg: dic
         loss = -surr.mean() + float(p["vf_coef"]) * vf - float(p["entropy_coef"]) * ent
         optimizer.zero_grad()
         loss.backward()
-        gn = nn.utils.clip_grad_norm_(list(policy.parameters()) + list(critic.parameters()), 1.0)
+        gn = nn.utils.clip_grad_norm_(list(policy.parameters()) + list(critic.parameters()), float(cfg["rl"]["grad_clip"]))
         optimizer.step()
         approx_kl = float((old_logp - logp).mean().detach())
         last = {

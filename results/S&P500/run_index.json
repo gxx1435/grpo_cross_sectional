@@ -1,0 +1,79 @@
+[
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1",
+    "valid": true,
+    "month": "2025-06",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693",
+    "valid": true,
+    "month": "2025-07",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08",
+    "valid": true,
+    "month": "2025-08",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44",
+    "valid": true,
+    "month": "2025-09",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c",
+    "valid": true,
+    "month": "2025-10",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7",
+    "valid": true,
+    "month": "2025-11",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82",
+    "valid": true,
+    "month": "2025-12",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65",
+    "valid": true,
+    "month": "2026-01",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7",
+    "valid": true,
+    "month": "2026-02",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9",
+    "valid": true,
+    "month": "2026-03",
+    "status": "ok"
+  },
+  {
+    "out": "/home/zouli/projects/research/grpo_cross_sectional/results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9",
+    "experiment_id": "sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9",
+    "valid": true,
+    "month": "2026-04",
+    "status": "ok"
+  }
+]

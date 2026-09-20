@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from backtest.drawdown import smooth_dd_to_date
-from backtest.execution import execute_day
+from backtest.execution import execute_day, execute_day_by_id
 from backtest.metrics import causal_sharpe
 
 
@@ -16,12 +16,21 @@ def run_path(
     y_list: List[np.ndarray],
     cfg: dict,
     extra: Optional[List[dict]] = None,
+    asset_ids: Optional[List[List[str]]] = None,
 ) -> pd.DataFrame:
     prev = None
+    prev_ids: Optional[List[str]] = None
     hist: List[float] = []
     rows = []
     for i, day in enumerate(dates):
-        met = execute_day(weights[i], y_list[i], prev, cfg)
+        current_w = np.asarray(weights[i], dtype=np.float64)
+        current_y = np.asarray(y_list[i], dtype=np.float64)
+        if asset_ids is not None:
+            current_ids = [str(x) for x in asset_ids[i]]
+            met = execute_day_by_id(current_w, current_y, current_ids, prev, prev_ids, cfg)
+            prev_ids = current_ids
+        else:
+            met = execute_day(current_w, current_y, prev, cfg)
         sharpe = causal_sharpe(hist, cfg["portfolio"]["sharpe_min_obs"], cfg["portfolio"]["sharpe_fallback"])
         smdd = smooth_dd_to_date(np.asarray(hist), cfg["portfolio"]["smooth_dd_temperature"])
         row = {
@@ -34,5 +43,5 @@ def run_path(
             row.update(extra[i])
         rows.append(row)
         hist.append(met["net_return"])
-        prev = np.asarray(weights[i], dtype=np.float64)
+        prev = current_w
     return pd.DataFrame(rows)

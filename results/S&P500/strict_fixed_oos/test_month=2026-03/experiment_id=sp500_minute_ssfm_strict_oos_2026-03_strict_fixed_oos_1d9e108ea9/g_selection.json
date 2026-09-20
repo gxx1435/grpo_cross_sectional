@@ -1,0 +1,12 @@
+{
+  "selected_g": 64,
+  "selection_split": "validation",
+  "selection_rule": "maximum validation mean net return",
+  "candidates": [
+    8,
+    16,
+    32,
+    64,
+    128
+  ]
+}

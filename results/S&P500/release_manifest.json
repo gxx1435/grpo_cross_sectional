@@ -1,0 +1,2946 @@
+{
+  "release": "sp500-strict-oos-v1.1",
+  "generated_at_utc": "2026-09-20T06:13:53.175421+00:00",
+  "code_commit": "f62e9c46035c67d2a4b31442f83caa1c0a909cf9",
+  "git_dirty": false,
+  "source_zip_sha256": "167aee53c8439948be966014dd60f4c7b34cd88fb9464187d67bd3b254a9ffcf",
+  "data_version": "52605c84025be0c906fd2da4c5fb07cdb9040fc10191d1b0ed294e529969161d",
+  "feature_schema_hash": "bf45b5afae66173b164ab3a6040ec8ac9936681cc92d487745a9d93db8303da6",
+  "pipeline_summary": {
+    "status": "completed",
+    "n_requested": 11,
+    "n_valid": 11,
+    "n_invalid": 0,
+    "n_failed": 0,
+    "hours": 1.6896604528692034,
+    "annual": {
+      "valid_months": [
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04"
+      ],
+      "excluded": [
+        {
+          "month": "2026-05",
+          "reason": "terminal source partition is incomplete (observed through 2026-05-08)"
+        }
+      ]
+    }
+  },
+  "formal_experiments": [
+    {
+      "month": "2025-06",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2025-07",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2025-08",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2025-09",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2025-10",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2025-11",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2025-12",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2026-01",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2026-02",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2026-03",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9",
+      "valid": true,
+      "status": "ok"
+    },
+    {
+      "month": "2026-04",
+      "experiment_id": "sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9",
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9",
+      "valid": true,
+      "status": "ok"
+    }
+  ],
+  "formal_file_count": 528,
+  "formal_total_bytes": 350552776,
+  "formal_files": [
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/S&P500实验分析.md",
+      "size": 11514,
+      "sha256": "b8d5bde144961e571df183e1998159f2ea79c7d91096786030f85d8cbfce5775"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/alpha_training_metadata.json",
+      "size": 553,
+      "sha256": "74aa342ab0124b137e44b2b87bd789b37aad1310d2666faf2a70e8445d0e67e2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/alpha_validation_logs.csv",
+      "size": 13687,
+      "sha256": "ca8bfec9b3fe98e75be45664eeb03086269444106d873b4363918143dc34f6a1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/attention_statistics.csv",
+      "size": 2208,
+      "sha256": "e9d332e5a16497aaa4cc43d9a5bb6f80d8d702b13804df0cabd6b8bb0da1a987"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/backtest_daily.csv",
+      "size": 160201,
+      "sha256": "24b713071f9d4a5b913844a4c383600fe00348fe572cd02623d4f7222fca716f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/candidate_portfolios.parquet",
+      "size": 2334484,
+      "sha256": "e80a2de5cd571fe50d0ed365d1c466d3d9b95c3eb91a63223feee625108850a2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/candidate_summary.csv",
+      "size": 1288,
+      "sha256": "a9faacc3f934696f9af7363b4b52d6e1ed9b66796a6a015524f629efe53173b3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/daily_portfolios.parquet",
+      "size": 32964,
+      "sha256": "fd9f0d6e11453006dca071c8810fcfc5cb7aeb932cfa6bd4395b081603ef928d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/daily_predictions.parquet",
+      "size": 65637,
+      "sha256": "2b96352ccfa7d8e6179eb95833bfb886f612bb4b059234fba0745ba468ccde2b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/g_selection.json",
+      "size": 176,
+      "sha256": "274b39bcbcf97d4ee6ae8fe329ed1016b03ffae4173a8b7f0b018c66173cc5e2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/g_test_summary.csv",
+      "size": 2122,
+      "sha256": "a1c07fd8b3abf864929a4b67f1f9192764d5a15defbe63768c99ad12fedb3ddc"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/g_validation_selection.csv",
+      "size": 405,
+      "sha256": "335cd17268b067c26bbc3bfdfa08bde1493761b7d1d99ce93aefeb420211a408"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/gpu_logs.csv",
+      "size": 568,
+      "sha256": "ba4a90eb3cab0ef0afad8c15f72a62dbfb8a0798d9c75f51496609c55918a1b4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/gpu_monitor_samples.csv",
+      "size": 6050,
+      "sha256": "9fa460b54e3d11df634ffe4faf613b24aa3ef27413c7b47000a89fa4614800f5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/gpu_summary.json",
+      "size": 473,
+      "sha256": "eba5ae7f4acac8ebdc6f5515dad1d757a5350d1028ed230795762bfa79209d55"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "e8cccafc042e58a0267bae9218954086c24f124fb01011c2b5a6580847ffe1f6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/leakage_audit.json",
+      "size": 65580,
+      "sha256": "56a3aa2609d37f069305384eff9b9a011a9d8efb1e317d047c527cfb15a95f54"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/model_updates.json",
+      "size": 122,
+      "sha256": "7fe476ef84aa437aaf59ccff1a2d4b76bd0f1ab62a27a24dfa9e4c8967aeca0e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "1f70eb58efc4511f13d136b42882cb5653983ada255ab021c9f3cd40dfefe7c3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "76d41b16c92e0eec302dadb7289bd212878b2a3f9b48ac6ed56b930506635ee9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "17bb495a83727cc2b1b266fac191b74ee8850d2483f45c492f7fb5d7bf5d93aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "f569c6b26df2a64d586c84239c8a064844d54e94726c03fa9a9a366a4b3a4c07"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "9282eafc780f981a9e9858d19d4b141bc5ad7416edae68052d4ab6af1f488a07"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "1257ad056abf1e2e8ff148c547ad7d7582b235d03781656ede72e1b0eb2679e9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "3bf7d842087ea92b1bd89a404d1818f2d99fc2ebd7c590f3d70feb5144de1bab"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "345ea9d1e0f56db86a0e8ff0ce7cee300a766f480d2850b99d7f4fa21138244e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "001c189c252360e0cf832ab8f9c2fcb7c9507c375a5827e82aa12ae078ebae97"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "e23d336a819e1546007d7d33925fbe84e92e43aef26a44e412c60e677febc53d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "ef5629f80e7a9422637d2f204109f1765d5cd281f6099716f4d649cf59dbf58b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "3adc466bdfde12ea522d9f553879eaf24408fbdf899a1fac4b947ba5b7895bcb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "a91c3a3de76d391cdf9cee4e8492f410fb7d9f745cc4e54ae359b8e60348da84"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "8e4b770b4062e33327d4b5c228942f7f170a6d8f616e77aada133c21e12958a3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "0964b0bdc53038b91e27dabebedc16483d0950ca19f65a91dd2edbb4e6190e5a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "01be20302b1d9914a70462167161f1123ec6effcdcce04223f4977fc1b5e0995"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "6844a0174552c630e9611657c5520c1ac56337c4a97ff2b7329e8fc244ef5dc3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/performance_summary.csv",
+      "size": 4911,
+      "sha256": "9e17c7111287d507a3fff35ba2863636983cfc19a6813dd0effc0702ce51bdb3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/performance_summary.json",
+      "size": 11622,
+      "sha256": "09e4ba85e7b3aba550e64d4164b8add09499b3aa7deb8f3618eaa3ce436626b8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/plots/cumulative_return.png",
+      "size": 236941,
+      "sha256": "85bd767f75adcb758fd1f4d58c6879251de8d46a57701016afde51f02764f4e2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/portfolio_weights.parquet",
+      "size": 76025,
+      "sha256": "a290ad6e5e18c1db00aa6c2bd070550f04214bdb9c285f3822f1cb059381ab61"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/prediction_metrics.csv",
+      "size": 8347,
+      "sha256": "39e5b055b8aa8a2c38559011133f35f9803e1e531bf4ca77dc590bd8f28a4544"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/reward_logs.csv",
+      "size": 2713755,
+      "sha256": "e26c826abb092e820e00a66f5127b8085b813a5b6d307dde862315f4e843fc43"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/runtime_logs.csv",
+      "size": 914,
+      "sha256": "5f7619df4c0d3244f51849778e1c8fa7ea963b04179e763fbcf26fd4f3b1fb88"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/split_manifest.json",
+      "size": 6160,
+      "sha256": "18315f80c72fa90e271c23ce1d01b0f4ce2159c2474538247822ba0a7ad2146e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/temporal_attention_summary.csv",
+      "size": 3931,
+      "sha256": "271887101753deb9e037e1b1e4f74024be85fc910d79aa998f6c724460f3d189"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/training_logs.csv",
+      "size": 2892,
+      "sha256": "92b5b4d2ad5a8e14b1f5f446d3ba2f917a22021dd52e8a0036b0f5e9405183c5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/S&P500实验分析.md",
+      "size": 11581,
+      "sha256": "b1b09a5274a790dd43f8d0369b72b7783f9b3a3e0a5c609bddf2d37fcde37643"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/alpha_training_metadata.json",
+      "size": 550,
+      "sha256": "3875b0f52cefcccda42c2419deaca37be5c7bd511fccd26b016bad9cd4a98590"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/alpha_validation_logs.csv",
+      "size": 13014,
+      "sha256": "25e191e9bf53081e20fb9171bddb29accde15b0c84ab339970d5d3550d6ef7de"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/attention_statistics.csv",
+      "size": 2568,
+      "sha256": "cb2102cb357b1a271af67342a5e7545195bc5538570f000ef362fcc89c008e7b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/backtest_daily.csv",
+      "size": 175305,
+      "sha256": "c1de0e23416547719d25a6e87c30dc0cf8762e1c0ce7b13c825e846e841be0c7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/candidate_portfolios.parquet",
+      "size": 3860999,
+      "sha256": "d48abcc144752bbe17d01ee8999025c2b8910d5a0ec85d49d239ab1130be65ab"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/candidate_summary.csv",
+      "size": 1298,
+      "sha256": "1bee5cece0b3c12bbe74561503715211f2ed81e9ba20de514d3175a894ab1720"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/daily_portfolios.parquet",
+      "size": 35085,
+      "sha256": "a0785d2d5c10f3373f3c30f37da41ed896aaa3e5e40ef3b165303b91a889604c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/daily_predictions.parquet",
+      "size": 70076,
+      "sha256": "348248404b224bb01791dccd523988ddd988d8cb030f96807a162b78e4a35f2c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/g_selection.json",
+      "size": 177,
+      "sha256": "2dc0819a1f42d0f4ec659ba3c5d87833108daf756a61ab4f5e9f4283fa8e01f0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/g_test_summary.csv",
+      "size": 2170,
+      "sha256": "4c79be1fb91196a1543684c15aa1e6b0bd3de3f2edd8a3f95fe1c7d79b97b102"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/g_validation_selection.csv",
+      "size": 401,
+      "sha256": "c772b048193c48886775bd5ec4231709963adcf9797821c1c8137f668cda5026"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/gpu_logs.csv",
+      "size": 584,
+      "sha256": "83987d639e5220fd4b84e48c2db4aedb75aae76356dd9ffe65e87b3204c2b67e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/gpu_monitor_samples.csv",
+      "size": 6444,
+      "sha256": "594a23cc72282271d2d2c8ac2837917e8fe5995ac0a17ed6c48b6fc334bcee77"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/gpu_summary.json",
+      "size": 473,
+      "sha256": "1436312633a9569bdd948d3d6eeed194275c69f34fe866d851acf0b6676631b3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "e41b30f5a0daf8f2f531401dd7d4b36e6960d40fc6a34f01c0baa13f1c328160"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/leakage_audit.json",
+      "size": 65580,
+      "sha256": "46ea8d3a5574de915655df9adc80d08ec978f49bc74ea7f2cb006bd287cb7815"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/model_updates.json",
+      "size": 122,
+      "sha256": "15f95b9cdeba8576c2944ded726c854526b53c5d800ca846714e90982c4ee39f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "2baa267063b0d7ac87c0c962319a53b97e34db1ab896e7f560c53234ce0a5193"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "de59636d18545234cd94b014be63beeee19b53c88d8692f1be77bb7ff01e46aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "2cc06fb11a90e35be876aeae1e8208806a944023ca32e24b77f182eb9e1b0632"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "12b7244ed8b8f536fe934e265b820bedd358201ba7750ac2d4cfb0b6da4f3ce5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "8edaf012440d90c1ff4183e03c0a5459ff35671d2f8e364e79b9debdb3732b25"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "b5fddb6add99992f14971a375ceb75fb71b3f35454e5276741a962105b1251d9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "26ac5811d71c8d155f4c9cc6c24004292606176bdf0a754f3aa1b6a35bd52be9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "99acc97ee743c6c5a39282a3d221a1fa770966eb874122b18669b854d4c10c01"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "c0f2a78b0a9ff44a23ed237ba38cfd03526bff3052cade58199a88684b940653"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "0d7083de767e80046c8dfbdfc11c23b9c8c1a30a75bbc1678658a088fa74b742"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "dbead0a5c20b070dad9b9999cde3c06defabc512055361ed0a1cec7592cca542"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "fd7393480f920067d66408057cf314d1b36f67c181a026e4173ef6cc8b77768c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "e22657de585f81ed2eea5d10c01a96d243701cc6c8d0b14d1d1f15b9a8fb484e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "e2e1173bf308b71735bdd36f6927b0ef83a05b2c7a7dd10dd790360ce99f0b45"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "4054d822e1695720010edb61da514d30c7deaf58fb5ab203c22bc688a4f80e72"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "9f5a2d3f2e29eba81f1a111cd913fcfa6d9c295eabd39667f7b183c211d3c064"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "216cdf6dc5963a89d0280c16a85a28aa8ffdd19c23bb8cb8bc8c19d931b808dd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/performance_summary.csv",
+      "size": 5182,
+      "sha256": "2633ae611734c8bfe275ada6b129369d0cbeb71b101af339c857c84ea923b7bd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/performance_summary.json",
+      "size": 11894,
+      "sha256": "7b2299dd38f46bae26329d93d8e579112c9a739aa5f2aa3321afbb05e22edc52"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/plots/cumulative_return.png",
+      "size": 229650,
+      "sha256": "4a4bcf27667710c4d4a06ef0afb081b92f87aa681beafae1d168f7449b334580"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/portfolio_weights.parquet",
+      "size": 85477,
+      "sha256": "28f834bcf305f9ea236a45c3d61d01a3e2e1baf0366a5b1a66edf69a338d73e5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/prediction_metrics.csv",
+      "size": 9269,
+      "sha256": "36e1be6219aa8150f721597a2555188f10e33dcd4d77c2ef837eabdcf70bf109"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/reward_logs.csv",
+      "size": 2837670,
+      "sha256": "be27850ebeddefb080c0e94ba6a9622fc3fa2c31d8c2ba8ea5558845ea7680b7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/runtime_logs.csv",
+      "size": 913,
+      "sha256": "5f13e72465e498a62be3bcfa855c2d803f4ad202509d0b429546170739fec687"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/split_manifest.json",
+      "size": 6160,
+      "sha256": "6ad5b65ce7b011910aa4250cef3a97749f1541f233fb728ec671fb310878121a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/temporal_attention_summary.csv",
+      "size": 3926,
+      "sha256": "60932da4823363656e89a11bd4401142d9f0bb912b3697c70a0305c42b6bec74"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/training_logs.csv",
+      "size": 2855,
+      "sha256": "09f5e9231658e8c90d77d31311adb481f0b951eb0e735ff2b4a6e373ce42c23e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/S&P500实验分析.md",
+      "size": 11605,
+      "sha256": "90def0597944d1592175a408e8314e05abf1b769de1a487faa0d431e4cc12574"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/alpha_training_metadata.json",
+      "size": 552,
+      "sha256": "f6a39569fc0c7fbb8b63436d61955b89cd3841a034b9c11bedd983f59870e401"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/alpha_validation_logs.csv",
+      "size": 14250,
+      "sha256": "ccd159725740a246903d17bff7664ea228195e2703c4c7faa26adf5a79728a9f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/attention_statistics.csv",
+      "size": 2337,
+      "sha256": "1dc6aee9044bd609713051da78fc26f1f3a07547f30d3e61cd389152ba29fc64"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/backtest_daily.csv",
+      "size": 168606,
+      "sha256": "69664eca2159863e78da457a387aa8fb2d5cbf812aec1d2fd0d1cca529d621b6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/candidate_portfolios.parquet",
+      "size": 8361136,
+      "sha256": "77f62b8ddb839963a6b7ba1a73cae791c199aca45a37ebef9fe794526d208b06"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/candidate_summary.csv",
+      "size": 1307,
+      "sha256": "122f39cc1611e729e78a8bf97b1c4a6f4b650db10b5a376db1bf04a011b74541"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/daily_portfolios.parquet",
+      "size": 34287,
+      "sha256": "a5430ceca9202be6b60fd14ac9e92b6081767475ddd396b525db35cbb652241b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/daily_predictions.parquet",
+      "size": 63622,
+      "sha256": "171471d7f664a5ac87cb0ffa5b5330c366e19833180cd7e28ae8ee67e2616c0f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/g_selection.json",
+      "size": 178,
+      "sha256": "8d087cc2b51aada534d955393ac38770be4ec28891949c4f0acba2ea7a80e8aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/g_test_summary.csv",
+      "size": 2203,
+      "sha256": "c8455413fe4adb50c1c125cf74cc3050129bcca50d4d6255931ed84ee3c4ab74"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/g_validation_selection.csv",
+      "size": 406,
+      "sha256": "f560ee556e7a7b55cc95b5b4b6de85e5c7eaf6076020bcf67d6e5f14687b2b82"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/gpu_logs.csv",
+      "size": 585,
+      "sha256": "16e2b5f79189da0065807a2702187096d4a82194328288f5b9e6e2bbd554a428"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/gpu_monitor_samples.csv",
+      "size": 6951,
+      "sha256": "c019087ebbe0d73c831650c19dbf6284dccf4adadba8b5ed1e83c0ce11d1c43a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/gpu_summary.json",
+      "size": 460,
+      "sha256": "a651ea4d226c078838cc5dd438b59ad88ec3a78df633db93a767df5a72e77527"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "8ee34f6472e92abfccc059ffeab273d6f5a62ccfdb48baa2200d434e3d8e92db"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/leakage_audit.json",
+      "size": 65580,
+      "sha256": "0696a057c602f4f74140f849335cd0f5fee6822ace201f37677dd4442d3ab3db"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/model_updates.json",
+      "size": 122,
+      "sha256": "0353d6ec9bfb47932b78a456674119b06ece8402a2469264e9568362fa498158"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "6b8658fe5294e208e609f4abb48b79080010c6553ff072b8dd2c59bc03bb1a7a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "4f6b79430dd528f222b30f040b68ec05c88554a99585f98063728f88864eb7ba"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "e8601ba1e9208c3257d1d3d2a565a378a9e71a887de24b7541b31edf1a9f6be1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "7b51f16640195e8876b2726684c15ac3ec551895c3268a8abee8dafdf93ce38e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "4daedf0025bc2ff4e06e56af3d953826de8772753041eb11b2424a307c7baa9d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "bc08968f8a526e34e394654368ddc493c109ac7fc789d7bdfa83cdd03421ce36"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "9def6e47e4f8fdd98e30028e1817feac6cf3e9e393827c049aecfdb3a075aa26"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "0cbcc240f612415bb3f0b8d1125de7b4f43ff4ef9d533d2251388204059a4b2c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "2c588c88fa445f06a390c713c6830ef5b44b08783df69a414d2b0e863ecc510f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "35e2d23b022a60f89d057b77dd677994b77170987ccb7de75440b2349f521f78"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "3e33830676d966105faa8de64285a8d7fbf4cecab49df45113cfa73b252a5dd2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "5eea1368a71ca44cd9a4ffeac356647d8ef74019ee3c80d70df847a7a2ece342"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "20f3334837ec2ae25120a2ad7d1c07e21d8a7459d515993b60268dcefac4af97"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "c331ceff8aab46778ebe60dcd7895db08a1342610177bbfade4ebf227cec280e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "54c4bf1c35496f8e6c9a19020536fc05eece04819417569e1c8fc78703a48b36"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "c7586c4b5263e2b6ad1d06e76002ad3d36c1fc2ebc70b7a714f62c2ac8a6f1aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "35dbce27af49c04b4968336a336cb78d9dacad3e83d0656a00724686cdcfdae4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/performance_summary.csv",
+      "size": 5345,
+      "sha256": "8e7f95f233e1d9a2a975c6dfca13dc748645720b9abf88df506a55aca1703524"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/performance_summary.json",
+      "size": 12058,
+      "sha256": "3c37bf2601e8dec8516d80b0034aa83a0b438a357c198636a1515543694df90a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/plots/cumulative_return.png",
+      "size": 238262,
+      "sha256": "60b69e89f71678495c133cb7bcad5c6a4a4f6798956643e5d0b4c2d5213a8b80"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/portfolio_weights.parquet",
+      "size": 81039,
+      "sha256": "af86ba7c1f36b5fcac8d8e0c6d8d9f29752a906bb1e8127217dae8f1bd198145"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/prediction_metrics.csv",
+      "size": 8828,
+      "sha256": "ee5e1bb0fe3052dcce5943252a359434e06a44f4360357d6d082bfdb9ac07f70"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/reward_logs.csv",
+      "size": 2871661,
+      "sha256": "9733269feeb247e9358815e15ac8b19271e23054e9d16940619e3b957f559578"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/runtime_logs.csv",
+      "size": 898,
+      "sha256": "5c50699f0346415ca823f99cd6cfb4bed912a29c0dfbb9024827af8e3a4d53dd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/split_manifest.json",
+      "size": 6196,
+      "sha256": "afc55e7ca22fad2700a5ba92f668556ea7a97824963fc3002eae870ffdf29bea"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/temporal_attention_summary.csv",
+      "size": 3935,
+      "sha256": "742f1476e1d16056571b5f49f60eea17cd372d30777ca7aacd4e7bfc11088752"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/training_logs.csv",
+      "size": 2918,
+      "sha256": "22a22e2d2efe480e6380dba4799a693b593840606f87860d72a0c438b016ba44"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/S&P500实验分析.md",
+      "size": 11498,
+      "sha256": "84a27e5cdb3d5e2cd2dceb16463c7f9fbb27f2b8c58f1276e9ceec9994a0fec5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/alpha_training_metadata.json",
+      "size": 551,
+      "sha256": "12813ffe0c227ca0ac7e31392fef5f23429a70b77e675c067c28b406513c5a69"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/alpha_validation_logs.csv",
+      "size": 13774,
+      "sha256": "40b11fe953ff71bfff391c96cd2f73ffb6a3ebc029813c7d37d0d50755981e12"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/attention_statistics.csv",
+      "size": 2304,
+      "sha256": "fb9e7a8c24398e8bbbd215bcc4867ff7f70b4bd843da283aebdc334deeef0a0f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/backtest_daily.csv",
+      "size": 168341,
+      "sha256": "1769b4438e06d6531a3724449863d8042e1b1ec8a96072ab342592a6f6a4683a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/candidate_portfolios.parquet",
+      "size": 8404737,
+      "sha256": "701ae118105880f9b4303193f28e81edca75ca8ce3c7626e9d259180d1d3287c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/candidate_summary.csv",
+      "size": 1309,
+      "sha256": "04c334045e2c1a095409bad1d3770a634084470bc99dfb2d59f5163009f5db89"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/daily_portfolios.parquet",
+      "size": 33939,
+      "sha256": "d7d57437bd98ec2413909b201c41db9b90f9158dd6a708868f522570d7377b73"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/daily_predictions.parquet",
+      "size": 57055,
+      "sha256": "f5835d77ebee4b5c2b4016033fadfcf5a00128e51c3d7fe3e9f99b4c95e757eb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/g_selection.json",
+      "size": 178,
+      "sha256": "8d087cc2b51aada534d955393ac38770be4ec28891949c4f0acba2ea7a80e8aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/g_test_summary.csv",
+      "size": 2191,
+      "sha256": "24e7dca5e7ea763961986edfb03211f0697e571a464dc2d02c30ee397bcc93f3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/g_validation_selection.csv",
+      "size": 408,
+      "sha256": "89276be02628e94de06e74416cefeb68127d02e75be3eb8b72d188fd87e49ade"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/gpu_logs.csv",
+      "size": 585,
+      "sha256": "de8c3638bc69774b11abe42b7fec139d5f2a5b2dca0ffaea938e388c834707b9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/gpu_monitor_samples.csv",
+      "size": 6705,
+      "sha256": "87576739692a4970a8436755dcb824f7691a516571d4fc7e7bdc495c97d3ace3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/gpu_summary.json",
+      "size": 462,
+      "sha256": "47923bd5a6bf494fcb187a33c1b8a0cf6bfba68cd01dd9e9204350284cbbfb87"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "33271b571638e007151752fc7b7c602cc081442bdccc8dd26ec83361a481c184"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/leakage_audit.json",
+      "size": 65580,
+      "sha256": "db8c030f5ee95c4780bf18017908d44b97907b4f368bf50b29ad5ba5b0b6f641"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/model_updates.json",
+      "size": 122,
+      "sha256": "2ab4fa8806230dbd869e4e0d0c2ced8209f4e2fc3653e60aef32cfd46bec58c8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "31b03407c1c4e47437de19fbfdff8af878194dfc075d413971f794205acd3cf6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "cf0f45364c85fd807746be6a4321692bc7d54064c3aa62acf90c7ad069146717"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "88564de775aa90eb527bb671fc4d5df4c3e0c8fa7077604440142f23c3a74519"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "3dee10b902b9b5169eacf06bf1f96767620df16ac03316ddfe208443a5f83858"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "eec38ffd945ee3db33189609876d8868346c2ec257e3488cf53452d74322473e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "acac75799debeb8feb771cd0f627e544d70984e7bf0b689acc93ec28f9eaabf4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "1a926e64beff4d3b4403ff9b3ee752f3f2e1d5009310e4559967ec8cf4f48904"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "efae4dc2ad9e424304b755b84448a059a6ce9d3fbfb3588f31d5760abf5b6800"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "8d5d6e3f76cc5ce3be727acec9d5885c951a84b67931ab42bf54dd3d9a42960e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "4c4353810aa99b2e2c6af06d879573fef0bd9b2e001ff5092a9ce2fbeba73816"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "a5ad7001e87c5cdfca22691f999eae2570af4c751ea9822e9dc31384d78bd60f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "3548f690127903efc4ff85303a28656c6e0cbe3d9e1a0d99417f9f19c460fed4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "419c096b03e97eace8ade6d098dcc5e108fcde04d6ac178412a732cd3b197535"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "6a4bf942f2ef12f09ad3c8d1e4682dc4c411bd4aca24024ce8934221ea1f5f21"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "a2b3e81ad46b9eaf61cfb4a95e3d4f903a3274a603403faed00e9d0c499a38d9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "4d98b2c9d26a59c9180c807aada461b0def4837efb2feb272e29b1c490e5d4ec"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "aa1864ef48283789b6fef4893fb00a617c125fd61c8367cb64a6e991e3cd2e22"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/performance_summary.csv",
+      "size": 5173,
+      "sha256": "ef8a7f3357fec6c0eea68de20fbe6374a2ff8c6c50c7c436777e0d24e62d7725"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/performance_summary.json",
+      "size": 11886,
+      "sha256": "edc8ead422e3c9948f908a3d2a456c28fb682b8764240bea98c5aaf5a9727986"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/plots/cumulative_return.png",
+      "size": 274681,
+      "sha256": "6b1be9b7b842e105c1c8600c7d7a6dd6c118cb639f2ce0806f9f91d8bee10fd4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/portfolio_weights.parquet",
+      "size": 81153,
+      "sha256": "e92e5400db41be3b05695d4359c3e681b7869b19cf43626d9b58d3c1d801b7bf"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/prediction_metrics.csv",
+      "size": 8911,
+      "sha256": "45305f9eb1a5db07aac172ce884f14116c1f7484245ead8e940d33d14594f827"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/reward_logs.csv",
+      "size": 2907827,
+      "sha256": "7bd673c7e69c67bf7aec1097009869dba2b3744b87141656069087da6eaaf70d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/runtime_logs.csv",
+      "size": 902,
+      "sha256": "2095727f85bcf1382174efa5994a698aedfc3b748960fc3edfae0b37341bd28f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/split_manifest.json",
+      "size": 6178,
+      "sha256": "4522c97595537c2e4a30ce263f53c23610cd53414659dc30e856ed97e4c0f5ee"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/temporal_attention_summary.csv",
+      "size": 3945,
+      "sha256": "1f2a2b67c326898bf3ac0f671135a74c83295c5076cc9d280218803f822382d5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/training_logs.csv",
+      "size": 2922,
+      "sha256": "072e39a8c70e35836384a2ed8aad44212714b4fb89804f5cedc19f935818f484"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/S&P500实验分析.md",
+      "size": 11628,
+      "sha256": "d198cfec19fed1f17aaeb577292238e8d542b637e0c11678735017b078f36d7d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/alpha_training_metadata.json",
+      "size": 551,
+      "sha256": "7254019e29f3faf511ebc5a16b86a9be5ae280eac0afb216d1fd28713462d7bf"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/alpha_validation_logs.csv",
+      "size": 13497,
+      "sha256": "85af911819230a6c40e9394a4117ca2629eed8a7b886777785fea9362f5750e2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/attention_statistics.csv",
+      "size": 2513,
+      "sha256": "315ef0e6af384da6ad274a349618ba9d542ecab846f6397a6adc5f5ee23dac29"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/backtest_daily.csv",
+      "size": 183873,
+      "sha256": "480d8fac1791b85ebe5f97297cbe3e69592c6671c0c280478ed662776cc51db9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/candidate_portfolios.parquet",
+      "size": 9172676,
+      "sha256": "58a06c4611fa641fb52b2fcf7cd9c5c6acbf263180086023ac05b353c2f919e4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/candidate_summary.csv",
+      "size": 1307,
+      "sha256": "5f3d2891f50c05c984b3c743ddc6e4adbd1bcf9bd18b4bd566e082f2233e220e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/daily_portfolios.parquet",
+      "size": 35912,
+      "sha256": "19bdb6ae6f2846b4636729fe18c642b22fb99d1f7d8c64396b8c695a93532518"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/daily_predictions.parquet",
+      "size": 72022,
+      "sha256": "f66ae05e0b0496ba37a3b1971a3558efb770c843b2a717c7581f834bb5933950"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/g_selection.json",
+      "size": 178,
+      "sha256": "8d087cc2b51aada534d955393ac38770be4ec28891949c4f0acba2ea7a80e8aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/g_test_summary.csv",
+      "size": 2217,
+      "sha256": "a9290331e93dfd4e1bf0e426a3a23de72f0a00753803602107ac2daab0a5fe03"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/g_validation_selection.csv",
+      "size": 404,
+      "sha256": "5af9f9451c590e811b757c863991125b4d71863314a4d25e8d4792938a6f7e2c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/gpu_logs.csv",
+      "size": 584,
+      "sha256": "d154e4ca2ae114d1cb0b8bec127b2d5cd942a12e94848b3b001237e9845dcbf5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/gpu_monitor_samples.csv",
+      "size": 6457,
+      "sha256": "740ee0ec1cadcf8703e76a8f47f54a4d07fe8e8aa050171a4239fcb959a01af9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/gpu_summary.json",
+      "size": 462,
+      "sha256": "543d27e45f505bb4cd6a2abb662e64fb5be1b30906066b3472a0ab8ddd6622ea"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "9a5561e7b4c03c0b4fb612c8579aba637e14c44f210313641d211988314bb651"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/leakage_audit.json",
+      "size": 65580,
+      "sha256": "b1b08ffa949ec0cec61f45ed6bd9c48756787e2c0118b20e2d50ac2821821a0a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/model_updates.json",
+      "size": 122,
+      "sha256": "cd44112041ecac109492f907fd126b44a30057ee5b76e5fc5ea3ec851069965a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "00313404394c736ec8f822f11416f21e4e6c6533cf11b89628579c1a9763bbf4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "772cf16560fec2326630100a0c1e4e87421e868f96e3c4c49dd4dbe66c57c2ae"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "3079f7b2b6df40d193b15399ecf23be58d31d9d18d71f302a524ff61c3a2aad8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "50503e64c5d854641a0dbc0d7796cbf4eb4d6c294b72af11b52562cf4eed96bd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "20f755132b43c79ca2b81515a1f298e2304b0c0bb6857d20b54e376c9ec0525a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "07f73a17ed754bab0d87efcdabec5a92bb8c4475e193559bee9d6f4a40f3e2d4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "85e4b2d9eb67a52a64b1fe9e00cd2f1670d1895ff90e4340555dcd68a8fcda22"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "5167e588926df792c3a9ca47c624779e6a5665e3a7ddb25cd1c3bbb1049f1ba6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "32334d822ac978f601050fb9caac1adfa1df84943afd89b6200d1e66564293b2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "3902ce91fe00d16aca0c81c4a7f4a63bb110567730ded370df12ffc8071c6ce1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "4d12567c66d31258b48dd9c3942f765373e30a46694b01e2686465fadb59bc09"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "9fbff8bd6c7140e8ac162ba24fcee1fb81cbdfc83fe68503dba0e55e0363e234"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "3b2bea4a335c6bcc125bfc4d3405b4faedfc9c8a1390be4511065b0761bc2ed4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "1b6357871ba5022fd2efefa14dccfa1b7574e003d14bb8499a23ae4e959e9da1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "9416003de399f7fa0379832d09100b07cc6458ac112f9bcbca02e8a6cedb92b0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "574a6c9806e4448de9da22388e197ffc3e59cc3a60204bfac24e3a166465094b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "e93670498ffe4eb5f8ab0f05ccc6ebe32259833e18bf6de5929134258dc7d46a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/performance_summary.csv",
+      "size": 5328,
+      "sha256": "24c23fdb568dcc600f985a1b392fa7f6fcf72a3f51b8490ffb6d5e50690a8c13"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/performance_summary.json",
+      "size": 12041,
+      "sha256": "59811a62ee19c561a20ab10815d44cedfff2ed851721bdfe12b099162b8d4540"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/plots/cumulative_return.png",
+      "size": 239862,
+      "sha256": "391bbd90f9d9e0bedab0eb13c36f8cc401d7aceca1610988bd3ff16ec33148a7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/portfolio_weights.parquet",
+      "size": 86063,
+      "sha256": "1bdb1f6635f6b742edd24d4bcd8b37d9ad53491c9d2889761580bef21f508ef4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/prediction_metrics.csv",
+      "size": 9751,
+      "sha256": "e3440f738cae9dd2d8fde2eeeacd471fbc73babebdc701e6e925646e1f239a0f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/reward_logs.csv",
+      "size": 2715062,
+      "sha256": "94ab4fd762b1b852ac680b45f5dbf23d632121aed4a9bdd65923a0e0ed49ac95"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/runtime_logs.csv",
+      "size": 902,
+      "sha256": "da8622ec99c63af422dc90852c2c50b21caa8ffb4be5efd688415c5c41c97336"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/split_manifest.json",
+      "size": 6196,
+      "sha256": "3be65c8e1bc4c97754f49200917b6af8d6be51eabdc816c0c13c17ebb615dc94"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/temporal_attention_summary.csv",
+      "size": 3939,
+      "sha256": "707069a946574b3e1f4b08eb7892b185a21942bc8d401c7ed6921410074bccf6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/training_logs.csv",
+      "size": 2902,
+      "sha256": "b3b6926cd3b9157745c4fe35941fce1dbfb2c282f07a347a763c60183d0b301b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/S&P500实验分析.md",
+      "size": 11612,
+      "sha256": "31f01c8fdd4cde55ff81ba561ee7e710bb7bf59be790dac4f13286a6d6b0f51e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/alpha_training_metadata.json",
+      "size": 550,
+      "sha256": "3f247668e0061a5671e9873825749542b6a5299000fd7e138d414a42a5fca87c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/alpha_validation_logs.csv",
+      "size": 14746,
+      "sha256": "2dc9a5ed04bea3c1ef4539c0b725f9620fe414dd79922cc3c486db29ff0b6ee1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/attention_statistics.csv",
+      "size": 2160,
+      "sha256": "7358dfa139b7120966d2304f2ffb1b1fbcf281702342a35a39ea4562bf8d5f8a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/backtest_daily.csv",
+      "size": 151069,
+      "sha256": "d3e287958c51d21a70397d2808c8f30ed55764b68a4a750411dcb936c0572b24"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/candidate_portfolios.parquet",
+      "size": 7572969,
+      "sha256": "e7846b7e0850a025cb68f34349ca76000bc897659bb005ed763fa702a1902cbc"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/candidate_summary.csv",
+      "size": 1301,
+      "sha256": "5706ad91646831ecfbed65ce665da879868ebd21a7f7218cd72d3548deb69f53"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/daily_portfolios.parquet",
+      "size": 32340,
+      "sha256": "cff7b9fa94b014efca77cb5b2dc4ec5eb13d40cce2e1c087cb5642ab5c8aca2a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/daily_predictions.parquet",
+      "size": 70797,
+      "sha256": "3a9abf1b25fe766d8b14bf9a81ed95eb6da4696a923622b0cf9146a582a5bf23"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/g_selection.json",
+      "size": 178,
+      "sha256": "8d087cc2b51aada534d955393ac38770be4ec28891949c4f0acba2ea7a80e8aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/g_test_summary.csv",
+      "size": 2215,
+      "sha256": "a0dc69451b86c5d904c1ae51f2da640a81b28da37876010ec9f54b136e8e2b5e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/g_validation_selection.csv",
+      "size": 407,
+      "sha256": "cdbf04c3b6ac290dc67d95b619b4d7ecdcbc9ac9796d45324f5d8585f43d2704"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/gpu_logs.csv",
+      "size": 585,
+      "sha256": "73493e113af37ece04fc7e45fc1196328eadde3b047ef9943cef1f414e460da6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/gpu_monitor_samples.csv",
+      "size": 6830,
+      "sha256": "83b7913f897b474a881f715e5a86f191f464b171b7d47d136d4dc0256ebe4e22"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/gpu_summary.json",
+      "size": 462,
+      "sha256": "f94f96090dc66ccfed7e0c19be067ce772bfaab047553089cdc573d574108718"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "0f8b72dd141d25f3c9a35f21bf8926ff5b58f3e33ea6e346c6759c040e6e6b13"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/leakage_audit.json",
+      "size": 65580,
+      "sha256": "d0fdd5c912c21cb4de92b46284da7e3d0a958d835e78c28a51430cf6f077b36f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/model_updates.json",
+      "size": 122,
+      "sha256": "cff5c85482fdfc7ea5639c6ef56c398c88968788db7044bf1af60d0e0db47fcd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "688fb72a8c8c19877f576f189678aa4c781e3ed3b3e24198e7a4d2407304205b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "76344fbc13e093502797a6a1b42264e99e7e3c59906787528a3c52defd8038a8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "96a1d17987b850c76684c264baf218c603710d93f815cea7f218ed923e2fa390"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "7d84ecae91a07927b51e6d7906b7ee8f586db09ebcd053d1b29af97cb28ed611"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "0a3262d7d9e97b603944a2fadd71392725b11d1c0c131817e914002c93d4f172"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "28e09166ed08a07b7cb61992774124e1f7a37e09f6d63691f616776e40226287"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "2e85a43a682b764f8b546b71ba38e19e5eda07ffa227f7c030e74ceafa382e2c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "1b58a85a28dc05749ad6721353c0513538d471a7619548fbe1300b517c47d30a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "109faa4bdd8e4ef593f461e6a80ff4b189f0d8cd709a2a7422c64b018e6bca71"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "cf161af629990fdedb7ff9314c94e166525aa18e89d62b9bcebdbefd58f7f6ec"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "82b87e76e26190776d46d384f17c18726913b279de6a519cc649e5d61fa27188"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "0adfc2a4e712106e35ffd40256b63f169f5e11241c94d246893c0931aa187f5f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "82463680f25d1c5978514d9a858d652482ccd7d501e3386519b1e545c45a3ceb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "59dd9d20e686e8f99ff856ced51f0605b74a112b98554a0b9b5d6ba5ef04d997"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "5be13fed374df7a994fe51475de8e6d03d997cdc8681d01fc7b018767e5b2d3c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "b3611f9409c98574c99683132e804f0a7339d16a9c281c45d97faec4d2437aea"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "73e42393f60b1a659c33b2de66855b327195223d81361cbd003751f47208eac3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/performance_summary.csv",
+      "size": 5299,
+      "sha256": "ec734c98cabec56a8cae60cde8e55e8194bf240ececf08aaf7d26ef0e6365b00"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/performance_summary.json",
+      "size": 12012,
+      "sha256": "373a56bc9e2c2caf1e1f4364167a4ac9ee8bcbc9c7cc61648b7ca66459febf4e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/plots/cumulative_return.png",
+      "size": 288898,
+      "sha256": "c8dc2c5e73fe98087019b8cc16e1890f7a36185005509fbff5504af205e39a39"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/portfolio_weights.parquet",
+      "size": 73410,
+      "sha256": "01536d698775f23ec92c620e7d72fb64efa541e07ecdbdd03625d7410c64bee8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/prediction_metrics.csv",
+      "size": 7876,
+      "sha256": "a638b718cd5a0e583ea99b3b4b88f2497054bb317d54f7247f789dfef3a0d1e7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/reward_logs.csv",
+      "size": 2708442,
+      "sha256": "5c4751629f76722a32df9e2b520b78d232c56b3378fa728128481bc8b618409e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/runtime_logs.csv",
+      "size": 899,
+      "sha256": "b0d72d45f3ef584e0718f8121deab9cf5c09259075dea65b4b2c881e341b1aa3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/split_manifest.json",
+      "size": 6178,
+      "sha256": "b2a31c0cf2d2e6aa5df2297d02e0df1eebefb863268b4a3c277b2807f13312bd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/temporal_attention_summary.csv",
+      "size": 3932,
+      "sha256": "2ea1e63774294a313471090afdc31297a38c006f6a3c41f21864866cd6defdbc"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/training_logs.csv",
+      "size": 2904,
+      "sha256": "403160b69944b3822d63570794121a333e2d9e0026e93f892781d7dae873146b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/S&P500实验分析.md",
+      "size": 11472,
+      "sha256": "8395e241290b990a2f15574245136597db7f658d478549988d38c1fce0b64268"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/alpha_training_metadata.json",
+      "size": 551,
+      "sha256": "c482de37bacddc38150bbbe575d910d72e9127594704c08687b93a046ced017b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/alpha_validation_logs.csv",
+      "size": 12562,
+      "sha256": "db5c50667c0697800bc6cc69e99b3d1c85b051f927c0a834cee42ac78af4234e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/attention_statistics.csv",
+      "size": 2640,
+      "sha256": "9a042c03de05d3624b72b0535fa95e14e0e126866cb05561ede1a08754707358"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/backtest_daily.csv",
+      "size": 170947,
+      "sha256": "40c49ed1c5d652595faae4c7a8bda792c86e449a3fac213b6d8e414595e53305"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/candidate_portfolios.parquet",
+      "size": 2595257,
+      "sha256": "228e5c3818d5a11b0e4df8810114a7f51a655eb00e0d7c2f9bebe8ce8f838339"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/candidate_summary.csv",
+      "size": 1294,
+      "sha256": "55522295d26a91d71efc14fa83771cadf75a96767b83072788612b36ad315eda"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/daily_portfolios.parquet",
+      "size": 35123,
+      "sha256": "0aa9a44a54bf8f1f1a3cf722261e50491b5237cd345d5ef5e3b9d12edd1d67aa"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/daily_predictions.parquet",
+      "size": 70088,
+      "sha256": "805af940f9b20a0e5ea21068886fe554f97a491bee0dc39bd4755945008dde8a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/g_selection.json",
+      "size": 176,
+      "sha256": "274b39bcbcf97d4ee6ae8fe329ed1016b03ffae4173a8b7f0b018c66173cc5e2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/g_test_summary.csv",
+      "size": 2161,
+      "sha256": "0d32bdf04ab6a0ee5ec0eacf41f4b5684c1b8af9b314b2e497a0d51a9d3691d5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/g_validation_selection.csv",
+      "size": 407,
+      "sha256": "1c3acc22d6b087ffe3e5342cb71f41fbf39be158cb7b227968660d67e5864f29"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/gpu_logs.csv",
+      "size": 584,
+      "sha256": "d4ed3c40fa289fe949b4db2083e78b6ed7e25c197552e0d5078bf7610cb9e1ad"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/gpu_monitor_samples.csv",
+      "size": 7063,
+      "sha256": "13ed068b8ddf5b73a336323569ba6a9158d9ee04efcc3972cec8eab8a00269c3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/gpu_summary.json",
+      "size": 463,
+      "sha256": "ef8bb031301c70162bd75e91a01391db5caa9f6e21401585de69da03d02c9a66"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "1849b0498b10aa07a855fa2ed6bb6aa5ab374816b1114924a29d669657976676"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/leakage_audit.json",
+      "size": 65580,
+      "sha256": "38aed38520d6b241fd0d8fd38deef47b58497fa6c08d1ce7cfc4aacf7cf350f2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/model_updates.json",
+      "size": 122,
+      "sha256": "1993d63596be86cc8032e02d3dc9a1802d7692bd5c65ea2bcb91a82ee3c9daeb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "e67a6a36239398459a88141309138e84fe99b2dab294bf43d159427d7cee705d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "d8a98ccefb97a020dcba14e4f5997e85fa803ee5b047a36cffb5af9417b42d6c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "80b6d1574510b1ae4431f15c990e1239a0d2c7859f7c2a831b97719d0aee622b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "41355d1f887dde32b46689639e754273b3218eac244bb5b1595accf2b72a4113"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "4b41ce00210e3580e75dc0f1ffb59de02fa2a493ad9c14e53326a0796dff7d01"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "52abaa693a51523cf00fc2cf81c2f68481451431ee498a7dda6faf55c075f152"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "b25fcf08c230985678b5a9e1f15a6e9375d67d61fcc9debb3cd6b2822d974ea7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "c5882198b8bfdba1540e472eb5499e35dc972b2cbedaca0461407858d38ae32e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "7b28b38db5b402f095edf800fbfda1ee2e8475c60620ae7a5d3d5de25d2ab159"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "fe697bae1ced2eb059ba52f04cb0f3a6239648bb2f3d06f85c0e58f0e228c33f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "ddd9c46fe32e3f465990b7b2c68c2eec107fa3849cc4ba6f26b4fa7b7040dd33"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "7f2c02c4b20d4253ca2ade79a8474b6118546d3583a19de0c8bc908bcef9944a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "f1177e333cdae4a7efe71b3b35ff35d08be6d152347f7616040f2933d90344b6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "4bd58d18536b0caa01e70cf997423ea365c1d4f1c6959e40cebe66bb8f3ac7a8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "ca5ff580bdf8ad26ac882b97d46e59cb77a97eced2079d65c962a3f24cb314ae"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "9cfa130bd11efdd0fcae938a6cf7235311b1390adc64a6267f12652140d6d35b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "d012c4776816c4b5b7ae4c5fdf25558c4b7d1eea83fc44b6ed74fc53570887e0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/performance_summary.csv",
+      "size": 5109,
+      "sha256": "cdf217a97b308510301f69c609f79b5ee4e1dc691b44457ec3d4668bedd374a6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/performance_summary.json",
+      "size": 11820,
+      "sha256": "02a23b3f2ac6d824c3f39f71a0dbcf78fe0820b91d2294691237502fa431d492"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/plots/cumulative_return.png",
+      "size": 248334,
+      "sha256": "98340d220771e456e9f6d0a16c4b351a0b58992e8f909a3c51f559b9311242f4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/portfolio_weights.parquet",
+      "size": 84268,
+      "sha256": "67f8459dbc3e16edfe5803a41dc8edfd1280975a690db8bfea66ef25ed5894f9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/prediction_metrics.csv",
+      "size": 9213,
+      "sha256": "5e0438dde3d28e05cd77d09275b3f626e99c196e2623b6336dbffb54da72d95c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/reward_logs.csv",
+      "size": 2715748,
+      "sha256": "1236733733983041fdba07c2595477d14a2db192f07f4c40920ce925f2d303af"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/runtime_logs.csv",
+      "size": 900,
+      "sha256": "7bad1fef9e9cade90e76a3536f82d8b4bac68430ae9046d92d0746b0e6bb2413"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/split_manifest.json",
+      "size": 6160,
+      "sha256": "bf765006c06cc8eefdc88480ab694b4a6f4d55b119bad95adc12ed1b98892cb9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/temporal_attention_summary.csv",
+      "size": 3910,
+      "sha256": "c8a81cd69126ca472df4c2d6982e1870fc9343cbe1913d1886c742cf0435a441"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/training_logs.csv",
+      "size": 2903,
+      "sha256": "191d0d8063eab727c9ea338cf7814c4dcbf861a8e17b766c11543b3422fd61e7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/S&P500实验分析.md",
+      "size": 11604,
+      "sha256": "694f8d9dc7a341d1b02e181e81839eb9b0bc87cfdbed62a293bc79588ec34657"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/alpha_training_metadata.json",
+      "size": 552,
+      "sha256": "1a4966fd7d06779f64d9644a58edd58d86c45c9484a50eb7c0632227f6b29aa6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/alpha_validation_logs.csv",
+      "size": 14297,
+      "sha256": "dc025ad0244e92c8ffa742aee4eb46f35ca52eb70db3a228181eb4e4f1ebf6fb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/attention_statistics.csv",
+      "size": 2311,
+      "sha256": "b4ba265fd7f914bc04647afbd150895452d2cc6ec9fa7b032b88be708221d653"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/backtest_daily.csv",
+      "size": 158517,
+      "sha256": "0b55d78f22e583f4ae5b9c1fb0c9644d183139c001ecbcddc60496f5bc81b01d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/candidate_portfolios.parquet",
+      "size": 2684274,
+      "sha256": "126ff61be30871668692fa311066dcdb47c1e317a04b4252dc8d68cfa843d7ce"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/candidate_summary.csv",
+      "size": 1293,
+      "sha256": "1bdc720e4c373b66d56961199d6d841f2f4c85d19a9b7877d402acd58edcd1c4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/daily_portfolios.parquet",
+      "size": 33297,
+      "sha256": "469034418e00192c6dffc838d60b461931161f8967fb6a022383db3b8bbed687"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/daily_predictions.parquet",
+      "size": 65333,
+      "sha256": "fd33384585e4fbb57a7feb8d20f19e22da1d1a9b3e9064986a9acaf76cea2e72"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/g_selection.json",
+      "size": 177,
+      "sha256": "69fa82b18416b027910ae4056ac26a3a721454a80b10fca21fe58e4c34ed92e2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/g_test_summary.csv",
+      "size": 2152,
+      "sha256": "43fe0bfb1bf7ee134e424f18c527f287089c2c9bde3a9f6a3dcd3b43fe3ad544"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/g_validation_selection.csv",
+      "size": 403,
+      "sha256": "8562ea25510be9d866d7b505b8c1da1b2f7e2e425180c73f6797a257958fda87"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/gpu_logs.csv",
+      "size": 585,
+      "sha256": "8b6e06b5658420da0f714253092cfedb8d74722037e2e9005d5ce067d0a7b97d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/gpu_monitor_samples.csv",
+      "size": 6953,
+      "sha256": "ddefa5208e0bb47d369958ba1ecab3ff98fb44c187c5635a6c02c8fe14ca2bb1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/gpu_summary.json",
+      "size": 461,
+      "sha256": "5097388f5d012b4fe3ef054483d833d001c0ecd602576f0ef0c22ca9d95c436b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "8cb49818a55ecb54bfb2ce5e3282f82eccf73bea73354a8e6489e8bd3427316e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/leakage_audit.json",
+      "size": 65580,
+      "sha256": "d4dd9efed37cb72e8f97726f487c946c91c1e1e5d1dc9e9fa9669a481bbee84e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/model_updates.json",
+      "size": 122,
+      "sha256": "0f5706cd81922067685074e77316e6be6f711a300e4d369d7eeb1663af873294"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "6f1a2ba1a672c0d6c1081be62156f82057a2dbcbf02eba95e8fa0219619e2595"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "28f39c85b7413a2e1d33c753b86ce34c66428841d863e46ba7ef0d7cc0d38e61"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "6388d6c32a6a5f1816c4f07fd9b75f862224c876ebe82e596c4c3421ea832854"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "5132bf2e6cf54d41ac9210cfcd983720fb2392d03e0832854a916185dd95a419"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "e1483ff8c3ed8a061f122692d5d1c336f48df82e78bb407a356ff41fa49ca1cd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "e63103cf9bf2c1225086fd27eceb64d47a721a8a975e41ad210351bbcce099c7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "db1ad1b99d435965859e2051e9d61c7b60a9d801d991a4d92e45a76a02d91433"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "b2a10f6dbba8b4954cb5674239989688978e9f1f6c3cf2e3047a22f4a81e9f01"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "8ed3ec90f04456c4b47b6c5d31d0b396760afeb99bf7622dc7310a9be21809cb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "4ae2cd13489012517a479858319bf45bf0bca3022d660467964bcbaeacea09c6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "f6809a310874d81508e6f6cf9ae9bc096af4dd33af3071adfdc2576d940504d8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "1181024223acbed7530be0d1ef8571c41e8d0878ff0bef14c5f89ae2c138bd3e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "ec6bd6a432192bf7c12bfa2ea120b605860f27d1096d20fe662e0551f467b967"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "0473e999572c1bfdef75928750b7e4358ecf85fbaa9f51c5f5723dffc8592ff1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "5f271eb39fb74f282e7aa1f080b442435ed573e912c82e99442db516708ff9c4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "12f7b5493f5d52b834905bc0f3e49b13f7a61618713cd47c70a28087cf00028f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "8fed67a96a90d74d2ea12bead6053ff9e5f606fc3f29ac9a537f0f36c2b70f1c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/performance_summary.csv",
+      "size": 5055,
+      "sha256": "3c4afdccec3e4d2ec5c8f229d50b255a856cc24268a40bcfdd2d02c3a52e8955"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/performance_summary.json",
+      "size": 11767,
+      "sha256": "099c842222b6069ed6991fca874f0fa4a7f34b7e73a06a1197fc5035a703a2fe"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/plots/cumulative_return.png",
+      "size": 205442,
+      "sha256": "5c7d80eeee918f4b40cc5fbd6da501d7bfc427a7edbf75d5f51adb3dc55e312e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/portfolio_weights.parquet",
+      "size": 75303,
+      "sha256": "e652769cb02f4be86d1f051d12c79e702975a622e07dc75067f0ca508a15b0cb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/prediction_metrics.csv",
+      "size": 8484,
+      "sha256": "d18fb619cbc911e09ec6ca236da433779745347b47def331e98b3927c94ce775"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/reward_logs.csv",
+      "size": 2707103,
+      "sha256": "08ef45ed90393835737b4e4873a0e8c01d80b424b764dbfd02fdc874c34a6a92"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/runtime_logs.csv",
+      "size": 900,
+      "sha256": "dcd9378e13cd49716df3732c4d748c731f5ea440c1eb110c8e30ebc967dc931e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/split_manifest.json",
+      "size": 6160,
+      "sha256": "b429e55285608d38e626feebf0e228c9008b32aa435b3cc4efb91f53fb34b00a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/temporal_attention_summary.csv",
+      "size": 3940,
+      "sha256": "b63cdb246351a5ad78ac203c8fc66995f61cc0ce08188c1d613cdec787a909b2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/training_logs.csv",
+      "size": 2898,
+      "sha256": "7170f312ed131766c5df063c02397ae625565af6e2d25a6bda6c6441f204ea51"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/S&P500实验分析.md",
+      "size": 11520,
+      "sha256": "34767aeaf369cda1f11c2b3b6beddb27d449ca5d7d79d588a7f6f0cedab4b28c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/alpha_training_metadata.json",
+      "size": 550,
+      "sha256": "284ffa886dd5fb9b60dd25070980b74d95a920a08723b58836ca54f5d233eb13"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/alpha_validation_logs.csv",
+      "size": 13149,
+      "sha256": "f957fd1877feb00f97ccc114c0cbb5aaf8becaf3832576562897bbb6d0dcf3ee"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/attention_statistics.csv",
+      "size": 2132,
+      "sha256": "7f13af8e89d185ac76dfaaba37b79fe4e8bcdc54834e403f2e4e24ca1caea41d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/backtest_daily.csv",
+      "size": 147965,
+      "sha256": "a8f4d0153b49839de21cc97aa2958c06547be47c4b768e7072d45224b16689e4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/candidate_portfolios.parquet",
+      "size": 3267443,
+      "sha256": "2d59bb226af6c3596b89313c23422c7d4a3ddb5a335196ac6a88777ea3cbf1bf"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/candidate_summary.csv",
+      "size": 1301,
+      "sha256": "399182057e9f8e406f7e85014fe7252a53f387b544e12cff612ede17bf7ef0de"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/daily_portfolios.parquet",
+      "size": 32261,
+      "sha256": "7a2fa0438bd2c8b2aacba8f4794219d61e09f26589231ef67d1ce18b6e6d1d21"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/daily_predictions.parquet",
+      "size": 79247,
+      "sha256": "af092151ff82d83900f76cc5c638885ae4941fdcb251519581346499723b36cb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/g_selection.json",
+      "size": 177,
+      "sha256": "2dc0819a1f42d0f4ec659ba3c5d87833108daf756a61ab4f5e9f4283fa8e01f0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/g_test_summary.csv",
+      "size": 2201,
+      "sha256": "4b45b025e721e79de02fe00c9a288f2412803593f9cf95f69c2bc5c875aa94da"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/g_validation_selection.csv",
+      "size": 408,
+      "sha256": "2d3330c6c370cd59bc14247f492cbe7e0e5093cb4346db2573ba5ab4379e7f1d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/gpu_logs.csv",
+      "size": 584,
+      "sha256": "adb6d8eccd311eec5f568e41a27ef34e07a4c9701b8800b1560cd02bea0e6e02"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/gpu_monitor_samples.csv",
+      "size": 6697,
+      "sha256": "6027549ee812d6e28f6528082d6a3034f842ec8eebbea6f673f93d3ce6d21d2c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/gpu_summary.json",
+      "size": 463,
+      "sha256": "5a77dbfb6084e777fa2d3ea536bd3c4b9d12d82fe0913b898f99f4ce89d01936"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "5cc90eb53ad9ea914813950b0b5b32426294a9bcbb3b36eab5d82b7e481ef1dc"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/leakage_audit.json",
+      "size": 65580,
+      "sha256": "1adc6f6350a33f1fcb2eb298e403f5ea70d2be4178e4f6ca066a8beb9b8bf93f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/model_updates.json",
+      "size": 122,
+      "sha256": "212f9bc2bd6748fa867937336bb0c6e8a0792dfee7e0d94dfef44da4cfdf84f9"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "2a6e01fb6134e76bac19debf39c5657c7c706bc6b740968a02c3cd1c54a86008"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "62b19b089534e3e8aef99f9f8f702fdfe47989bb0e116439449c3ba5a71c1846"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "4621dafcd0a228f935ec3db4d03ac524c7f389dbea76d8db7db97dfa3e7bf52f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "8d1d5e65973513b3b9909ba618472dfde6c965d19e7cc3d463cbd1ede8f807d4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "616a34e3784a393812500220780449f34b64758ca1373c16a607b7b45346e27d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "2eb650d0b3a8e2e287189e9d578eca1197d051fa13d67f541b19103129f205a5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "981321b00e1d24e7aeb4f43a3eec758338d270efe10028cbad3e454a18d24d29"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "3eed11d61d8a0311b78923b5c246282b82d0f5ff07ce8b978e8d22b373190f8d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "9ba283f3b058cfdd8ce979293105c7f8987ce35cdf7f021f7da9cce4325b8eea"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "b88e5a056a7be4bdc24b0bd42226203219c6a023f2a8e7570f7a2211f9d2ef35"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "6765707de5a03b54dcf5ef9ab049d32417d1cc3ff689beb75d462d2a112a8ebd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "99145faca6296e176061ba684eab2294a702d617b1be8f0e58a8514367d81de8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "41f39876e3b43083a3da327ae6ae223a1c96dfaf830ccdf1a576f26b4ca514cb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "2fe611349c215df6215ec2a2e1081753569a92d9ab99fdf2d01ca7721018c78a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "c98e8dc8c0172acab2b3f0cc162b3fda84003c9aa438a20faaa261c48a99aa01"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "5d0aa0d9a411879d511aed01fa5bc029b852bb8263e4c5e4f2c982b7f1021083"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "6786185e5d708c4d81504cd511ed59bc20d550f0ee61b02d372d766a5469c070"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/performance_summary.csv",
+      "size": 5203,
+      "sha256": "6e7e5861f1acfa03e4b9c112e35e3e518d2c33cffdeeffa9a300cd6a23a7b4b7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/performance_summary.json",
+      "size": 11915,
+      "sha256": "ef89698456d9bde3064594cb6adc3573dc52369b46515b75ccabb137c4b558dd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/plots/cumulative_return.png",
+      "size": 289432,
+      "sha256": "73067f2fd8c030e2f10a76fc2c79d18fa60aea389d3bd81d5eb127004c5e119d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/portfolio_weights.parquet",
+      "size": 70786,
+      "sha256": "34a5c1f82070313072271dfa304e75b38b45cdd993e95d405333f1c79938d597"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/prediction_metrics.csv",
+      "size": 7892,
+      "sha256": "4c20c080f1bc8f8a2034afa763de9268e83c8f780375e6cb5e2c9c75d29d2c99"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/reward_logs.csv",
+      "size": 2856663,
+      "sha256": "e3a75a53809e36564609a87d106bba6bfdacdfc5f15bc671494c51d67e14bac0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/runtime_logs.csv",
+      "size": 902,
+      "sha256": "f8cef6cbb22e39a60f7252c69a5a747728b5cabea26ebd27773eaa61a0ea4e6b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/split_manifest.json",
+      "size": 6124,
+      "sha256": "6ac48f9aa65ed88e6a97b801b71eccb273a0166e6a0538e66c797af30eb13f73"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/temporal_attention_summary.csv",
+      "size": 3941,
+      "sha256": "07addbd8bce7cabdf1b427f6605505434bca1041f747ac40d8f15f1607675c30"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/training_logs.csv",
+      "size": 2852,
+      "sha256": "2022c62ff0ebda20b27baca80b28a33285e8deb95d1e1bbdff8ead488f084c0e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/S&P500实验分析.md",
+      "size": 11601,
+      "sha256": "91a333915d94c925c778bc1f611d786219938a796eb82fcbda5b9894c5d89075"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/alpha_training_metadata.json",
+      "size": 551,
+      "sha256": "a65b40e52fced5863d8f8a597451a31fbfc1aeec1d8240b3890e280c8c037bfe"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/alpha_validation_logs.csv",
+      "size": 12526,
+      "sha256": "cb48d2a2a2ac93397b0b1fdab5e90cf6b05bdd6750a44bfc6a83a6a9ac4f8175"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/attention_statistics.csv",
+      "size": 2442,
+      "sha256": "bb4d7425f894149be5d8f7d43d5b1a0ea607487262b89b20a73aae64af50820b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/backtest_daily.csv",
+      "size": 174743,
+      "sha256": "081dcc99d1617611c24263225a2289bce8472cf9f2953e24b0a436ed838190c7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/candidate_portfolios.parquet",
+      "size": 5455151,
+      "sha256": "0831cfe4508b9616591eb1763fb137978281687d9156e1adc770dd7abadb4a5c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/candidate_summary.csv",
+      "size": 1292,
+      "sha256": "040d966467c9c8e518cc769aacdd4c2017ac0e8ce67d192d2790abc42f28ed79"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/daily_portfolios.parquet",
+      "size": 35506,
+      "sha256": "5596a10ed52a91bce96a04d996ef62e4b9d853b609fedfcb7fafef5fbc046485"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/daily_predictions.parquet",
+      "size": 89444,
+      "sha256": "e2e99cd18dc2526627e2707d338fdbb35ed86195d8f56e1f40b5ec483c508f8b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/g_selection.json",
+      "size": 177,
+      "sha256": "664f848fdfe2577c12992421fd12fc865207d8f0ef5e069f9d1fa13a2b0243f3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/g_test_summary.csv",
+      "size": 2190,
+      "sha256": "97d0a0b7fc304cfccfbbed1873259785f59bdbb3fa3d6313d4563f97c64de290"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/g_validation_selection.csv",
+      "size": 403,
+      "sha256": "1192687ce8c2adfb712483d163425a0ae90b1751cf6577870446f202808e3a22"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/gpu_logs.csv",
+      "size": 584,
+      "sha256": "a2caddfc63c16a80224a548f2a331a798b9cc7e1a66ce378c6938b319fb27083"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/gpu_monitor_samples.csv",
+      "size": 7322,
+      "sha256": "d7fe52e996868237b0f22b416aecf33f6402f4365af26d0b9c6c65c3cd72a8b0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/gpu_summary.json",
+      "size": 462,
+      "sha256": "2358187d1f8e9973b283e880598d20be00bdba0b9d3531799476a602efb83c5a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "ad5509e3a0efd43f4b8f3d8cbc1eb3a118eb7bacb30ee3c28f667cb7360271b8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/leakage_audit.json",
+      "size": 65580,
+      "sha256": "08566741075754a0cf91151a108544050518d22ebda43d22bc1c960ca2519b83"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/model_updates.json",
+      "size": 122,
+      "sha256": "a1b37bd1db188044c5bdb05bb32f208af38517ff345dcd46aa99edd728562fdd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "b2fdaccad1af4fae121961eb8ea1df72674afb562d73836cfcdd3d633deb276d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "d11036a46569b36604e6b9a070264a6bbc876d4da3362e05d17b529ce4e3074e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "a47b7951c22edcd9f13072c40b38d258ab04e72d98afbd051c10325f9e32bd0b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "4da207643e0210417c00db1881fa232af84f2d4aef7cbe24a8b15487819650a8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "e5967bc780a276c4ff32e97f0a74f60e90b9b46c400fbb23953b8985e250bf82"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "288d6ea79c125ac2dc9dfe25d8ff5009b2ca930a0f130cd264eb8e13b217c19f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "6e22f24d0d3fcd2fe3423195cdfba0b5abd1cdffadb735e5004b31b7578d9118"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "6f188935eb4f60c16174e7774ed328ea49ee5fe82d4f62b6f5af71d1fcc5c0bb"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "d0fdc50eea0d3fcc2b2bd2b05f7afd4889ac2c4009cfe8d1232ce72ee90ad9f8"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "c4679b7181923ea024765c4eff7fbe13e203a6ceb04bdc0a6fc069226fe7bf47"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "5947463b2b7e1bc350e998738ca3e00dbde0188d5ab78d29f02bc151cf10700f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "689daab296b5c5537d246d5fdfc9ec7405a3de902640e1b16c33b5346dec753d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "6669215e60b2d6a400d1a6154b3bdb206f74e52f9b1f0a38f11dbe73e6bf6bf4"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "001ac8b7d70377e5004f01fa81e1f395d2a9e7c986ffcb3af96797ddb192f63d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "693a265496def2483ebc6c5b479d81f16d8a841aab19498e29220027169c428f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "f0e53937edd56bf4e0f0c092d65cf64ddf8f20a232d56eecd36ed35000570c2b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "26030292e685bb8422982b1a508182fbef2c0e076e34a19fa8fcbaa85b197895"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/performance_summary.csv",
+      "size": 5257,
+      "sha256": "cd8fd6e7c3399a63c297c2c1ca1d0d611e6a3b1925cac2cfc669ae64b9abd005"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/performance_summary.json",
+      "size": 11969,
+      "sha256": "be8d2b11fd5e03dfdb3f15e36071bd52ca81f3aa504787b79dbe8e392b39bb2e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/plots/cumulative_return.png",
+      "size": 223886,
+      "sha256": "f2d91bd4bd11b95561a9f4d6b80e8392ae1e5f1531c8af141f925f136ccb6251"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/portfolio_weights.parquet",
+      "size": 78868,
+      "sha256": "bd1d329c76f4f0551a3193a4a7f2f29733c7e25906398ef0ffee092cb0ff3868"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/prediction_metrics.csv",
+      "size": 9249,
+      "sha256": "ffecf8056af75e633db0e8078831a92ee49eeb9fa4cc5f406ef9cfe4eefd50ff"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/reward_logs.csv",
+      "size": 2829819,
+      "sha256": "4841d4bac0ec19c80755091dc914e354c5808151305ce5c46178f5d14e4819a7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/runtime_logs.csv",
+      "size": 899,
+      "sha256": "126d910cb5988fc2f0087107e9b8198e75d45098064e861d14e5368511bf8912"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/split_manifest.json",
+      "size": 6160,
+      "sha256": "b5fa4871221771517167eae47090fa72cd6652f1f6a2dfa36f9796a034bd4f6e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/temporal_attention_summary.csv",
+      "size": 3947,
+      "sha256": "08dc370263935ff68e15c3dae4dd6df35ce3d8537e6aeabc4d3a539716692f60"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/training_logs.csv",
+      "size": 2896,
+      "sha256": "3ba3cf1f913046dd2f508f5b4af4494a6c464cab65ceb56cd3ea3c03701077bf"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/S&P500实验分析.md",
+      "size": 11497,
+      "sha256": "d43838dd0f15e651d7e898fcfdba4d40061436edeb49eee8991006f7c5c6e29a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/alpha_training_metadata.json",
+      "size": 552,
+      "sha256": "d31c89c04644d9f474fc5146e6bcc897a5816048f8ba415df6afbdfac8fb1837"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/alpha_validation_logs.csv",
+      "size": 14383,
+      "sha256": "b1befbf38007f9a002269a8e7b910c279373a2f85ed20b51d8101e1986f55c5c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/attention_statistics.csv",
+      "size": 2305,
+      "sha256": "a623f61740ab4d673cd1f4ca9be82d4ca3893deca4f17313ace95117e79456b7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/backtest_daily.csv",
+      "size": 165475,
+      "sha256": "cb1dcae10bf615894cd05240d5fa357b263635cec35a382287394b88f773b5dd"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/candidate_portfolios.parquet",
+      "size": 3618743,
+      "sha256": "1c05e356a9eb01e18e5f7657bd8b8bbcfa3658d23cb5d42be5455bee75d4ee02"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/candidate_summary.csv",
+      "size": 1291,
+      "sha256": "3d760fbf45000cd3dcc45fc8818faced53b5727f168e391096fc0e533cf7b14a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/config.yaml",
+      "size": 5899,
+      "sha256": "1ae4ffea6e65e7f5936ee3de01a96d5e6e29d6bf9247ca5123bd97e675df87c2"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/daily_portfolios.parquet",
+      "size": 34676,
+      "sha256": "645a28556e431696bc43a6a58a08e1b447449199523c26b44b4391b98bc6c28f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/daily_predictions.parquet",
+      "size": 79927,
+      "sha256": "8fef5b9fc41916678b1017df786ef098a8099145028bf87c10e96f4f84f45013"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/environment.json",
+      "size": 6266,
+      "sha256": "ae9607e4cfb68a88d69e00be3a79cc1a10647ebae4db3d3be5a57bc5a353c690"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/feature_schema.json",
+      "size": 2628,
+      "sha256": "b565034cca5202d8129a557770aea10d6915364f08489fab7884f5ea639c056b"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/g_selection.json",
+      "size": 177,
+      "sha256": "2dc0819a1f42d0f4ec659ba3c5d87833108daf756a61ab4f5e9f4283fa8e01f0"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/g_test_summary.csv",
+      "size": 2214,
+      "sha256": "3dc2411a5fa84d5eaa07b78eecd3c81ed636d10382fd88b97f850c9f9c65d5e6"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/g_validation_selection.csv",
+      "size": 406,
+      "sha256": "4e1dd552b07ebec0ca6c36ad06cc0c319d1833b6038db529b0d978cea63a09d1"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/gpu_logs.csv",
+      "size": 585,
+      "sha256": "305b177ea651068d12f79030460b671e8b4e3c77c95bc7bbcb51587c90da01ce"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/gpu_monitor_samples.csv",
+      "size": 7702,
+      "sha256": "1215466155b00affaa14481ec1372f20a970a3d7dacea10886c89a000fe23988"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/gpu_summary.json",
+      "size": 460,
+      "sha256": "556edacb3a9ba6250528c9a6257331ef0bb2a662d7074424748302d353ad209d"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/leakage_audit.csv",
+      "size": 53618,
+      "sha256": "bd7d7fdb4ebe9bf700e157173a2efc1aa378cb775c6b439af85fd5fe7d02aa58"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/leakage_audit.json",
+      "size": 65580,
+      "sha256": "3a5f4d0d2911d165f76438f4436b915835116cd6fb1832718c411ee350b94657"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/model_updates.json",
+      "size": 122,
+      "sha256": "3471ba2b734af2ddd375c565f8ab37dca08b341d72569b593da79e9db7708f3c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/alpha_best_validation.pt",
+      "size": 3211347,
+      "sha256": "9ba8b31c8585ca5862fe920ba6ea36b133331264fbeab045d43164d39d338ecf"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/alpha_last.pt",
+      "size": 3208929,
+      "sha256": "d5b5a5e484cc8a57867bb2fdba001c87078ed831c90f0ca463d2afb6dc58f70f"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/alpha_scaler.npz",
+      "size": 5194,
+      "sha256": "2ba3b39a2e522f3b6d22d72f506d252c3563d06867dbfa5f1ab93c24b8852349"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/diffusion_best_validation.pt",
+      "size": 1164742,
+      "sha256": "8f027277c77629474a7462d07bf004c29235d59f5e37055e4e1a125254e7124e"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/diffusion_last.pt",
+      "size": 1164081,
+      "sha256": "0a7b39d1e20ccbae58bc8985bc59c4c888ca1cb0afc45ed32fde8513c1610799"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/gaussian_best_validation.pt",
+      "size": 1118225,
+      "sha256": "5b4ce807ba87851007c7fdaafb9f8fb18f0b385261abf420062c712be529d46a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/gaussian_last.pt",
+      "size": 1117339,
+      "sha256": "870cd2412c91ba6d164f35c36121bf8211a5a53a663e7dd48bdd774e517a949a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/grpo_best_validation.pt",
+      "size": 805793,
+      "sha256": "14b90786cb8608cf8396c5f4708da91fa20c67d7c693e5a25c5cce2458c44946"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/grpo_last.pt",
+      "size": 805207,
+      "sha256": "2b5c68dde566492c94e339fee8348b075b566dfd2664369e247a62f9df646412"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/mlp_best_validation.pt",
+      "size": 1116483,
+      "sha256": "2d79f36e433e48fddd4617a0dc28ba0e523099e483a248693177d3c408bf5558"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/mlp_last.pt",
+      "size": 1115833,
+      "sha256": "826ca9229b5996efaa9f271335314c111f96a6df6ec359e8671ea48d6a7747ec"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/ppo_best_validation.pt",
+      "size": 1566107,
+      "sha256": "cd6f02550ad29390dd98bf7c2a02138f9f4f0b37fcaa25cc7f2c66a6f80489ab"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/ppo_last.pt",
+      "size": 1565193,
+      "sha256": "851bbd80758fd399960097ab507e3408ba64422b57d6b5f72145e92a4918d159"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/ssfm_best_validation.pt",
+      "size": 1378201,
+      "sha256": "3234fe860a2fde7455bc74f8d4debe2af9dd3671c0c66153917e788c5e4ee03c"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/ssfm_last.pt",
+      "size": 1377483,
+      "sha256": "6b3a6985d11f2e4b390c53453797ed9fb2f3ffdb44b208a2fd2a994803a3bd0a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/standard_fm_best_validation.pt",
+      "size": 1164403,
+      "sha256": "267a0ffd4e5d81e84fc8d77319845af1eabd210ea9912a8891ea8f8b93e92b11"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/models/standard_fm_last.pt",
+      "size": 1163945,
+      "sha256": "204a2cd5899f90282a1e82a3ba99548ab7b04e4db5d63e91c8174bcc63fb5649"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/performance_summary.csv",
+      "size": 5222,
+      "sha256": "a6ac1bb3261c44885e744bce270a905d99d0763fc5e2d27a4a0af7334ef468cc"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/performance_summary.json",
+      "size": 11934,
+      "sha256": "3d8a700d2e91103a9533e93574290211167b1abd6c1c7231b9161502e41a5b48"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/plots/cumulative_return.png",
+      "size": 245249,
+      "sha256": "40c23011353898bc45a211b06ca6c411b23180a0b8e2415cec243b6e20bb0ee5"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/portfolio_weights.parquet",
+      "size": 76367,
+      "sha256": "18714790bf3f34963856dc940f810b2618898fe01cec69594bcfa543c6ae46bf"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/prediction_metrics.csv",
+      "size": 8784,
+      "sha256": "8b70d0b1e97d9c7968f7ee1bb5a0e01bf302f40e67d786bce769d9c6b00afb9a"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/reward_logs.csv",
+      "size": 2901333,
+      "sha256": "b3df1a5cef77e890d2bf27f4dbc3547fc8d87abf3999f729b3dde6b0ac945dfc"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/runtime_logs.csv",
+      "size": 899,
+      "sha256": "f9a5bd2b349d7a6075d0f61848eadb05bd540a4b785301b6efe29ce2d4661ac3"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/split_manifest.json",
+      "size": 6196,
+      "sha256": "e4df9d3740aca3f952ff7021cd90d3836bb748a1f3dad78b05cd681509d828b7"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/temporal_attention_summary.csv",
+      "size": 3933,
+      "sha256": "d325e295e7b9dc5c497b4b4af174bf2cfc8549cb6c700e396e5051beab80be88"
+    },
+    {
+      "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/training_logs.csv",
+      "size": 2915,
+      "sha256": "f0a0bc35de855b9f1faf809cde7f389a5aa74018ea1e9ed32c9a0d8e79fa3c65"
+    }
+  ],
+  "excluded_from_release": [
+    "raw source ZIP",
+    "data/processed feature store",
+    "smoke experiment directories",
+    "failed smoke receipts"
+  ],
+  "supersedes": "sp500-strict-oos-v1",
+  "analysis_refresh": {
+    "generator_commit": "1156b8a8cd873a8a57426f8298307ee2ec70aacd",
+    "source_results_commit": "ab25cee6c023c280c603faff0185b5cb57454057",
+    "formal_experiments_rerun": false,
+    "source_metrics_changed": false,
+    "report_figure_count": 20,
+    "monthly_nav_figures_recolored": 11,
+    "visual_color_check": "PASS"
+  },
+  "analysis_file_count": 33,
+  "analysis_total_bytes": 1503079,
+  "analysis_files": [
+    {
+      "path": "results/S&P500/final_summary/S&P500全年实验分析.md",
+      "size": 18860,
+      "sha256": "1fdd5be76733723eaff96519e60958c217765f2ceb07754efaeaaed5055d6f3d"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_attention_summary.csv",
+      "size": 1510,
+      "sha256": "3a84e9aeb17bebf86250bb0d6ae646c81b8fac013ed125f51fc0d064d4989e1c"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_candidate_summary.csv",
+      "size": 1301,
+      "sha256": "2083b81e275a324acd341e9258d54bbc0526789551ed8e1515d0dfa1d7dfd4fb"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_intraday_attention.csv",
+      "size": 635,
+      "sha256": "dfb124d3c2cd0fd3b88a2199baecbcebef1d867fecf8cbe74c2e2f81ecfef839"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_leakage_audit_summary.csv",
+      "size": 199,
+      "sha256": "fd19372ee1415dc115b8d1dd97784183c4614bcdacb1d014c697c8df0c301a37"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_monthly_performance.csv",
+      "size": 56433,
+      "sha256": "bcdf63100441aba23776433d9cd77bd205b97bb2b018dcd701190d820d5c1397"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_performance_summary.csv",
+      "size": 5304,
+      "sha256": "4b76b455facd7eff67483fd04e1a1f6de7e9d34c28ffe6f2036c0ca8176130f5"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_prediction_summary.csv",
+      "size": 5037,
+      "sha256": "82aa3bc441d50524c401bfadf47c3237a91eb437e59f1d44d5df62b7495146dc"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_runtime_summary.csv",
+      "size": 9262,
+      "sha256": "61397109ffc811a57e9ff38ec71700daadcf3c3f5bab526f8e462310df970c5a"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_strategy_comparison.csv",
+      "size": 5304,
+      "sha256": "4b76b455facd7eff67483fd04e1a1f6de7e9d34c28ffe6f2036c0ca8176130f5"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_temporal_day_attention.csv",
+      "size": 479,
+      "sha256": "e1be0416cb1af0b949eb2d579984721fd0ff6e35da45f0b8084fa37af9e5203d"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_universe_sensitivity.csv",
+      "size": 510,
+      "sha256": "5e6da4a845b52de12fd9d35d743b503f5bfebbcaffacb4d8280f6d863f834d46"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/alpha_monthly_ic_rankic.png",
+      "size": 32636,
+      "sha256": "97d948fcc2b8980b759ca13f79b4f8106cbdd02150fe184c64df91540f371a02"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/alpha_monthly_topk_excess.png",
+      "size": 38863,
+      "sha256": "1091ac1f5d57d9f29abfb958fe563b91d64162b08822cee2fa77497211fb58e6"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/annual_cumulative_return.png",
+      "size": 376740,
+      "sha256": "f31e8fc9d2f51757ea34f32cffcde2d9e59bade8cadf05581e2261419db7075e"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/g_bar_return.png",
+      "size": 32630,
+      "sha256": "0f755d1bd346a68a3cee3ca214d1ec81a2f4b1605f547a70e1f44037c4f3ff62"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/g_bar_sampling_time.png",
+      "size": 42190,
+      "sha256": "0c37c618c35ffe26d700802d8280f06d20ed70b9d3cae057327f81770f0ead4f"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_cost.png",
+      "size": 48566,
+      "sha256": "0479b51a9ae563568a2d9a19afbd957370bc3d98caef33e921e48fa58a9e820c"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_mdd.png",
+      "size": 49862,
+      "sha256": "557d57a568b9d9c124bb6e4432966f0a99d3241f81f251fbbc9e8e95057170de"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_return.png",
+      "size": 50820,
+      "sha256": "d20e700ed96373c08e22cd0bf8c36f1df6ad888625f9c7e3652a7a6e6e895256"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_sharpe.png",
+      "size": 41102,
+      "sha256": "f93fbfe2fb79b57bd2f37adf850c4ab22cd19e1433122f51a110913c68f5ed10"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_turnover.png",
+      "size": 46653,
+      "sha256": "cac6b87423ec4e47d0b7d7c989aeddd21cf268c0dfcc93af8983e59fb5e88530"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_nav.png",
+      "size": 195653,
+      "sha256": "143566b8168d305c032dab0aea7f21e0c6268d533e4d8172d6059e5bdbe32442"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/intraday_attention.png",
+      "size": 40012,
+      "sha256": "ad6331d10896a2ec3ab503f55a31bef53e227d1b544c5f0256c62f2165ed67dc"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_cost.png",
+      "size": 37302,
+      "sha256": "26aef2c5fb01382b958a7b7b56fa547ad10cc4ca7833884dfa69bf8925cb4d1d"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_mdd.png",
+      "size": 37926,
+      "sha256": "0a98c7a1aed79de426594e068519319935a2d7f6c932e6bc1435219b555b3883"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_return.png",
+      "size": 36593,
+      "sha256": "e362ebbe0eec03ca6da1f2124775a720d2b9ed76b73d0d8f405fc1dcf27af7a2"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_sharpe.png",
+      "size": 33657,
+      "sha256": "b6ff61d88141421faadb3b24c4e0897aab6f6fcbab8c05e10f0f89b9ae817fc7"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_turnover.png",
+      "size": 34667,
+      "sha256": "037f707b870bb6e9556f0d300c582c26233743ab3a483d1c0d09375b701920d5"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_nav.png",
+      "size": 150759,
+      "sha256": "97535ca47ac30f5e418596b08895bc603f35f5f97984974a342c480088138849"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/temporal_day_attention.png",
+      "size": 33338,
+      "sha256": "8aabeaef0cebb782407aa2f0c917f67429774b5615f642814c6fbe733fa38efc"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/universe_sensitivity.png",
+      "size": 37753,
+      "sha256": "4debc107f6ed922479bc7ec340abafc9935171f8a289b62a56780d5533d5e147"
+    },
+    {
+      "path": "results/S&P500/final_summary/summary.json",
+      "size": 523,
+      "sha256": "9d94399c6747ec3ae442c738a761def5e4ee239db8375c72514ff846c59db295"
+    }
+  ]
+}

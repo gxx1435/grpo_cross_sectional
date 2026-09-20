@@ -17,7 +17,7 @@ def grpo_update(policy, cond, sample_logits, rewards, optimizer, cfg: dict) -> D
     loss = -(adv.detach() * logp).mean()
     optimizer.zero_grad()
     loss.backward()
-    gn = nn.utils.clip_grad_norm_(policy.parameters(), 1.0)
+    gn = nn.utils.clip_grad_norm_(policy.parameters(), float(cfg["rl"]["grad_clip"]))
     optimizer.step()
     stats = group_stats(rewards.detach().cpu().numpy(), torch.softmax(sample_logits, dim=-1).detach().cpu().numpy(), cfg)
     out = {"loss": float(loss.detach()), "grad_norm": float(gn), **{k: stats[k] for k in stats if k != "warning"}}

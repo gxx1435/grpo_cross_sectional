@@ -11,7 +11,7 @@ from utils.logging import log
 
 def run_g_experiments(cfg: dict, store: ResearchStore, out_root: Path, oos_mode: str, months=None) -> None:
     months = months or month_starts(cfg["walkforward"]["test_start"], cfg["walkforward"]["test_end"])
-    g_grid = list(cfg["ssfm"]["group_sizes"])
+    g_grid = list(cfg["matrix"]["E_g"])
     prog = Progress(len(months), f"E-G {oos_mode}", log_every=1)
     for m in months:
         log(f"== G grid {g_grid} {oos_mode} {m.strftime('%Y-%m')}")

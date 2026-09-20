@@ -1,275 +1,202 @@
-"""Causal minute features. F is auto-counted. No centered windows, no future backfill."""
+"""Strictly trailing minute features for the S&P 500 experiment."""
 
 from __future__ import annotations
 
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, Iterable, List, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
 
-OHLCV_BASE: List[str] = ["open", "high", "low", "close", "volume"]
-
-DERIVED: List[str] = [
-    "log_return_1",
-    "return_5",
-    "return_10",
-    "return_30",
-    "return_60",
-    "return_120",
+BASE_FEATURES = ["open", "high", "low", "close", "volume"]
+CANDLE_FEATURES = [
+    "high_tail",
+    "low_tail",
+    "tail_adj_ret",
+    "hammer",
+    "volatility",
+]
+BAR_SHAPE_FEATURES = [
     "high_low_range",
     "open_close_return",
     "body_ratio",
     "upper_shadow_ratio",
     "lower_shadow_ratio",
     "close_position",
-    "vol_5",
-    "vol_10",
-    "vol_30",
-    "vol_60",
-    "vol_120",
-    "downside_vol_5d",
-    "downside_vol_10d",
-    "downside_vol_30",
+]
+VOLUME_PRICE_FEATURES = [
     "log_volume",
     "volume_change",
-    "relative_volume_5",
-    "relative_volume_20",
     "vwap_deviation",
     "amihud",
     "volume_weighted_return",
-    "price_ma5_deviation",
-    "price_ma10_deviation",
-    "price_ma20_deviation",
-    "ma5_ma20",
-    "cs_rank_return_30",
-    "cs_rank_return_60",
-    "cs_rank_relative_volume",
-    "cs_rank_volatility",
 ]
-
-CALENDAR: List[str] = [
+CALENDAR_FEATURES = [
     "day_of_week_sin",
     "day_of_week_cos",
     "is_monday",
     "is_friday",
-    "overnight_return",
-    "overnight_volatility",
 ]
 
-FEATURE_NAMES: List[str] = OHLCV_BASE + DERIVED + CALENDAR
-CS_RANK_NAMES = (
-    "cs_rank_return_30",
-    "cs_rank_return_60",
-    "cs_rank_relative_volume",
-    "cs_rank_volatility",
-)
 
-
-def feature_dim() -> int:
-    return len(FEATURE_NAMES)
-
-
-def _roll_mean(x: np.ndarray, w: int) -> np.ndarray:
-    xf = np.nan_to_num(np.asarray(x, dtype=np.float64), nan=0.0)
-    t, n = xf.shape
-    c = np.cumsum(xf, axis=0)
-    out = np.zeros_like(xf)
-    if t >= w:
-        prev = np.concatenate([np.zeros((1, n)), c[: t - w]], axis=0)
-        out[w - 1 :] = (c[w - 1 :] - prev) / float(w)
-    for i in range(min(w - 1, t)):
-        out[i] = c[i] / float(i + 1)
+def feature_names(cfg: dict) -> List[str]:
+    windows = [int(w) for w in cfg["features"]["windows"]]
+    fcfg = cfg["features"]
+    out = list(BASE_FEATURES)
+    for prefix in (
+        "o2c",
+        "h2c",
+        "l2c",
+        "v2c",
+        "ma2c",
+        "ma2v",
+        "zscore",
+        "o2c_per_std",
+        "v2c_per_std",
+        "volat_per_std",
+    ):
+        out.extend(f"{prefix}_w{w}" for w in windows)
+    out.extend(CANDLE_FEATURES)
+    out.extend(f"vwap_ratio_w{int(a)}_w{int(b)}" for a, b in cfg["features"]["vwap_pairs"])
+    out.append("log_return_1")
+    out.extend(f"return_{int(w)}" for w in fcfg["base_return_windows"])
+    out.extend(BAR_SHAPE_FEATURES)
+    out.extend(f"vol_{int(w)}" for w in fcfg["base_volatility_windows"])
+    out.extend(VOLUME_PRICE_FEATURES[:2])
+    out.extend(f"relative_volume_{int(w)}" for w in fcfg["relative_volume_windows"])
+    out.extend(VOLUME_PRICE_FEATURES[2:])
+    out.extend(f"price_ma{int(w)}_deviation" for w in fcfg["price_ma_windows"])
+    ma_short, ma_long = (int(w) for w in fcfg["ma_spread_pair"])
+    out.append(f"ma{ma_short}_ma{ma_long}")
+    out.extend(str(name) for name in fcfg["cross_sectional_rank_sources"])
+    out.extend(CALENDAR_FEATURES)
+    if len(out) != len(set(out)):
+        raise RuntimeError("feature schema contains duplicate names")
     return out
 
 
-def _roll_std(x: np.ndarray, w: int) -> np.ndarray:
-    mu = _roll_mean(x, w)
-    mu2 = _roll_mean(np.asarray(x, dtype=np.float64) ** 2, w)
-    return np.sqrt(np.maximum(mu2 - mu ** 2, 0.0))
+def feature_dim(cfg: dict) -> int:
+    return len(feature_names(cfg))
 
 
-def _cs_rank(x: np.ndarray) -> np.ndarray:
-    return pd.DataFrame(x).rank(axis=1, pct=True, na_option="keep").to_numpy(dtype=np.float64)
+def _safe_div(num: pd.Series, den: pd.Series, eps: float) -> pd.Series:
+    good = den.abs() > eps
+    out = pd.Series(np.nan, index=num.index, dtype="float64")
+    out.loc[good] = num.loc[good] / den.loc[good]
+    return out
 
 
-def compute_minute_features(
-    open_: np.ndarray,
-    high: np.ndarray,
-    low: np.ndarray,
-    close: np.ndarray,
-    volume: np.ndarray,
-    amount: np.ndarray,
-    ts: pd.DatetimeIndex,
-) -> Tuple[np.ndarray, Dict[str, object]]:
-    """
-    Causal [T, N, F] features.
+def compute_symbol_features(frame: pd.DataFrame, cfg: dict) -> pd.DataFrame:
+    """Compute one symbol in timestamp order; every rolling window is trailing."""
+    x = frame.sort_values("minute_timestamp", kind="mergesort").copy()
+    derived: Dict[str, pd.Series] = {}
+    eps = float(cfg["features"]["epsilon"])
+    windows = [int(w) for w in cfg["features"]["windows"]]
+    o, h, l, c, v = (x[k].astype("float64") for k in ("open", "high", "low", "close", "volume"))
+    typical = (h + l + c) / 3.0
+    pv = typical * v
+    rolling_vwap: Dict[int, pd.Series] = {}
+    for w in windows:
+        count = c.rolling(w, min_periods=w).count()
+        open_w = o.shift(w - 1).where(count == w)
+        high_w = h.rolling(w, min_periods=w).max()
+        low_w = l.rolling(w, min_periods=w).min()
+        ma_w = c.rolling(w, min_periods=w).mean()
+        std_w = c.rolling(w, min_periods=w).std(ddof=0)
+        vol_sum = v.rolling(w, min_periods=w).sum()
+        vwap_w = _safe_div(pv.rolling(w, min_periods=w).sum(), vol_sum, eps)
+        rolling_vwap[w] = vwap_w
+        derived[f"o2c_w{w}"] = (_safe_div(c, open_w, eps) - 1.0) * 1e4
+        derived[f"h2c_w{w}"] = (_safe_div(c, high_w, eps) - 1.0) * 1e4
+        derived[f"l2c_w{w}"] = (_safe_div(c, low_w, eps) - 1.0) * 1e4
+        derived[f"v2c_w{w}"] = (_safe_div(c, vwap_w, eps) - 1.0) * 1e4
+        derived[f"ma2c_w{w}"] = (_safe_div(c, ma_w, eps) - 1.0) * 1e4
+        derived[f"ma2v_w{w}"] = (_safe_div(vwap_w, ma_w, eps) - 1.0) * 1e4
+        derived[f"zscore_w{w}"] = _safe_div(std_w, ma_w, eps) * 1e4
+        derived[f"o2c_per_std_w{w}"] = _safe_div(c - open_w, std_w, eps)
+        derived[f"v2c_per_std_w{w}"] = _safe_div(c - vwap_w, std_w, eps)
+        derived[f"volat_per_std_w{w}"] = _safe_div(h - l, std_w, eps)
 
-    overnight_* uses already-realized previous-day close vs current-bar open
-    only on historical bars. D-day Open is never written into a D-day
-    prediction window because callers pass M_{D-10:D-1} only.
-    """
-    o = np.asarray(open_, dtype=np.float64)
-    h = np.asarray(high, dtype=np.float64)
-    l = np.asarray(low, dtype=np.float64)
-    c = np.asarray(close, dtype=np.float64)
-    v = np.asarray(volume, dtype=np.float64)
-    a = np.asarray(amount, dtype=np.float64)
-    t_len, n = c.shape
-    names = list(FEATURE_NAMES)
-    f = len(names)
-    feats = np.zeros((t_len, n, f), dtype=np.float32)
+    derived["high_tail"] = _safe_div(h - pd.concat([c, o], axis=1).max(axis=1), o, eps) * 1e4
+    derived["low_tail"] = _safe_div(pd.concat([c, o], axis=1).min(axis=1) - l, o, eps) * 1e4
+    derived["tail_adj_ret"] = _safe_div(2.0 * c - h - l, o, eps) * 1e4
+    derived["hammer"] = _safe_div(o + c, h + l, eps) * 1e4
+    derived["volatility"] = _safe_div(h - l, h + l, eps) * 2e4
+    for a, b in cfg["features"]["vwap_pairs"]:
+        a, b = int(a), int(b)
+        derived[f"vwap_ratio_w{a}_w{b}"] = _safe_div(rolling_vwap[a], rolling_vwap[b], eps) * 1e4
 
-    logc = np.log(np.clip(c, 1e-6, None))
-    log_return_1 = np.diff(logc, axis=0, prepend=logc[:1])
+    logc = np.log(c.where(c > 0))
+    r1 = logc.diff()
+    derived["log_return_1"] = r1
+    for w in (int(value) for value in cfg["features"]["base_return_windows"]):
+        derived[f"return_{w}"] = c.pct_change(w, fill_method=None)
+    full = h - l
+    derived["high_low_range"] = _safe_div(full, c, eps)
+    derived["open_close_return"] = _safe_div(c, o, eps) - 1.0
+    derived["body_ratio"] = _safe_div((c - o).abs(), full, eps)
+    derived["upper_shadow_ratio"] = _safe_div(h - pd.concat([o, c], axis=1).max(axis=1), full, eps)
+    derived["lower_shadow_ratio"] = _safe_div(pd.concat([o, c], axis=1).min(axis=1) - l, full, eps)
+    derived["close_position"] = _safe_div(c - l, full, eps)
+    for w in (int(value) for value in cfg["features"]["base_volatility_windows"]):
+        derived[f"vol_{w}"] = r1.rolling(w, min_periods=w).std(ddof=0)
+    derived["log_volume"] = np.log1p(v.where(v >= 0))
+    derived["volume_change"] = derived["log_volume"].diff()
+    for w in (int(value) for value in cfg["features"]["relative_volume_windows"]):
+        derived[f"relative_volume_{w}"] = _safe_div(v, v.rolling(w, min_periods=w).mean(), eps)
+    derived["vwap_deviation"] = _safe_div(c, typical, eps) - 1.0
+    amount_proxy = typical * v
+    derived["amihud"] = _safe_div(r1.abs(), amount_proxy, eps)
+    volume_window = int(cfg["features"]["volume_weighted_return_volume_window"])
+    derived["volume_weighted_return"] = r1 * derived[f"relative_volume_{volume_window}"]
+    for w in (int(value) for value in cfg["features"]["price_ma_windows"]):
+        ma = c.rolling(w, min_periods=w).mean()
+        derived[f"price_ma{w}_deviation"] = _safe_div(c, ma, eps) - 1.0
+    ma_short_window, ma_long_window = (int(value) for value in cfg["features"]["ma_spread_pair"])
+    ma_short = c.rolling(ma_short_window, min_periods=ma_short_window).mean()
+    ma_long = c.rolling(ma_long_window, min_periods=ma_long_window).mean()
+    derived[f"ma{ma_short_window}_ma{ma_long_window}"] = _safe_div(ma_short, ma_long, eps) - 1.0
+    dow = x["trading_date"].dt.dayofweek.astype("float64")
+    derived["day_of_week_sin"] = np.sin(2 * np.pi * dow / 5.0)
+    derived["day_of_week_cos"] = np.cos(2 * np.pi * dow / 5.0)
+    derived["is_monday"] = (dow == 0).astype("float64")
+    derived["is_friday"] = (dow == 4).astype("float64")
+    return pd.concat([x, pd.DataFrame(derived, index=x.index)], axis=1)
 
-    def ret_h(hh: int) -> np.ndarray:
-        out = np.zeros((t_len, n), dtype=np.float64)
-        out[hh:] = c[hh:] / np.clip(c[:-hh], 1e-6, None) - 1.0
-        return out
 
-    return_5, return_10 = ret_h(5), ret_h(10)
-    return_30, return_60, return_120 = ret_h(30), ret_h(60), ret_h(120)
-    rng = (h - l) / np.clip(c, 1e-6, None)
-    open_close_return = c / np.clip(o, 1e-6, None) - 1.0
-    body = np.abs(c - o)
-    full = np.maximum(h - l, 1e-6)
-    body_ratio = body / full
-    upper_shadow_ratio = (h - np.maximum(o, c)) / full
-    lower_shadow_ratio = (np.minimum(o, c) - l) / full
-    close_position = (c - l) / full
+def add_cross_sectional_features(frame: pd.DataFrame, cfg: dict) -> pd.DataFrame:
+    x = frame.copy()
+    group = x.groupby("minute_timestamp", sort=False, observed=True)
+    # The mapping is persisted in the feature-config hash and therefore cannot
+    # change silently between feature versions.
+    mapping = cfg["features"]["cross_sectional_rank_sources"]
+    for dst, src in mapping.items():
+        x[dst] = group[src].rank(method="average", pct=True, na_option="keep")
+    size = group["stock_code"].transform("count")
+    present = group["return_30"].transform("count")
+    x["cross_section_size"] = size.astype("int32")
+    x["cross_section_missing_count"] = (size - present).astype("int32")
+    x["rank_calculation_timestamp"] = x["minute_timestamp"]
+    x["data_available_cutoff"] = x["minute_timestamp"]
+    return x
 
-    vol_5 = _roll_std(log_return_1, 5)
-    vol_10 = _roll_std(log_return_1, 10)
-    vol_30 = _roll_std(log_return_1, 30)
-    vol_60 = _roll_std(log_return_1, 60)
-    vol_120 = _roll_std(log_return_1, 120)
-    down = np.where(log_return_1 < 0, log_return_1, 0.0)
-    downside_vol_5d = _roll_std(down, 1200)
-    downside_vol_10d = _roll_std(down, 2400)
-    downside_vol_30 = _roll_std(down, 30)
 
-    log_volume = np.log(np.clip(v, 1.0, None))
-    volume_change = np.diff(log_volume, axis=0, prepend=log_volume[:1])
-    vol_ma5 = _roll_mean(v, 5)
-    vol_ma20 = _roll_mean(v, 20)
-    relative_volume_5 = v / np.clip(vol_ma5, 1.0, None)
-    relative_volume_20 = v / np.clip(vol_ma20, 1.0, None)
-    vwap = np.where(v > 0, a / np.clip(v, 1.0, None), c)
-    vwap_deviation = c / np.clip(vwap, 1e-6, None) - 1.0
-    amihud = np.abs(log_return_1) / np.clip(a, 1.0, None)
-    volume_weighted_return = log_return_1 * relative_volume_5
-    ma5 = _roll_mean(c, 5)
-    ma10 = _roll_mean(c, 10)
-    ma20 = _roll_mean(c, 20)
-    price_ma5_deviation = c / np.clip(ma5, 1e-6, None) - 1.0
-    price_ma10_deviation = c / np.clip(ma10, 1e-6, None) - 1.0
-    price_ma20_deviation = c / np.clip(ma20, 1e-6, None) - 1.0
-    ma5_ma20 = ma5 / np.clip(ma20, 1e-6, None) - 1.0
-
-    cs_r30 = _cs_rank(return_30)
-    cs_r60 = _cs_rank(return_60)
-    cs_rv = _cs_rank(relative_volume_20)
-    cs_vol = _cs_rank(vol_30)
-
-    def cs_z(x: np.ndarray) -> np.ndarray:
-        mu = np.nanmean(x, axis=1, keepdims=True)
-        sd = np.nanstd(x, axis=1, keepdims=True)
-        return (x - mu) / np.clip(sd, 1e-6, None)
-
-    ts = pd.DatetimeIndex(ts)
-    dow = ts.dayofweek.to_numpy(dtype=np.float64)
-    sin = np.sin(2 * np.pi * dow / 5.0)
-    cos = np.cos(2 * np.pi * dow / 5.0)
-    is_mon = (dow == 0).astype(np.float64)
-    is_fri = (dow == 4).astype(np.float64)
-
-    dates = ts.normalize()
-    overnight = np.zeros((t_len, n), dtype=np.float64)
-    uniq, first_idx = [], {}
-    codes = pd.Series(dates).factorize()[0]
-    for i, d in enumerate(codes):
-        if d not in first_idx:
-            first_idx[d] = i
-            uniq.append(d)
-    last_idx = {}
-    for i, d in enumerate(codes):
-        last_idx[d] = i
-    for d in uniq:
-        if d == 0:
-            continue
-        i0 = first_idx[d]
-        ip = last_idx[d - 1]
-        prev_c = np.clip(c[ip], 1e-8, None)
-        # Historical overnight: day-d open vs day-(d-1) close. For a D-day
-        # prediction window this day is at most D-1, so D Open is unused.
-        overnight[i0] = np.log(np.clip(o[i0], 1e-8, None) / prev_c)
-    overnight_vol = _roll_std(overnight, 20)
-
-    channels = [
-        cs_z(np.log(np.clip(o, 1e-6, None))),
-        cs_z(np.log(np.clip(h, 1e-6, None))),
-        cs_z(np.log(np.clip(l, 1e-6, None))),
-        cs_z(np.log(np.clip(c, 1e-6, None))),
-        cs_z(log_volume),
-        log_return_1,
-        return_5,
-        return_10,
-        return_30,
-        return_60,
-        return_120,
-        rng,
-        open_close_return,
-        body_ratio,
-        upper_shadow_ratio,
-        lower_shadow_ratio,
-        close_position,
-        vol_5,
-        vol_10,
-        vol_30,
-        vol_60,
-        vol_120,
-        downside_vol_5d,
-        downside_vol_10d,
-        downside_vol_30,
-        log_volume,
-        volume_change,
-        relative_volume_5,
-        relative_volume_20,
-        vwap_deviation,
-        amihud,
-        volume_weighted_return,
-        price_ma5_deviation,
-        price_ma10_deviation,
-        price_ma20_deviation,
-        ma5_ma20,
-        cs_r30,
-        cs_r60,
-        cs_rv,
-        cs_vol,
-        np.broadcast_to(sin[:, None], (t_len, n)),
-        np.broadcast_to(cos[:, None], (t_len, n)),
-        np.broadcast_to(is_mon[:, None], (t_len, n)),
-        np.broadcast_to(is_fri[:, None], (t_len, n)),
-        overnight,
-        overnight_vol,
-    ]
-    if len(channels) != f:
-        raise RuntimeError(f"F auto-count mismatch: {len(channels)} vs {f}")
-    for i, ch in enumerate(channels):
-        feats[:, :, i] = np.asarray(ch, dtype=np.float32)
-    np.nan_to_num(feats, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
-
-    miss = {}
-    for i, name in enumerate(names):
-        miss[name] = float(np.mean(~np.isfinite(channels[i])))
-    meta = {
-        "feature_names": names,
-        "feat_dim": f,
-        "rolling": "trailing_only",
-        "centered_window": False,
-        "cs_rank_names": list(CS_RANK_NAMES),
-        "cs_rank_timing": "contemporaneous_cross_section_at_bar",
-        "overnight_rule": "hist_day_open_vs_prev_close_only",
-        "missing_rate": miss,
-    }
-    return feats, meta
+def finalize_feature_validity(frame: pd.DataFrame, names: Sequence[str]) -> Tuple[pd.DataFrame, Dict[str, Dict[str, float]]]:
+    vals = frame[list(names)].replace([np.inf, -np.inf], np.nan)
+    finite = np.isfinite(vals.to_numpy(dtype=np.float64, copy=False))
+    validity = pd.DataFrame(
+        {
+            "feature_valid_fraction": finite.mean(axis=1).astype("float32"),
+            "feature_invalid_count": (~finite).sum(axis=1).astype("int16"),
+            "feature_valid_mask": finite.all(axis=1),
+        },
+        index=frame.index,
+    )
+    metadata = frame.drop(columns=list(names), errors="ignore")
+    x = pd.concat([metadata, vals, validity], axis=1)
+    rates: Dict[str, Dict[str, float]] = {}
+    for j, name in enumerate(names):
+        rates[name] = {
+            "missing_rate": float(vals[name].isna().mean()),
+            "invalid_rate": float((~finite[:, j]).mean()),
+        }
+    return x, rates

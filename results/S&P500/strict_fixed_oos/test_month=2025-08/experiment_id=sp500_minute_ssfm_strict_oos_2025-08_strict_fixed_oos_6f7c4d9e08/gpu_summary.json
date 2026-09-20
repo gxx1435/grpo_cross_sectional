@@ -1,0 +1,16 @@
+{
+  "n_samples": 55,
+  "interval_s": 10.0,
+  "util_gpu_mean": 2.909090909090909,
+  "util_gpu_max": 35.0,
+  "mem_used_mb_mean": 7164.0,
+  "mem_used_mb_max": 7164.0,
+  "process_rss_mb_mean": 38237.96075054545,
+  "process_rss_mb_max": 39965.315072,
+  "system_ram_used_mb_max": 12018.46272,
+  "torch_peak_alloc_mb": 1746.189312,
+  "torch_peak_reserved_mb": 7000.293376,
+  "gpu_name": "NVIDIA GeForce RTX 4090 D",
+  "oom_events": 0,
+  "source": "nvidia-smi+torch"
+}

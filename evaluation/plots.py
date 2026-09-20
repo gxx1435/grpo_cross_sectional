@@ -179,7 +179,7 @@ def series_from_daily(df: pd.DataFrame, ycol: str, expected: Sequence[str], cum:
         g = g.sort_values("date") if "date" in g.columns else g
         y = pd.to_numeric(g[ycol], errors="coerce").to_numpy(dtype=np.float64)
         if cum:
-            y = np.cumsum(np.nan_to_num(y, nan=0.0))
+            y = np.exp(np.cumsum(np.nan_to_num(y, nan=0.0))) - 1.0
         if "date" in g.columns:
             x = pd.to_datetime(g["date"], errors="coerce").to_numpy()
         else:
@@ -191,7 +191,7 @@ def series_from_daily(df: pd.DataFrame, ycol: str, expected: Sequence[str], cum:
 def plot_cum(df: pd.DataFrame, path: Path, title: str, focus: Optional[List[str]] = None) -> None:
     expected = list(focus) if focus else (sorted(df["model"].astype(str).unique()) if df is not None and len(df) and "model" in df.columns else [])
     series = series_from_daily(df if df is not None else pd.DataFrame(), "net_return", expected, cum=True)
-    plot_series(path, title, "交易日", "累计净收益（Σ net_return）", expected, series, empty_ylim=(-0.1, 0.1))
+    plot_series(path, title, "Trading date", "Cumulative net return (exp(sum net log return)-1)", expected, series, empty_ylim=(-0.1, 0.1))
 
 
 def plot_metric_ts(df: pd.DataFrame, path: Path, metric: str, title: str, group: str = "model", expected: Optional[Sequence[str]] = None, ylabel: Optional[str] = None) -> None:

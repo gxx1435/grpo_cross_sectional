@@ -162,6 +162,27 @@ for _g in G_VALUES:
 FALLBACK_COLOR = "#7F7F7F"
 PLACEHOLDER = "-"
 
+# Human-readable strategy names used by the S&P 500 reports.  Keep these as
+# aliases of the existing logical series so monthly/annual charts and the
+# legacy Top30 charts use the same stable palette rather than silently falling
+# back to grey.
+DISPLAY_NAME_ALIASES: Dict[str, str] = {
+    "Equal Weight": "equal_weight",
+    "MVO": "mvo",
+    "Maximum Sharpe": "max_sharpe",
+    "Risk Parity": "risk_parity",
+    "Black-Litterman": "black_litterman",
+    "Kelly": "kelly",
+    "MLP Policy": "mlp",
+    "Gaussian Policy": "gaussian",
+    "Gaussian + MLP": "gaussian",
+    "Diffusion": "diffusion",
+    "Standard FM": "standard_fm",
+    "SS-FM": "ssfm",
+    "SS-FM + PPO": "ssfm_ppo",
+    "SS-FM + GRPO": "ssfm_grpo",
+}
+
 FIG_CUM = dict(xlabel="交易日", ylabel="累计净收益（Σ net_return）")
 FIG_IC = dict(xlabel="交易日", ylabel="IC（Pearson）")
 FIG_RIC = dict(xlabel="交易日", ylabel="RankIC（Spearman）")
@@ -176,6 +197,10 @@ FIG_HIST = dict(xlabel="取值", ylabel="频数")
 
 def color_for(name: str) -> str:
     key = str(name)
+    if key in DISPLAY_NAME_ALIASES:
+        return color_for(DISPLAY_NAME_ALIASES[key])
+    if key.startswith("SS-FM G="):
+        return color_for(key.split("=", 1)[-1])
     if key in SERIES_COLORS:
         return SERIES_COLORS[key]
     for suffix in ("_top30", "_all"):

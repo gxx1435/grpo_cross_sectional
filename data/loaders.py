@@ -1,154 +1,227 @@
-"""Minute OHLCV and auction loaders. Align only on (stock_code, trading_date)."""
+"""Auditable pandas loader for the S&P 500 Databento ZIP delivery."""
 
 from __future__ import annotations
 
+import hashlib
+import io
+import json
+import re
+import zipfile
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, Iterator, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
 
-from data.universe import filename_to_code, normalize_stock_code
+from utils.config import resolve_path
 
-RAW_COLS = {
-    "日期": "ts",
-    "开盘": "open",
-    "最高": "high",
-    "最低": "low",
-    "收盘": "close",
-    "成交量(股)": "volume",
-    "成交额(元)": "amount",
-    "换手率(%)": "turnover",
-}
-
-AUCTION_COLS = {
-    "日期": "trading_date",
-    "代码": "raw_code",
-    "集合竞价涨幅%": "auction_return_pct",
-    "集合竞价成交价": "auction_price",
-    "集合竞价成交量(股)": "auction_volume",
-    "集合竞价成交额(元)": "auction_amount",
-    "集合竞价换手率1": "auction_turnover_1",
-    "集合竞价换手率2": "auction_turnover_2",
-    "集合竞价量比1": "auction_vol_ratio_1",
-    "集合竞价量比2": "auction_vol_ratio_2",
-    "集合竞价量比3": "auction_vol_ratio_3",
-}
-
-AUCTION_FEATURE_NAMES = [
-    "auction_return",
-    "auction_price",
-    "auction_volume",
-    "auction_amount",
-    "auction_turnover_1",
-    "auction_turnover_2",
-    "auction_vol_ratio_1",
-    "auction_vol_ratio_2",
-    "auction_vol_ratio_3",
+STANDARD_COLUMNS = [
+    "stock_code",
+    "minute_timestamp",
+    "trading_date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
 ]
 
-
-def read_minute_csv(path: Path) -> pd.DataFrame:
-    df = pd.read_csv(path, parse_dates=["日期"])
-    df = df.rename(columns=RAW_COLS)
-    df = df.set_index("ts").sort_index()
-    df = df[~df.index.duplicated(keep="first")]
-    keep = [c for c in ("open", "high", "low", "close", "volume", "amount", "turnover") if c in df.columns]
-    return df[keep]
-
-
-def find_stock_csv(stock_code: str, pool_dirs: Sequence[Path]) -> List[Path]:
-    num, ex = stock_code.split(".")
-    fname = f"{ex.lower()}{num}.csv"
-    found = []
-    for d in pool_dirs:
-        p = Path(d) / fname
-        if p.is_file():
-            found.append(p)
-    return found
+IDENTIFIER_ALIASES = ("stock_code", "symbol", "ticker", "security_id", "instrument_id")
+TIMESTAMP_ALIASES = ("minute_timestamp", "ts_event", "timestamp", "datetime", "date")
+OHLCV_ALIASES = {
+    "open": ("open", "Open", "开盘"),
+    "high": ("high", "High", "最高"),
+    "low": ("low", "Low", "最低"),
+    "close": ("close", "Close", "收盘"),
+    "volume": ("volume", "Volume", "成交量", "成交量(股)"),
+}
 
 
-def load_stock_minutes(
-    stock_code: str,
-    pool_dirs: Sequence[Path],
-    start: str,
-    end: str,
-) -> pd.DataFrame:
-    parts = [read_minute_csv(p) for p in find_stock_csv(stock_code, pool_dirs)]
-    if not parts:
-        return pd.DataFrame()
-    df = pd.concat(parts).sort_index()
-    df = df[~df.index.duplicated(keep="first")]
-    t0, t1 = pd.Timestamp(start), pd.Timestamp(end) + pd.Timedelta(days=1)
-    return df[(df.index >= t0) & (df.index < t1)]
+def sha256_path(path: Path, block: int = 8 << 20) -> str:
+    h = hashlib.sha256()
+    with Path(path).open("rb") as fh:
+        for chunk in iter(lambda: fh.read(block), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
-def load_auction_dir(path: Path) -> pd.DataFrame:
-    rows = []
-    for p in sorted(Path(path).glob("*.csv")):
-        try:
-            raw = pd.read_csv(p)
-        except Exception:
-            continue
-        raw = raw.rename(columns=AUCTION_COLS)
-        need = set(AUCTION_COLS.values())
-        if not need.issubset(raw.columns):
-            continue
-        raw["stock_code"] = raw["raw_code"].map(lambda x: normalize_stock_code(str(x)))
-        raw["trading_date"] = pd.to_datetime(raw["trading_date"].astype(str), format="%Y%m%d", errors="coerce")
-        raw = raw.dropna(subset=["trading_date", "stock_code"])
-        rows.append(raw)
+def _json_member(zf: zipfile.ZipFile, suffix: str) -> Dict[str, Any]:
+    names = [n for n in zf.namelist() if n.endswith(suffix)]
+    if len(names) != 1:
+        raise RuntimeError(f"expected one {suffix} in ZIP, found {names}")
+    return json.loads(zf.read(names[0]))
+
+
+def enumerate_month_members(zip_path: Path) -> List[Dict[str, Any]]:
+    """List monthly .zst members and reconcile them with the vendor manifest."""
+    with zipfile.ZipFile(zip_path) as zf:
+        manifest = _json_member(zf, "/manifest.json")
+        expected = {
+            str(row["filename"]): str(row.get("hash", "")).removeprefix("sha256:")
+            for row in manifest.get("files", [])
+        }
+        rows: List[Dict[str, Any]] = []
+        for info in zf.infolist():
+            if not info.filename.lower().endswith(".zst"):
+                continue
+            base = Path(info.filename).name
+            match = re.search(r"(20\d{2})(\d{2})\d{2}-(20\d{2})(\d{2})\d{2}", base)
+            if not match:
+                raise RuntimeError(f"cannot infer month from {info.filename}")
+            rows.append(
+                {
+                    "source_month": f"{match.group(1)}-{match.group(2)}",
+                    "source_file": info.filename,
+                    "compressed_size": int(info.file_size),
+                    "zip_compress_type": int(info.compress_type),
+                    "source_file_hash": expected.get(base, ""),
+                }
+            )
+    rows.sort(key=lambda r: (r["source_month"], r["source_file"]))
     if not rows:
-        return pd.DataFrame()
-    df = pd.concat(rows, ignore_index=True)
-    df["auction_return"] = pd.to_numeric(df["auction_return_pct"], errors="coerce") / 100.0
-    for c in AUCTION_FEATURE_NAMES[1:]:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
-    df["auction_available_clock"] = "09:25:00"
-    return df[["stock_code", "trading_date"] + AUCTION_FEATURE_NAMES + ["auction_available_clock"]]
+        raise RuntimeError(f"no .zst files in {zip_path}")
+    return rows
 
 
-def load_all_auctions(dirs: Sequence[Path]) -> pd.DataFrame:
-    parts = [load_auction_dir(Path(d)) for d in dirs]
-    parts = [p for p in parts if len(p)]
-    if not parts:
-        raise FileNotFoundError(f"no auction CSVs under {list(dirs)}")
-    df = pd.concat(parts, ignore_index=True)
-    df = df.drop_duplicates(["stock_code", "trading_date"], keep="last")
-    return df.sort_values(["trading_date", "stock_code"])
+def hash_zip_member(zip_path: Path, member: str, block: int = 8 << 20) -> str:
+    h = hashlib.sha256()
+    with zipfile.ZipFile(zip_path) as zf, zf.open(member) as fh:
+        for chunk in iter(lambda: fh.read(block), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
-def data_contract(cfg: dict) -> Dict[str, object]:
-    from utils.config import resolve_path
+def detect_member_format(member: str, first_bytes: bytes) -> str:
+    low = member.lower()
+    if low.endswith((".csv.zst", ".csv.zstd")):
+        return "csv"
+    if first_bytes[:4] == b"PAR1":
+        return "parquet"
+    stripped = first_bytes.lstrip()
+    if stripped.startswith((b"{", b"[")):
+        return "json"
+    if b"," in first_bytes.splitlines()[0]:
+        return "csv"
+    raise RuntimeError(f"unsupported content format for {member}")
 
+
+def _choose(columns: Iterable[str], aliases: Iterable[str], field: str) -> str:
+    cols = list(columns)
+    by_lower = {str(c).lower(): str(c) for c in cols}
+    for alias in aliases:
+        if alias in cols:
+            return alias
+        if alias.lower() in by_lower:
+            return by_lower[alias.lower()]
+    raise RuntimeError(f"missing {field}; columns={cols}")
+
+
+def normalize_ohlcv(raw: pd.DataFrame, timezone: str) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+    ts_col = _choose(raw.columns, TIMESTAMP_ALIASES, "timestamp")
+    id_col = _choose(raw.columns, IDENTIFIER_ALIASES, "stock identifier")
+    colmap = {name: _choose(raw.columns, aliases, name) for name, aliases in OHLCV_ALIASES.items()}
+    ts = pd.to_datetime(raw[ts_col], utc=True, errors="coerce")
+    out = pd.DataFrame(
+        {
+            "stock_code": raw[id_col].astype("string").str.strip().str.upper(),
+            "minute_timestamp": ts,
+        }
+    )
+    for name, source in colmap.items():
+        out[name] = pd.to_numeric(raw[source], errors="coerce")
+    local = ts.dt.tz_convert(timezone)
+    out["trading_date"] = local.dt.tz_localize(None).dt.normalize()
+    out["local_timestamp"] = local.dt.tz_localize(None)
+    for optional in ("instrument_id", "publisher_id", "rtype", "vwap", "trade_count", "amount", "session", "exchange"):
+        if optional in raw.columns and optional not in out.columns:
+            out[optional] = raw[optional]
+
+    duplicate = out.duplicated(["stock_code", "minute_timestamp"], keep="first")
+    bad_ts = out["minute_timestamp"].isna() | out["stock_code"].isna() | out["stock_code"].eq("")
+    prices = out[["open", "high", "low", "close"]]
+    bad_price = (~np.isfinite(prices)).any(axis=1) | (prices <= 0).any(axis=1)
+    bad_volume = ~np.isfinite(out["volume"]) | (out["volume"] < 0)
+    bad_ohlc = (out["high"] < out[["open", "close"]].max(axis=1)) | (
+        out["low"] > out[["open", "close"]].min(axis=1)
+    )
+    invalid = bad_ts | bad_price | bad_volume | bad_ohlc
+    stats = {
+        "duplicate_count": int(duplicate.sum()),
+        "invalid_timestamp_count": int(bad_ts.sum()),
+        "invalid_price_count": int(bad_price.sum()),
+        "invalid_volume_count": int(bad_volume.sum()),
+        "invalid_ohlc_count": int(bad_ohlc.sum()),
+        "invalid_count": int(invalid.sum()),
+        "identifier_source": id_col,
+        "timestamp_source": ts_col,
+        "column_mapping": {"stock_code": id_col, "minute_timestamp": ts_col, **colmap},
+    }
+    out["source_invalid_flag"] = invalid
+    out = out.loc[~duplicate].sort_values(["stock_code", "minute_timestamp"], kind="mergesort").reset_index(drop=True)
+    return out, stats
+
+
+def read_month_member(zip_path: Path, member: str, timezone: str) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+    """Read a real ZIP member with pandas after inspecting its decompressed header."""
+    with zipfile.ZipFile(zip_path) as zf:
+        with zf.open(member) as probe:
+            import zstandard as zstd
+
+            reader = zstd.ZstdDecompressor().stream_reader(probe)
+            head = reader.read(4096)
+        fmt = detect_member_format(member, head)
+        with zf.open(member) as fh:
+            if fmt == "csv":
+                raw = pd.read_csv(fh, compression="zstd", low_memory=False)
+            elif fmt == "parquet":
+                raw = pd.read_parquet(io.BytesIO(fh.read()))
+            elif fmt == "json":
+                raw = pd.read_json(fh, compression="zstd", lines=True)
+            else:  # pragma: no cover - detect_member_format is exhaustive
+                raise RuntimeError(fmt)
+    out, stats = normalize_ohlcv(raw, timezone)
+    stats.update({"detected_format": fmt, "raw_columns": list(raw.columns), "row_count_raw": int(len(raw))})
+    return out, stats
+
+
+def regular_session(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
+    clock = df["local_timestamp"].dt.strftime("%H:%M")
+    return df.loc[(clock >= str(start)) & (clock <= str(end))].copy()
+
+
+def data_contract(cfg: dict) -> Dict[str, Any]:
+    zip_path = resolve_path(cfg, cfg["paths"]["source_zip"])
+    processed = resolve_path(cfg, cfg["paths"]["processed_dir"])
+    results = resolve_path(cfg, cfg["paths"]["results_dir"])
     missing: List[str] = []
     notes: List[str] = []
-    cons = resolve_path(cfg, cfg["paths"]["constituents_csv"])
-    if not cons.is_file():
-        missing.append(str(cons))
-    pools = [resolve_path(cfg, p) for p in cfg["paths"]["minute_pools"]]
-    for p in pools:
-        if not p.is_dir():
-            missing.append(str(p))
-        else:
-            n = len(list(p.glob("*.csv")))
-            notes.append(f"{p}: {n} csv")
-            if n == 0:
-                missing.append(f"{p} (empty)")
-    auc = [resolve_path(cfg, p) for p in cfg["paths"]["auction_dirs"]]
-    for p in auc:
-        if not p.is_dir():
-            missing.append(str(p))
-        else:
-            n = len(list(p.glob("*.csv")))
-            notes.append(f"{p}: {n} auction csv")
-            if n == 0:
-                missing.append(f"{p} (empty)")
+    members: List[Dict[str, Any]] = []
+    if not zip_path.is_file():
+        missing.append(str(zip_path))
+    else:
+        try:
+            members = enumerate_month_members(zip_path)
+            notes.append(f"ZIP contains {len(members)} monthly .zst members")
+        except Exception as exc:
+            missing.append(f"ZIP contract: {exc}")
+    for path in (processed, results):
+        try:
+            path.mkdir(parents=True, exist_ok=True)
+            probe = path / ".write_probe"
+            probe.write_text("ok", encoding="utf-8")
+            probe.unlink()
+        except Exception as exc:
+            missing.append(f"not writable: {path}: {exc}")
+    stat = zip_path.stat() if zip_path.is_file() else None
     return {
-        "ok": len(missing) == 0,
+        "ok": not missing,
         "missing": missing,
         "notes": notes,
-        "pools": [str(p) for p in pools],
-        "auction_dirs": [str(p) for p in auc],
-        "constituents": str(cons),
+        "source_zip": str(zip_path),
+        "zip_size": int(stat.st_size) if stat else None,
+        "zip_mtime_ns": int(stat.st_mtime_ns) if stat else None,
+        "zip_sha256": sha256_path(zip_path) if stat else None,
+        "members": members,
+        "standard_columns": STANDARD_COLUMNS,
+        "timezone": cfg["calendar"]["timezone"],
     }

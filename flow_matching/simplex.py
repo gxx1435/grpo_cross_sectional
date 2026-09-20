@@ -5,7 +5,11 @@ import torch
 
 def tangent_project(v: torch.Tensor) -> torch.Tensor:
     """P = I - 11^T/K → sum(v_tangent)=0."""
-    return v - v.mean(dim=-1, keepdim=True)
+    out = v - v.mean(dim=-1, keepdim=True)
+    # Remove the final floating-point accumulation residual as well. This is
+    # mathematically the same tangent projection and materially tightens the
+    # simplex audit for float32 tensors.
+    return out - out.sum(dim=-1, keepdim=True) / out.size(-1)
 
 
 def simplex_violation(w: torch.Tensor, eps: float = 1e-5) -> dict:

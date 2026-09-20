@@ -1,0 +1,315 @@
+experiment:
+  name: sp500_minute_ssfm_strict_oos
+  seed: 42
+  deterministic: true
+  deterministic_warn_only: true
+paths:
+  root: .
+  source_zip: /home/zouli/projects/research/data/_temp/EQUS-20260919-6L9X397UJK.zip
+  processed_dir: data/processed/sp500
+  results_dir: results/S&P500
+universe:
+  index: S&P500
+  type: data_available_equity_universe
+  join_key: stock_code
+  history_min_coverage: 0.7
+  min_history_minutes: 780
+  min_target_minutes: 300
+  disclosure: Source metadata contains a fixed requested symbol list, not point-in-time
+    historical S&P 500 membership. The daily universe is therefore an audited data-availability
+    proxy and is exposed to survivorship and selection bias.
+calendar:
+  timezone: America/New_York
+  bars_per_day: 390
+  lookback_days: 10
+  regular_session_start: 09:30
+  regular_session_end: '15:59'
+  execution_clock: 09:30:00
+  realization_clock: '16:00:00'
+  decision_clock: 09:29:59
+panel:
+  start: auto
+  end: auto
+walkforward:
+  test_start: 2025-06
+  test_end: auto
+  train_months: 12
+  val_months: 1
+  train_offset_months: 13
+oos_modes:
+- strict_fixed_oos
+features:
+  windows:
+  - 5
+  - 10
+  - 30
+  - 60
+  - 120
+  - 240
+  - 390
+  - 780
+  vwap_pairs:
+  - - 5
+    - 30
+  - - 5
+    - 60
+  - - 10
+    - 60
+  - - 30
+    - 120
+  base_return_windows:
+  - 5
+  - 10
+  - 30
+  - 60
+  - 120
+  base_volatility_windows:
+  - 5
+  - 10
+  - 30
+  - 60
+  - 120
+  relative_volume_windows:
+  - 5
+  - 20
+  volume_weighted_return_volume_window: 5
+  price_ma_windows:
+  - 5
+  - 10
+  - 20
+  ma_spread_pair:
+  - 5
+  - 20
+  cross_sectional_rank_sources:
+    cs_rank_return_30: return_30
+    cs_rank_return_60: return_60
+    cs_rank_relative_volume: relative_volume_20
+    cs_rank_volatility: vol_30
+  epsilon: 1.0e-08
+  parquet_compression: zstd
+  persist_dtype: float32
+  raw_chunksize: 500000
+portfolio:
+  top_k: 30
+  long_only: true
+  max_weight: 0.15
+  transaction_cost_rate: 0.0003
+  initial_turnover_policy: from_cash
+  return_type: log
+  hist_risk_lookback_days: 60
+  risk_model:
+    covariance_epsilon: 1.0e-06
+    mvo_risk_aversion: 1.0
+    max_sharpe_grid_points: 40
+    max_sharpe_lambda_min: 0.05
+    max_sharpe_lambda_max: 20.0
+    risk_parity_iterations: 200
+    black_litterman_tau: 0.05
+    black_litterman_view_variance_scale: 0.25
+  sharpe_min_obs: 10
+  sharpe_fallback: 0.0
+  smooth_dd_temperature: 20.0
+reward:
+  w_return: 0.4
+  w_sharpe: 0.4
+  w_turnover: 0.15
+  w_smooth_mdd: 0.15
+  zmax: 5.0
+  eps: 1.0e-08
+  fit_on: train_only
+runtime:
+  train_day_stride: 5
+  state_day_stride: 5
+  validation_day_stride: 1
+  num_data_workers: 0
+gpu:
+  mixed_precision: true
+  gradient_checkpointing: false
+  allow_grad_accum: true
+  oom_max_retries: 4
+  monitor_interval_sec: 10.0
+  high_utilization: true
+  target_util_pct: 80
+  cudnn_benchmark: false
+  allow_tf32: false
+  progress_gpu_poll_sec: 30.0
+prediction:
+  strategy_name: minute_transformer_cross_stock_attention
+  target: intraday_log_return
+  formula: log(Close_D / Open_D)
+  feat_dim: auto
+  d_model: 48
+  n_heads: 4
+  ff_mult: 2
+  n_layers_temporal: 2
+  n_layers_cross: 1
+  patch: 30
+  dropout: 0.1
+  stock_chunk: 96
+  optimizer: AdamW
+  lr: 0.0005
+  weight_decay: 0.0001
+  epochs: 2
+  early_stopping_patience: 2
+  grad_clip: 1.0
+  batch_asofs: 1
+  prediction_loss:
+    type: huber
+    delta: 1.0
+  rank_weight: 0.0
+  feat_standardize: true
+  feat_std_stride: 5
+  feat_std_bar_stride: 10
+  feature_scaler:
+    epsilon: 1.0e-06
+    zmax: 5.0
+  val_select: mse
+  scheduler:
+    type: cosine
+    min_lr: 1.0e-05
+  seeds:
+  - 42
+  models:
+  - minute_transformer_cross_stock_attention
+  primary_model: minute_transformer_cross_stock_attention
+ssfm:
+  hidden: 128
+  n_teachers: 3
+  teachers:
+  - mvo
+  - max_sharpe
+  - risk_parity
+  teacher_emb: 8
+  steps: 120
+  validation_interval: 20
+  batch_size: 32
+  optimizer: Adam
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  n_sample_steps: 12
+  default_g_source: validation
+  default_g: 32
+  candidate_select: predicted_utility
+  risk_aversion: 1.0
+  clr_eps: 1.0e-08
+  scheduler:
+    type: cosine
+    min_lr: 0.0
+standard_fm:
+  hidden: 128
+  steps: 120
+  optimizer: Adam
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  n_sample_steps: 12
+  scheduler:
+    type: cosine
+    min_lr: 0.0
+diffusion:
+  hidden: 128
+  steps: 120
+  optimizer: Adam
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  n_diff_steps: 40
+  scheduler:
+    type: cosine
+    min_lr: 0.0
+mlp_policy:
+  hidden: 128
+  steps: 120
+  optimizer: Adam
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  scheduler:
+    type: cosine
+    min_lr: 0.0
+gaussian_policy:
+  hidden: 128
+  steps: 120
+  optimizer: Adam
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  nll_weight: 1.0
+  min_std: 0.05
+  max_std: 2.0
+  scheduler:
+    type: cosine
+    min_lr: 0.0
+rl:
+  algorithms:
+  - ppo
+  - grpo
+  init_from: ssfm
+  freeze_alpha: true
+  hidden: 96
+  epochs: 2
+  optimizer: Adam
+  lr: 0.0001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  noise_std: 0.5
+  group_size: 32
+  distill_steps: 80
+  ppo:
+    cliprange: 0.2
+    vf_coef: 0.5
+    entropy_coef: 0.01
+    inner_epochs: 4
+    kl_stop: 0.05
+  grpo:
+    weak_var_threshold: 1.0e-06
+    weak_adv_threshold: 1.0e-06
+  rollout_split: train_only
+  checkpoint_on: validation
+  scheduler:
+    type: cosine
+    min_lr: 0.0
+matrix:
+  A_prediction:
+  - minute_transformer_cross_stock_attention
+  B_portfolio:
+  - equal_weight
+  - mvo
+  - max_sharpe
+  - risk_parity
+  - black_litterman
+  - kelly
+  C_generative:
+  - mlp
+  - gaussian
+  - diffusion
+  - standard_fm
+  - ssfm
+  D_rl:
+  - ssfm
+  - ssfm_ppo
+  - ssfm_grpo
+  E_g:
+  - 8
+  - 16
+  - 32
+  - 64
+  - 128
+  F_oos:
+  - strict_fixed_oos
+  allocation_pools:
+  - top30
+reports:
+- cumulative_return
+- performance_summary
+- prediction_metrics
+- prediction_distribution
+- topk_stats
+- gpu_time
+- g_curves
+- fm_vs_diffusion
+- ppo_vs_grpo
+- attention_analysis
+- leakage_audit
+_root: /home/zouli/projects/research/grpo_cross_sectional
