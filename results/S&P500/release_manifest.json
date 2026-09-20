@@ -1,6 +1,6 @@
 {
-  "release": "sp500-strict-oos-v1",
-  "generated_at_utc": "2026-09-20T04:26:11.364019+00:00",
+  "release": "sp500-strict-oos-v1.1",
+  "generated_at_utc": "2026-09-20T06:13:53.175421+00:00",
   "code_commit": "f62e9c46035c67d2a4b31442f83caa1c0a909cf9",
   "git_dirty": false,
   "source_zip_sha256": "167aee53c8439948be966014dd60f4c7b34cd88fb9464187d67bd3b254a9ffcf",
@@ -115,7 +115,7 @@
     }
   ],
   "formal_file_count": 528,
-  "formal_total_bytes": 350118019,
+  "formal_total_bytes": 350552776,
   "formal_files": [
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/S&P500实验分析.md",
@@ -319,8 +319,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/plots/cumulative_return.png",
-      "size": 199424,
-      "sha256": "f70f6c34802879708a219dc814fcac51c80eb824c2ab06a1aafcdaf9a6e82bae"
+      "size": 236941,
+      "sha256": "85bd767f75adcb758fd1f4d58c6879251de8d46a57701016afde51f02764f4e2"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-06/experiment_id=sp500_minute_ssfm_strict_oos_2025-06_strict_fixed_oos_b816825df1/portfolio_weights.parquet",
@@ -559,8 +559,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/plots/cumulative_return.png",
-      "size": 196199,
-      "sha256": "09957c596f8d485c1c81f8e03aedfdc01909e9aa5e1565f77562da98f230ec49"
+      "size": 229650,
+      "sha256": "4a4bcf27667710c4d4a06ef0afb081b92f87aa681beafae1d168f7449b334580"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-07/experiment_id=sp500_minute_ssfm_strict_oos_2025-07_strict_fixed_oos_7e54863693/portfolio_weights.parquet",
@@ -799,8 +799,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/plots/cumulative_return.png",
-      "size": 198942,
-      "sha256": "afe63294d934660266a8f9c1d60af2f1f614e43e84ce7aa1063e72bf493f4d0d"
+      "size": 238262,
+      "sha256": "60b69e89f71678495c133cb7bcad5c6a4a4f6798956643e5d0b4c2d5213a8b80"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-08/experiment_id=sp500_minute_ssfm_strict_oos_2025-08_strict_fixed_oos_6f7c4d9e08/portfolio_weights.parquet",
@@ -1039,8 +1039,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/plots/cumulative_return.png",
-      "size": 228864,
-      "sha256": "54583c4aa3f66b2f46a2526919db7d5276f4a03dfc0760a6627ec5d239b35edd"
+      "size": 274681,
+      "sha256": "6b1be9b7b842e105c1c8600c7d7a6dd6c118cb639f2ce0806f9f91d8bee10fd4"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-09/experiment_id=sp500_minute_ssfm_strict_oos_2025-09_strict_fixed_oos_0ef2cfec44/portfolio_weights.parquet",
@@ -1279,8 +1279,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/plots/cumulative_return.png",
-      "size": 200152,
-      "sha256": "e16ba7eebd20a6e17e73480beefabfde8ef526bc907b86b300d9409d76a55edd"
+      "size": 239862,
+      "sha256": "391bbd90f9d9e0bedab0eb13c36f8cc401d7aceca1610988bd3ff16ec33148a7"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-10/experiment_id=sp500_minute_ssfm_strict_oos_2025-10_strict_fixed_oos_f1914e664c/portfolio_weights.parquet",
@@ -1519,8 +1519,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/plots/cumulative_return.png",
-      "size": 240400,
-      "sha256": "1ca1c85efc4e175cb89301523f5c7c2c53c216a1e7e71dfb50da446b2d1dfb24"
+      "size": 288898,
+      "sha256": "c8dc2c5e73fe98087019b8cc16e1890f7a36185005509fbff5504af205e39a39"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-11/experiment_id=sp500_minute_ssfm_strict_oos_2025-11_strict_fixed_oos_f2d7514ac7/portfolio_weights.parquet",
@@ -1759,8 +1759,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/plots/cumulative_return.png",
-      "size": 208572,
-      "sha256": "8bca96cc4f147fdb5d01272030811e54e499306a2f39847f3fc4a4bf3c629e24"
+      "size": 248334,
+      "sha256": "98340d220771e456e9f6d0a16c4b351a0b58992e8f909a3c51f559b9311242f4"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2025-12/experiment_id=sp500_minute_ssfm_strict_oos_2025-12_strict_fixed_oos_d49b20af82/portfolio_weights.parquet",
@@ -1999,8 +1999,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/plots/cumulative_return.png",
-      "size": 173223,
-      "sha256": "bd68614429c9bc7c76d012019c5fa9140d3359f5f8e30e19d2d17fcdf8e9a514"
+      "size": 205442,
+      "sha256": "5c7d80eeee918f4b40cc5fbd6da501d7bfc427a7edbf75d5f51adb3dc55e312e"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-01/experiment_id=sp500_minute_ssfm_strict_oos_2026-01_strict_fixed_oos_cce333fd65/portfolio_weights.parquet",
@@ -2239,8 +2239,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/plots/cumulative_return.png",
-      "size": 246551,
-      "sha256": "eca1c3b052702ae89e65f087ec2b86f1f874a880f7f2677df9c7ccbd2990086b"
+      "size": 289432,
+      "sha256": "73067f2fd8c030e2f10a76fc2c79d18fa60aea389d3bd81d5eb127004c5e119d"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-02/experiment_id=sp500_minute_ssfm_strict_oos_2026-02_strict_fixed_oos_cd339684e7/portfolio_weights.parquet",
@@ -2479,8 +2479,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/plots/cumulative_return.png",
-      "size": 188205,
-      "sha256": "0fb7af69ca41271a3a376469d20011e934857d1174f2f4b9827bd181e0e35fbe"
+      "size": 223886,
+      "sha256": "f2d91bd4bd11b95561a9f4d6b80e8392ae1e5f1531c8af141f925f136ccb6251"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-03/experiment_id=sp500_minute_ssfm_strict_oos_2026-03_strict_fixed_oos_1d9e108ea9/portfolio_weights.parquet",
@@ -2719,8 +2719,8 @@
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/plots/cumulative_return.png",
-      "size": 205348,
-      "sha256": "a6e33d2ff9a3c32488c4ae1dc080750b34563c55ed5b7f07e34cb175572ff2f5"
+      "size": 245249,
+      "sha256": "40c23011353898bc45a211b06ca6c411b23180a0b8e2415cec243b6e20bb0ee5"
     },
     {
       "path": "results/S&P500/strict_fixed_oos/test_month=2026-04/experiment_id=sp500_minute_ssfm_strict_oos_2026-04_strict_fixed_oos_d5759a14f9/portfolio_weights.parquet",
@@ -2763,5 +2763,184 @@
     "data/processed feature store",
     "smoke experiment directories",
     "failed smoke receipts"
+  ],
+  "supersedes": "sp500-strict-oos-v1",
+  "analysis_refresh": {
+    "generator_commit": "1156b8a8cd873a8a57426f8298307ee2ec70aacd",
+    "source_results_commit": "ab25cee6c023c280c603faff0185b5cb57454057",
+    "formal_experiments_rerun": false,
+    "source_metrics_changed": false,
+    "report_figure_count": 20,
+    "monthly_nav_figures_recolored": 11,
+    "visual_color_check": "PASS"
+  },
+  "analysis_file_count": 33,
+  "analysis_total_bytes": 1503079,
+  "analysis_files": [
+    {
+      "path": "results/S&P500/final_summary/S&P500全年实验分析.md",
+      "size": 18860,
+      "sha256": "1fdd5be76733723eaff96519e60958c217765f2ceb07754efaeaaed5055d6f3d"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_attention_summary.csv",
+      "size": 1510,
+      "sha256": "3a84e9aeb17bebf86250bb0d6ae646c81b8fac013ed125f51fc0d064d4989e1c"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_candidate_summary.csv",
+      "size": 1301,
+      "sha256": "2083b81e275a324acd341e9258d54bbc0526789551ed8e1515d0dfa1d7dfd4fb"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_intraday_attention.csv",
+      "size": 635,
+      "sha256": "dfb124d3c2cd0fd3b88a2199baecbcebef1d867fecf8cbe74c2e2f81ecfef839"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_leakage_audit_summary.csv",
+      "size": 199,
+      "sha256": "fd19372ee1415dc115b8d1dd97784183c4614bcdacb1d014c697c8df0c301a37"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_monthly_performance.csv",
+      "size": 56433,
+      "sha256": "bcdf63100441aba23776433d9cd77bd205b97bb2b018dcd701190d820d5c1397"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_performance_summary.csv",
+      "size": 5304,
+      "sha256": "4b76b455facd7eff67483fd04e1a1f6de7e9d34c28ffe6f2036c0ca8176130f5"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_prediction_summary.csv",
+      "size": 5037,
+      "sha256": "82aa3bc441d50524c401bfadf47c3237a91eb437e59f1d44d5df62b7495146dc"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_runtime_summary.csv",
+      "size": 9262,
+      "sha256": "61397109ffc811a57e9ff38ec71700daadcf3c3f5bab526f8e462310df970c5a"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_strategy_comparison.csv",
+      "size": 5304,
+      "sha256": "4b76b455facd7eff67483fd04e1a1f6de7e9d34c28ffe6f2036c0ca8176130f5"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_temporal_day_attention.csv",
+      "size": 479,
+      "sha256": "e1be0416cb1af0b949eb2d579984721fd0ff6e35da45f0b8084fa37af9e5203d"
+    },
+    {
+      "path": "results/S&P500/final_summary/annual_universe_sensitivity.csv",
+      "size": 510,
+      "sha256": "5e6da4a845b52de12fd9d35d743b503f5bfebbcaffacb4d8280f6d863f834d46"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/alpha_monthly_ic_rankic.png",
+      "size": 32636,
+      "sha256": "97d948fcc2b8980b759ca13f79b4f8106cbdd02150fe184c64df91540f371a02"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/alpha_monthly_topk_excess.png",
+      "size": 38863,
+      "sha256": "1091ac1f5d57d9f29abfb958fe563b91d64162b08822cee2fa77497211fb58e6"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/annual_cumulative_return.png",
+      "size": 376740,
+      "sha256": "f31e8fc9d2f51757ea34f32cffcde2d9e59bade8cadf05581e2261419db7075e"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/g_bar_return.png",
+      "size": 32630,
+      "sha256": "0f755d1bd346a68a3cee3ca214d1ec81a2f4b1605f547a70e1f44037c4f3ff62"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/g_bar_sampling_time.png",
+      "size": 42190,
+      "sha256": "0c37c618c35ffe26d700802d8280f06d20ed70b9d3cae057327f81770f0ead4f"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_cost.png",
+      "size": 48566,
+      "sha256": "0479b51a9ae563568a2d9a19afbd957370bc3d98caef33e921e48fa58a9e820c"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_mdd.png",
+      "size": 49862,
+      "sha256": "557d57a568b9d9c124bb6e4432966f0a99d3241f81f251fbbc9e8e95057170de"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_return.png",
+      "size": 50820,
+      "sha256": "d20e700ed96373c08e22cd0bf8c36f1df6ad888625f9c7e3652a7a6e6e895256"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_sharpe.png",
+      "size": 41102,
+      "sha256": "f93fbfe2fb79b57bd2f37adf850c4ab22cd19e1433122f51a110913c68f5ed10"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_bar_turnover.png",
+      "size": 46653,
+      "sha256": "cac6b87423ec4e47d0b7d7c989aeddd21cf268c0dfcc93af8983e59fb5e88530"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/generation_nav.png",
+      "size": 195653,
+      "sha256": "143566b8168d305c032dab0aea7f21e0c6268d533e4d8172d6059e5bdbe32442"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/intraday_attention.png",
+      "size": 40012,
+      "sha256": "ad6331d10896a2ec3ab503f55a31bef53e227d1b544c5f0256c62f2165ed67dc"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_cost.png",
+      "size": 37302,
+      "sha256": "26aef2c5fb01382b958a7b7b56fa547ad10cc4ca7833884dfa69bf8925cb4d1d"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_mdd.png",
+      "size": 37926,
+      "sha256": "0a98c7a1aed79de426594e068519319935a2d7f6c932e6bc1435219b555b3883"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_return.png",
+      "size": 36593,
+      "sha256": "e362ebbe0eec03ca6da1f2124775a720d2b9ed76b73d0d8f405fc1dcf27af7a2"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_sharpe.png",
+      "size": 33657,
+      "sha256": "b6ff61d88141421faadb3b24c4e0897aab6f6fcbab8c05e10f0f89b9ae817fc7"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_bar_turnover.png",
+      "size": 34667,
+      "sha256": "037f707b870bb6e9556f0d300c582c26233743ab3a483d1c0d09375b701920d5"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/rl_nav.png",
+      "size": 150759,
+      "sha256": "97535ca47ac30f5e418596b08895bc603f35f5f97984974a342c480088138849"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/temporal_day_attention.png",
+      "size": 33338,
+      "sha256": "8aabeaef0cebb782407aa2f0c917f67429774b5615f642814c6fbe733fa38efc"
+    },
+    {
+      "path": "results/S&P500/final_summary/plots/universe_sensitivity.png",
+      "size": 37753,
+      "sha256": "4debc107f6ed922479bc7ec340abafc9935171f8a289b62a56780d5533d5e147"
+    },
+    {
+      "path": "results/S&P500/final_summary/summary.json",
+      "size": 523,
+      "sha256": "9d94399c6747ec3ae442c738a761def5e4ee239db8375c72514ff846c59db295"
+    }
   ]
 }
