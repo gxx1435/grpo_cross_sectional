@@ -1,0 +1,7 @@
+phase,seconds,initial_stock_chunk,final_stock_chunk,batch_asofs,gradient_accumulation,gradient_checkpointing,oom_retries,train_states,validation_states,test_dates,n_samples,interval_s,util_gpu_mean,util_gpu_max,mem_used_mb_mean,mem_used_mb_max,process_rss_mb_mean,process_rss_mb_max,system_ram_used_mb_max,torch_peak_alloc_mb,torch_peak_reserved_mb,gpu_name,oom_events,source
+alpha_training,305.9689118862152,96.0,96.0,1.0,1.0,False,0.0,,,,,,,,,,,,,,,,,
+portfolio_state_generation,158.03906083106995,,,,,,,50.0,20.0,,,,,,,,,,,,,,,
+generative_training,2.703505277633667,,,,,,,,,,,,,,,,,,,,,,,
+rl_training,9.339992761611938,,,,,,,,,,,,,,,,,,,,,,,
+test_inference,56.61814522743225,,,,,,,,,19.0,,,,,,,,,,,,,,
+total,538.0089643001556,,,,,,,,,,53.0,10.0,2.0377358490566038,36.0,7164.0,7164.0,51121.527286339624,53446.877184,12373.741568,1649.791488,7000.293376,NVIDIA GeForce RTX 4090 D,0.0,nvidia-smi+torch

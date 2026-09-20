@@ -1,0 +1,199 @@
+{
+  "ok": true,
+  "missing": [],
+  "notes": [
+    "ZIP contains 25 monthly .zst members"
+  ],
+  "source_zip": "/home/zouli/projects/research/data/_temp/EQUS-20260919-6L9X397UJK.zip",
+  "zip_size": 1500784616,
+  "zip_mtime_ns": 1789827600000000000,
+  "zip_sha256": "167aee53c8439948be966014dd60f4c7b34cd88fb9464187d67bd3b254a9ffcf",
+  "members": [
+    {
+      "source_month": "2024-05",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20240501-20240531.ohlcv-1m.csv.zst",
+      "compressed_size": 60922239,
+      "zip_compress_type": 8,
+      "source_file_hash": "255ad96b61b5417cecc6305af60cfac03aaaa915013d08fb416c21c1da9f9793"
+    },
+    {
+      "source_month": "2024-06",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20240601-20240630.ohlcv-1m.csv.zst",
+      "compressed_size": 52556969,
+      "zip_compress_type": 8,
+      "source_file_hash": "25a23f7e436806726b8badbfe1f8579640206d2c6d0f84b86662d2d03f9b1bba"
+    },
+    {
+      "source_month": "2024-07",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20240701-20240731.ohlcv-1m.csv.zst",
+      "compressed_size": 60679781,
+      "zip_compress_type": 8,
+      "source_file_hash": "b097c3feffbcb2fd2fa380311c092b012454038f2b820922a4f2d124771c7c0c"
+    },
+    {
+      "source_month": "2024-08",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20240801-20240831.ohlcv-1m.csv.zst",
+      "compressed_size": 61129664,
+      "zip_compress_type": 8,
+      "source_file_hash": "4b088e0f1cee88dad89ab06d93d6dc91a6e95d08de70740642f8c081ec7a4d37"
+    },
+    {
+      "source_month": "2024-09",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20240901-20240930.ohlcv-1m.csv.zst",
+      "compressed_size": 57096326,
+      "zip_compress_type": 8,
+      "source_file_hash": "4742477ff3da3edb43e360b814c94135e578c049c214a1455c10d95349d6c4c3"
+    },
+    {
+      "source_month": "2024-10",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20241001-20241031.ohlcv-1m.csv.zst",
+      "compressed_size": 64949512,
+      "zip_compress_type": 8,
+      "source_file_hash": "c263d6b1f28fda31d5e82c292c110600ba44fc849b134916d625bb24b188cfb1"
+    },
+    {
+      "source_month": "2024-11",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20241101-20241130.ohlcv-1m.csv.zst",
+      "compressed_size": 57274111,
+      "zip_compress_type": 8,
+      "source_file_hash": "a2780b7619871aa3b9f57510401af5af1fc35c8e6a1b456446f1290a82dda36c"
+    },
+    {
+      "source_month": "2024-12",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20241201-20241231.ohlcv-1m.csv.zst",
+      "compressed_size": 57898741,
+      "zip_compress_type": 8,
+      "source_file_hash": "06bdfee64299b5106fa83ee6b2a432ed3b2d4239cee763dee567987626857c96"
+    },
+    {
+      "source_month": "2025-01",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250101-20250131.ohlcv-1m.csv.zst",
+      "compressed_size": 59172313,
+      "zip_compress_type": 8,
+      "source_file_hash": "4c44879404aa8eec1f8c95b431e9550653b4260416cc5f6250e57e382ca3dd69"
+    },
+    {
+      "source_month": "2025-02",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250201-20250228.ohlcv-1m.csv.zst",
+      "compressed_size": 57588392,
+      "zip_compress_type": 8,
+      "source_file_hash": "08594fbf6745401fd90637096b1e132263e0b8bf787acc4d520274d58a52b071"
+    },
+    {
+      "source_month": "2025-03",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250301-20250331.ohlcv-1m.csv.zst",
+      "compressed_size": 65550607,
+      "zip_compress_type": 8,
+      "source_file_hash": "604ec8d061f0185aab64a7c178cff9796fbeade26a2f4767ecab03194bbc533f"
+    },
+    {
+      "source_month": "2025-04",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250401-20250430.ohlcv-1m.csv.zst",
+      "compressed_size": 68104597,
+      "zip_compress_type": 8,
+      "source_file_hash": "584fcab632ca2f312569530100e96f22f30f17acf51b2b3179c7ee26f644cea3"
+    },
+    {
+      "source_month": "2025-05",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250501-20250531.ohlcv-1m.csv.zst",
+      "compressed_size": 63128840,
+      "zip_compress_type": 8,
+      "source_file_hash": "4b6d13bf9d191e74aaabbbeee8ff52204bb4588f02c28e70d45c7774c01952d1"
+    },
+    {
+      "source_month": "2025-06",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250601-20250630.ohlcv-1m.csv.zst",
+      "compressed_size": 59762716,
+      "zip_compress_type": 8,
+      "source_file_hash": "c2e8af17096fd209db223462aec80d36c2e7433b8f91895b5b6cfe64d9b88131"
+    },
+    {
+      "source_month": "2025-07",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250701-20250731.ohlcv-1m.csv.zst",
+      "compressed_size": 65718413,
+      "zip_compress_type": 8,
+      "source_file_hash": "5a2144fd38933e8a68d7a03c23ee1f1cc9a9e7c4b15042401d9775c8da74ad50"
+    },
+    {
+      "source_month": "2025-08",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250801-20250831.ohlcv-1m.csv.zst",
+      "compressed_size": 59763273,
+      "zip_compress_type": 8,
+      "source_file_hash": "00f576d8cc7ef25f72b2c4011fa670994bfc458eb5ba9a956a2190616f3586e4"
+    },
+    {
+      "source_month": "2025-09",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20250901-20250930.ohlcv-1m.csv.zst",
+      "compressed_size": 59720298,
+      "zip_compress_type": 8,
+      "source_file_hash": "c885b90ec34bf5f24fa89b62873db8492940ace30c9df04448f1acc5565100f4"
+    },
+    {
+      "source_month": "2025-10",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20251001-20251031.ohlcv-1m.csv.zst",
+      "compressed_size": 68000729,
+      "zip_compress_type": 8,
+      "source_file_hash": "4bf1e05684ba85a67b913f4028cb2ca101df99c7c88102e17ad2c426fb90befe"
+    },
+    {
+      "source_month": "2025-11",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20251101-20251130.ohlcv-1m.csv.zst",
+      "compressed_size": 57383100,
+      "zip_compress_type": 8,
+      "source_file_hash": "f91e00a22b5347fb359f74be05471df1e495da8bbcc90fa8cda4f1ad90cc8863"
+    },
+    {
+      "source_month": "2025-12",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20251201-20251231.ohlcv-1m.csv.zst",
+      "compressed_size": 63120264,
+      "zip_compress_type": 8,
+      "source_file_hash": "c898d5a3560059e2bd348dc0ded1ee038e58fef6b8c8717d761eb7c502c4fbf2"
+    },
+    {
+      "source_month": "2026-01",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20260101-20260131.ohlcv-1m.csv.zst",
+      "compressed_size": 61779633,
+      "zip_compress_type": 8,
+      "source_file_hash": "0315bd8f8d045be3ac04fb5a6365e9cdd1d6e3540926671f4e626ac1f77375e4"
+    },
+    {
+      "source_month": "2026-02",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20260201-20260228.ohlcv-1m.csv.zst",
+      "compressed_size": 61987240,
+      "zip_compress_type": 8,
+      "source_file_hash": "b2f168d996b475611e10cf92f0a14ebcfe02af9908ccf4f0b12286c8cf28a889"
+    },
+    {
+      "source_month": "2026-03",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20260301-20260331.ohlcv-1m.csv.zst",
+      "compressed_size": 71140618,
+      "zip_compress_type": 8,
+      "source_file_hash": "63c72acdc07e369b1ed59ec8a632a55ac622c69b9da10ec68ba616f1ac6ee024"
+    },
+    {
+      "source_month": "2026-04",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20260401-20260430.ohlcv-1m.csv.zst",
+      "compressed_size": 66249241,
+      "zip_compress_type": 8,
+      "source_file_hash": "7a5b31a866efbdc5939e44b610728f1e37aa4e751a46abb3246a366db9e60073"
+    },
+    {
+      "source_month": "2026-05",
+      "source_file": "EQUS-20260919-6L9X397UJK/equs-mini-20260501-20260510.ohlcv-1m.csv.zst",
+      "compressed_size": 19634524,
+      "zip_compress_type": 8,
+      "source_file_hash": "773d1671bd82f8d86c664ec245792e2af33ff9e3fa3a668ab0a8a8cb736f5ea2"
+    }
+  ],
+  "standard_columns": [
+    "stock_code",
+    "minute_timestamp",
+    "trading_date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume"
+  ],
+  "timezone": "America/New_York"
+}

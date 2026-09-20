@@ -1,0 +1,15 @@
+{
+  "params": 487888,
+  "trainable_params": 487888,
+  "batch_size": 1,
+  "grad_accum": 1,
+  "est_vram_gb": 1.02,
+  "est_gpu_util_pct": 82.0,
+  "est_sec_per_epoch": 572.0,
+  "est_total_hours": 8.1,
+  "est_infer_sec": 0.97,
+  "est_sample_sec": 1.6,
+  "est_disk_gb": 125.5,
+  "est_gpu_hours": 8.9,
+  "notes": "OOS=strict_fixed_oos | 11 months | pools=1 | alpha=minute_transformer_cross_stock_attention | train_day_stride=5 | AMP, deterministic settings, fixed Test checkpoint"
+}

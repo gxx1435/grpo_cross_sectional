@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "n_requested": 11,
+  "n_valid": 11,
+  "n_invalid": 0,
+  "n_failed": 0,
+  "hours": 1.6896604528692034,
+  "annual": {
+    "valid_months": [
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04"
+    ],
+    "excluded": [
+      {
+        "month": "2026-05",
+        "reason": "terminal source partition is incomplete (observed through 2026-05-08)"
+      }
+    ]
+  }
+}

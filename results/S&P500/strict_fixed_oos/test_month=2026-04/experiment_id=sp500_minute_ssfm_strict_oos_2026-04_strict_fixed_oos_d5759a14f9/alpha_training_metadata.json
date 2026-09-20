@@ -1,0 +1,19 @@
+{
+  "best_epoch": 2,
+  "best_validation_mse": 0.0004948367621347478,
+  "best_checkpoint_id": "9ba8b31c8585ca5862fe920ba6ea36b133331264fbeab045d43164d39d338ecf",
+  "checkpoint_selection_rule": "minimum validation MSE",
+  "parameter_count": {
+    "params": 261265,
+    "trainable_params": 261265
+  },
+  "train_days_sampled": 50,
+  "validation_days": 22,
+  "wall_time_sec": 352.53235602378845,
+  "initial_stock_chunk": 96,
+  "final_stock_chunk": 96,
+  "batch_asofs": 1,
+  "gradient_accumulation": 1,
+  "gradient_checkpointing": false,
+  "oom_retries": 0
+}
