@@ -33,33 +33,33 @@ def score_softmax(alpha: np.ndarray, valid: Optional[np.ndarray] = None, tau: fl
     return w
 
 
-def kelly(mu: np.ndarray, sigma: np.ndarray, max_w: float) -> np.ndarray:
-    raw = np.linalg.pinv(sanitize_cov(sigma)) @ np.asarray(mu, dtype=np.float64)
+def kelly(mu: np.ndarray, sigma: np.ndarray, max_w: float, risk_cfg: dict) -> np.ndarray:
+    raw = np.linalg.pinv(sanitize_cov(sigma, float(risk_cfg["covariance_epsilon"]))) @ np.asarray(mu, dtype=np.float64)
     if not np.isfinite(raw).all():
         raw = np.ones_like(mu)
     return cap_and_simplex(project_simplex(raw), max_w)
 
 
-def black_litterman(mu: np.ndarray, sigma: np.ndarray, views: np.ndarray, max_w: float, tau: float = 0.05) -> np.ndarray:
+def black_litterman(mu: np.ndarray, sigma: np.ndarray, views: np.ndarray, max_w: float, risk_cfg: dict) -> np.ndarray:
     """Views = predicted alpha only. No future realized returns."""
-    sigma = sanitize_cov(sigma)
+    sigma = sanitize_cov(sigma, float(risk_cfg["covariance_epsilon"]))
     k = mu.size
     pi = np.asarray(mu, dtype=np.float64)
     q = np.asarray(views, dtype=np.float64)
-    omega = np.diag(np.maximum(np.diag(sigma) * 0.25, 1e-8))
-    tau_s = float(tau) * sigma
+    omega = np.diag(np.maximum(np.diag(sigma) * float(risk_cfg["black_litterman_view_variance_scale"]), float(risk_cfg["covariance_epsilon"])))
+    tau_s = float(risk_cfg["black_litterman_tau"]) * sigma
     mid = np.linalg.pinv(np.linalg.pinv(tau_s) + np.linalg.pinv(omega))
     mu_bl = mid @ (np.linalg.pinv(tau_s) @ pi + np.linalg.pinv(omega) @ q)
-    return mvo(mu_bl, sigma, 1.0, max_w)
+    return mvo(mu_bl, sigma, float(risk_cfg["mvo_risk_aversion"]), max_w, float(risk_cfg["covariance_epsilon"]))
 
 
-def all_baselines(mu: np.ndarray, sigma: np.ndarray, alpha: Optional[np.ndarray], max_w: float) -> Dict[str, np.ndarray]:
+def all_baselines(mu: np.ndarray, sigma: np.ndarray, alpha: Optional[np.ndarray], max_w: float, risk_cfg: dict) -> Dict[str, np.ndarray]:
     views = alpha if alpha is not None else mu
     return {
         "equal_weight": equal_weight(len(mu)),
-        "mvo": mvo(mu, sigma, 1.0, max_w),
-        "max_sharpe": max_sharpe(mu, sigma, max_w),
-        "risk_parity": risk_parity(sigma, max_w),
-        "black_litterman": black_litterman(mu, sigma, views, max_w),
-        "kelly": kelly(mu, sigma, max_w),
+        "mvo": mvo(views, sigma, float(risk_cfg["mvo_risk_aversion"]), max_w, float(risk_cfg["covariance_epsilon"])),
+        "max_sharpe": max_sharpe(views, sigma, max_w, risk_cfg),
+        "risk_parity": risk_parity(sigma, max_w, risk_cfg),
+        "black_litterman": black_litterman(mu, sigma, views, max_w, risk_cfg),
+        "kelly": kelly(views, sigma, max_w, risk_cfg),
     }

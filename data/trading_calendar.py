@@ -1,4 +1,4 @@
-"""SSE/SZSE continuous-session 240-minute template. No future-bar fill."""
+"""US regular-session minute template with explicit missing-bar padding."""
 
 from __future__ import annotations
 
@@ -9,69 +9,39 @@ import numpy as np
 import pandas as pd
 
 
-def _hm(s: str) -> time:
-    hh, mm = s.split(":")
+def _hm(value: str) -> time:
+    hh, mm = str(value).split(":")[:2]
     return time(int(hh), int(mm))
 
 
 def session_times(cfg: dict) -> List[time]:
     cal = cfg["calendar"]
-    lo_m, hi_m = cal["morning"]
-    lo_a, hi_a = cal["afternoon"]
+    cur = datetime.combine(datetime.today().date(), _hm(cal["regular_session_start"]))
+    end = datetime.combine(datetime.today().date(), _hm(cal["regular_session_end"]))
     out: List[time] = []
-    t = datetime.combine(datetime.today().date(), _hm(lo_m))
-    end = datetime.combine(datetime.today().date(), _hm(hi_m))
-    while t <= end:
-        out.append(t.time())
-        t += timedelta(minutes=1)
-    t = datetime.combine(datetime.today().date(), _hm(lo_a))
-    end = datetime.combine(datetime.today().date(), _hm(hi_a))
-    while t <= end:
-        out.append(t.time())
-        t += timedelta(minutes=1)
-    n = int(cal["bars_per_day"])
-    if len(out) != n:
-        raise RuntimeError(f"minute template has {len(out)} slots, expected {n}")
+    while cur <= end:
+        out.append(cur.time())
+        cur += timedelta(minutes=1)
+    expected = int(cal["bars_per_day"])
+    if len(out) != expected:
+        raise RuntimeError(f"minute template has {len(out)} slots, expected {expected}")
     return out
 
 
-def is_dropped_clock(ts: pd.Timestamp, drop: Sequence[str]) -> bool:
-    clock = f"{ts.hour:02d}:{ts.minute:02d}"
-    return clock in set(drop)
-
-
-def align_day_to_template(
-    day_index: pd.DatetimeIndex,
-    values: np.ndarray,
-    template: Sequence[time],
-) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Map a day's irregular minutes onto the 240-slot template.
-    Missing slots are zero + mask=0. Never copies a later minute backward.
-    """
+def align_day_to_template(local_timestamps: pd.DatetimeIndex, values: np.ndarray, template: Sequence[time]) -> Tuple[np.ndarray, np.ndarray]:
     n = len(template)
-    if values.ndim == 1:
-        aligned = np.zeros((n,), dtype=np.float32)
-    else:
-        aligned = np.zeros((n,) + values.shape[1:], dtype=np.float32)
+    aligned = np.full((n,) + values.shape[1:], np.nan, dtype=np.float32)
     mask = np.zeros((n,), dtype=np.float32)
-    if len(day_index) == 0:
-        return aligned, mask
     clock_to_i = {(t.hour, t.minute): i for i, t in enumerate(template)}
-    for j, ts in enumerate(day_index):
-        ts = pd.Timestamp(ts)
-        key = (int(ts.hour), int(ts.minute))
-        i = clock_to_i.get(key)
-        if i is None:
+    for row, ts in enumerate(local_timestamps):
+        t = pd.Timestamp(ts)
+        slot = clock_to_i.get((t.hour, t.minute))
+        if slot is None:
             continue
-        aligned[i] = values[j]
-        mask[i] = 1.0
+        aligned[slot] = values[row]
+        mask[slot] = 1.0
     return aligned, mask
 
 
-def trading_days_from_index(idx: pd.DatetimeIndex) -> List[pd.Timestamp]:
-    return list(sorted({pd.Timestamp(t).normalize() for t in idx}))
-
-
-def stamp(day: pd.Timestamp, clock: str) -> pd.Timestamp:
-    return pd.Timestamp(f"{pd.Timestamp(day).date()} {clock}")
+def stamp(day: pd.Timestamp, clock: str, timezone: str = "America/New_York") -> pd.Timestamp:
+    return pd.Timestamp(f"{pd.Timestamp(day).date()} {clock}", tz=timezone)

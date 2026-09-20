@@ -1,60 +1,82 @@
-"""Temporal / patch Transformer over 2400 minute tokens."""
+"""Patch-based temporal Transformer with learned causal-history pooling."""
 
 from __future__ import annotations
 
 import math
-from typing import Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 
 class PatchEmbed(nn.Module):
     def __init__(self, feat_dim: int, d_model: int, patch: int) -> None:
         super().__init__()
-        self.patch = int(patch)
-        self.proj = nn.Linear(feat_dim * int(patch), d_model)
+        self.patch_size = int(patch)
+        self.proj = nn.Linear(feat_dim * self.patch_size, d_model)
 
-    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-        squeeze = False
-        if x.dim() == 3:
-            x = x.unsqueeze(0)
-            squeeze = True
+    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor]) -> Tuple[torch.Tensor, torch.Tensor]:
+        if x.dim() != 3:
+            raise RuntimeError("MinuteEncoder expects [stocks, minutes, features]")
+        n, length, feat = x.shape
+        patch = self.patch_size
+        padded = int(math.ceil(length / patch) * patch)
+        if padded != length:
+            x = F.pad(x, (0, 0, 0, padded - length))
             if mask is not None:
-                mask = mask.unsqueeze(0)
-        b, n, l, f = x.shape
-        p = self.patch
-        n_p = l // p
-        x = x[:, :, : n_p * p].reshape(b, n, n_p, p * f)
-        h = self.proj(x)
-        pm = None
-        if mask is not None:
-            m = mask[:, :, : n_p * p].reshape(b, n, n_p, p).mean(dim=-1)
-            pm = m < 0.25
-        if squeeze:
-            return h.squeeze(0), None if pm is None else pm.squeeze(0)
-        return h, pm
+                mask = F.pad(mask, (0, padded - length))
+        if mask is None:
+            mask = torch.ones((n, padded), device=x.device, dtype=x.dtype)
+        h = self.proj(x.reshape(n, padded // patch, patch * feat))
+        patch_valid = mask.reshape(n, padded // patch, patch).sum(dim=-1) > 0
+        return h, patch_valid
 
 
 class MinuteEncoder(nn.Module):
-    def __init__(self, feat_dim: int, d_model: int, patch: int, n_heads: int, n_layers: int, dropout: float, max_patches: int = 160) -> None:
+    def __init__(self, feat_dim: int, d_model: int, patch: int, n_heads: int, n_layers: int, dropout: float, max_patches: int) -> None:
         super().__init__()
         self.patch = PatchEmbed(feat_dim, d_model, patch)
-        self.pe = nn.Parameter(torch.zeros(1, max_patches, d_model))
-        nn.init.normal_(self.pe, std=0.02)
-        layer = nn.TransformerEncoderLayer(d_model, n_heads, d_model * 2, dropout, batch_first=True, norm_first=True)
-        self.enc = nn.TransformerEncoder(layer, num_layers=n_layers)
-        self.last_attn: Optional[torch.Tensor] = None
+        self.position = nn.Parameter(torch.zeros(1, int(max_patches), d_model))
+        nn.init.normal_(self.position, std=0.02)
+        layer = nn.TransformerEncoderLayer(
+            d_model,
+            n_heads,
+            d_model * 2,
+            dropout,
+            batch_first=True,
+            norm_first=True,
+            activation="gelu",
+        )
+        self.encoder = nn.TransformerEncoder(layer, num_layers=int(n_layers))
+        self.pool_query = nn.Parameter(torch.zeros(1, 1, d_model))
+        nn.init.normal_(self.pool_query, std=0.02)
+        self.pool = nn.MultiheadAttention(d_model, n_heads, dropout=dropout, batch_first=True)
+        self.norm = nn.LayerNorm(d_model)
+        self.last_attention_summary: Dict[str, torch.Tensor] = {}
 
     def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-        h, key_pad = self.patch(x, mask)
-        p = h.size(-2)
-        h = h + self.pe[:, :p]
-        if h.dim() == 3:
-            h = self.enc(h, src_key_padding_mask=key_pad)
-            return h[:, -1]
-        b, n, p, d = h.shape
-        h = h.reshape(b * n, p, d)
-        kp = None if key_pad is None else key_pad.reshape(b * n, p)
-        h = self.enc(h, src_key_padding_mask=kp)
-        return h[:, -1].reshape(b, n, d)
+        h, patch_valid = self.patch(x, mask)
+        patches = h.size(1)
+        if patches > self.position.size(1):
+            raise RuntimeError(f"{patches} patches exceed positional capacity {self.position.size(1)}")
+        h = h + self.position[:, :patches]
+        pad = ~patch_valid
+        all_pad = pad.all(dim=1)
+        if bool(all_pad.any()):
+            pad = pad.clone()
+            pad[all_pad, 0] = False
+        h = self.encoder(h, src_key_padding_mask=pad)
+        query = self.pool_query.expand(h.size(0), -1, -1)
+        pooled, weight = self.pool(query, h, h, key_padding_mask=pad, need_weights=True, average_attn_weights=False)
+        # [N, heads, 1, patches] -> one auditable distribution over history.
+        mean_weight = weight.mean(dim=(0, 1, 2))
+        prob = mean_weight / mean_weight.sum().clamp_min(1e-12)
+        entropy = -(prob.clamp_min(1e-12) * prob.clamp_min(1e-12).log()).sum()
+        self.last_attention_summary = {
+            "temporal_patch_attention": prob.detach(),
+            "temporal_attention_entropy": entropy.detach(),
+            "temporal_attention_concentration": prob.max().detach(),
+            "temporal_mask_rate": pad.float().mean().detach(),
+        }
+        return self.norm(pooled.squeeze(1))

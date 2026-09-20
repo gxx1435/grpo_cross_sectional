@@ -34,13 +34,29 @@ def apply_valid_mask(w: np.ndarray, valid: np.ndarray) -> np.ndarray:
 
 
 def cap_and_simplex(w: np.ndarray, max_weight: float) -> np.ndarray:
-    w = np.clip(np.asarray(w, dtype=np.float64), 0.0, float(max_weight))
-    s = w.sum()
-    if s <= 1e-12:
-        w = np.ones_like(w) / w.size
-    else:
-        w = w / s
-    return project_simplex(w)
+    """Euclidean projection onto {w >= 0, sum(w)=1, w <= max_weight}."""
+    values = np.asarray(w, dtype=np.float64).ravel()
+    cap = float(max_weight)
+    if values.size * cap < 1.0 - 1e-12:
+        raise ValueError(f"infeasible max_weight={cap} for n={values.size}")
+    if not np.isfinite(values).all():
+        values = np.ones_like(values)
+    lo = float(np.min(values - cap))
+    hi = float(np.max(values))
+    for _ in range(100):
+        theta = 0.5 * (lo + hi)
+        candidate = np.clip(values - theta, 0.0, cap)
+        if candidate.sum() > 1.0:
+            lo = theta
+        else:
+            hi = theta
+    projected = np.clip(values - hi, 0.0, cap)
+    residual = 1.0 - float(projected.sum())
+    if abs(residual) > 1e-10:
+        room = cap - projected if residual > 0 else projected
+        eligible = room > 1e-14
+        projected[eligible] += residual * room[eligible] / float(room[eligible].sum())
+    return projected
 
 
 def sanitize_cov(sigma: np.ndarray, eps: float = 1e-6) -> np.ndarray:

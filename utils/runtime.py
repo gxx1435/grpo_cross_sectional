@@ -37,8 +37,8 @@ def estimate_resources(cfg: Dict[str, Any], n_months: int = 13) -> ResourceEstim
     pred = cfg["prediction"]
     d = int(pred["d_model"])
     patch = int(pred["patch"])
-    lookback = int(pred["lookback_bars"])
-    n_stocks = int(cfg["universe"]["n_stocks_cap"])
+    lookback = int(cfg["calendar"]["lookback_days"]) * int(cfg["calendar"]["bars_per_day"])
+    n_stocks = 500
     epochs = int(pred["epochs"])
     top_k = int(cfg["portfolio"]["top_k"])
     g = int(cfg["rl"]["group_size"])
@@ -50,26 +50,17 @@ def estimate_resources(cfg: Dict[str, Any], n_months: int = 13) -> ResourceEstim
         gpu_mem = torch.cuda.get_device_properties(0).total_memory / 1e9
     vram = min(gpu_mem * 0.9, 1.0 + act_gb + params * 4 / 1e9 * 3)
     sec_ep = n_stocks / 500.0 * (lookback / 2400.0) * 220 * 1.6
-    n_pred = len(pred["models"])
+    n_pred = 1
     n_gen = 5
     n_rl = 2
     n_pools = max(len((cfg.get("matrix") or {}).get("allocation_pools") or ["top30"]), 1)
-    oos = len(cfg["oos_modes"])
-    n_friday = 4 if "sequential_oos_weekly_retrain" in cfg.get("oos_modes", []) else 0
+    oos = 1
     init_s = sec_ep * epochs * n_months * n_pred + n_pools * (180 * n_months * n_gen + 300 * n_months * n_rl)
-    # Friday close retrain: primary alpha + generative + PPO/GRPO only, both pools
-    retrain_s = n_friday * n_months * (sec_ep * epochs + n_pools * (180 * n_gen + 300 * n_rl))
-    if "strict_fixed_oos" in cfg.get("oos_modes", []) and n_friday:
-        init_s *= oos
-    elif "strict_fixed_oos" in cfg.get("oos_modes", []):
-        init_s *= max(oos, 1)
-    total_h = (init_s + retrain_s) / 3600.0
+    total_h = init_s * oos / 3600.0
     notes = (
-        f"OOS={cfg.get('oos_modes')} | {n_months} months | pools={n_pools} "
-        f"(top30+all uses compact cond on K=500) | "
-        f"Friday retrain ~{n_friday}/month (primary+SS-FM+RL per pool) | "
-        f"SFT rank_weight={pred.get('rank_weight', 0)} csz={pred.get('sft_cs_zscore', True)} val_select={pred.get('val_select', 'mse')} | "
-        "AMP + multi-asof batch + cudnn.benchmark (high_utilization)"
+        f"OOS=strict_fixed_oos | {n_months} months | pools={n_pools} | "
+        f"alpha={pred.get('strategy_name')} | train_day_stride={cfg.get('runtime', {}).get('train_day_stride')} | "
+        "AMP, deterministic settings, fixed Test checkpoint"
     )
     if gpu_mem >= 30:
         notes = "RTX 32GB class: AMP on, allow grad accum / checkpoint on OOM"
@@ -84,7 +75,8 @@ def estimate_resources(cfg: Dict[str, Any], n_months: int = 13) -> ResourceEstim
         est_total_hours=round(total_h, 1),
         est_infer_sec=round(0.6 * lookback / 2400.0 * n_stocks / 500.0, 2),
         est_sample_sec=round(0.05 * g, 3),
-        est_disk_gb=round(n_months * oos * 0.25 + 3.0, 2),
+        # Raw parquet + 130-feature parquet + dense float32 research store.
+        est_disk_gb=round(120.0 + n_months * oos * 0.5, 2),
         est_gpu_hours=round(total_h * 1.1, 1),
         notes=notes,
     )
@@ -92,7 +84,11 @@ def estimate_resources(cfg: Dict[str, Any], n_months: int = 13) -> ResourceEstim
 
 def feat_dim_guess(cfg: Dict[str, Any]) -> int:
     f = cfg["prediction"].get("feat_dim", "auto")
-    return 46 if f == "auto" else int(f)
+    if f != "auto":
+        return int(f)
+    from data.minute_features import feature_names
+
+    return len(feature_names(cfg))
 
 
 def is_oom(err: BaseException) -> bool:

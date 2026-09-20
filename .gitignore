@@ -16,6 +16,7 @@ Thumbs.db
 
 # Local market data, caches, checkpoints
 files/
+data/processed/
 *.zip
 *.npz
 **/.hf_cache/
@@ -24,12 +25,10 @@ files/
 *.pth
 *.ckpt
 
-# results: keep 实验分析 + figures; drop weights, logs, tables, run dirs
+# Generated experiment outputs stay out of Git history by default.  A release
+# commit may force-add a reviewed, compact evidence set; full artifacts belong
+# in the corresponding GitHub Release.
 results/**
-!results/**/
-!results/**/*.md
-!results/**/*.png
-!results/**/*.svg
 
 # Legacy local scripts (old GitHub tree; keep on disk, do not publish)
 /diag.py
@@ -45,4 +44,3 @@ results/**
 /wait_then_run*.py
 /watch_*.py
 /scripts/
-/tests/
