@@ -49,7 +49,7 @@ from portfolio.teacher_portfolios import TEACHER_IDS, TEACHER_NAMES
 from portfolio.topk import select_topk, topk_table
 from rl.grpo import grpo_update
 from rl.ppo import ValueHead, WeightPolicy, ppo_update, sample_portfolios
-from rl.reward import composite_reward, fit_reward_scalers
+from rl.reward import composite_reward, fit_reward_scalers, reward_mode
 from utils.config import refresh_prediction_train_cfg
 from utils.git_info import environment_info
 from utils.io import dump_yaml_copy, experiment_id
@@ -749,7 +749,10 @@ def distill_and_rl(ss_fm, cache, cfg, device, algo: str, k: Optional[int] = None
             w, logits_s, _ = sample_portfolios(pol, cond, g, float(cfg["rl"]["noise_std"]))
             ws = w.detach().cpu().numpy()
             rews = []
-            shp = causal_sharpe(
+            mode = reward_mode(cfg)
+            # Shared path stats (legacy composite). For sharpe_only, recompute per sample
+            # so group members get distinct advantages.
+            shp_shared = causal_sharpe(
                 hist_net,
                 cfg["portfolio"]["sharpe_min_obs"],
                 0.0,
@@ -758,6 +761,16 @@ def distill_and_rl(ss_fm, cache, cfg, device, algo: str, k: Optional[int] = None
             smdd = smooth_dd_to_date(np.asarray(hist_net), cfg["portfolio"]["smooth_dd_temperature"])
             for gi in range(g):
                 met = execute_day(ws[gi], item["R"], prev, cfg)
+                if mode in ("sharpe", "sharpe_only", "single_sharpe"):
+                    # Include today's net return so within-group Sharpe differs by weight.
+                    shp = causal_sharpe(
+                        list(hist_net) + [met["net_return"]],
+                        cfg["portfolio"]["sharpe_min_obs"],
+                        0.0,
+                        int(cfg["portfolio"].get("sharpe_window", 20)),
+                    )
+                else:
+                    shp = shp_shared
                 pack = composite_reward(
                     {"return": met["net_return"], "sharpe": shp, "turnover": met["turnover"], "smooth_mdd": smdd},
                     scalers,
@@ -801,7 +814,7 @@ def distill_and_rl(ss_fm, cache, cfg, device, algo: str, k: Optional[int] = None
             prev = w_next
             n_upd += 1
             rl_bar.update(ep * len(cache) + n_upd, f"ep{ep+1} {item['asof'].date()}")
-        log(f"      {algo.upper()} epoch {ep+1} updates={n_upd} wall={time.time()-t0:.1f}s bc_coef={bc_coef} prev={prev_mode}")
+        log(f"      {algo.upper()} epoch {ep+1} updates={n_upd} wall={time.time()-t0:.1f}s mode={reward_mode(cfg)} bc_coef={bc_coef} prev={prev_mode}")
     rl_bar.close()
     pol._reward_scalers = scalers  # type: ignore[attr-defined]
     return pol

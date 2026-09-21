@@ -242,11 +242,19 @@ def main() -> None:
     ap.add_argument("--months", nargs="*", default=MONTHS)
     ap.add_argument("--src-tag", default="strict_fixed_oos")
     ap.add_argument("--out-tag", default="strict_fixed_oos_rl_bc")
+    ap.add_argument("--reward-mode", default=None, help="composite | sharpe_only")
     ap.add_argument("--merge-only", action="store_true")
     ap.add_argument("--skip-merge", action="store_true")
     args = ap.parse_args()
 
-    cfg = load_config()
+    overrides = {}
+    if args.reward_mode:
+        mode = str(args.reward_mode).strip().lower()
+        rem = {"mode": mode}
+        if mode in ("sharpe", "sharpe_only", "single_sharpe"):
+            rem.update({"w_return": 0.0, "w_sharpe": 1.0, "w_turnover": 0.0, "w_smooth_mdd": 0.0})
+        overrides["reward"] = rem
+    cfg = load_config(overrides=overrides if overrides else None)
     assert str(cfg["experiment"]["market"]).lower() in ("sp500", "s&p500", "spx")
     results_dir = resolve_path(cfg, cfg["paths"]["results_dir"])
     src_root = results_dir / args.src_tag
@@ -255,9 +263,10 @@ def main() -> None:
     months = list(args.months)
 
     log(
-        f"SP500 RL-BC rerun | reward TO/MDD={cfg['reward'].get('w_turnover')}/{cfg['reward'].get('w_smooth_mdd')} "
+        f"SP500 RL rerun | mode={cfg['reward'].get('mode', 'composite')} "
+        f"TO/MDD={cfg['reward'].get('w_turnover')}/{cfg['reward'].get('w_smooth_mdd')} "
         f"bc_coef={cfg['rl'].get('bc_coef')} prev={cfg['rl'].get('prev_mode')} noise={cfg['rl'].get('noise_std')} "
-        f"epochs={cfg['rl'].get('epochs')} months={len(months)}"
+        f"epochs={cfg['rl'].get('epochs')} months={len(months)} out={args.out_tag}"
     )
     write_json(
         dest_root / "rerun_config.json",
@@ -266,6 +275,7 @@ def main() -> None:
             "rl": {k: cfg["rl"].get(k) for k in ("bc_coef", "prev_mode", "noise_std", "epochs", "group_size", "distill_steps", "teacher_bc_samples")},
             "months": months,
             "src_tag": args.src_tag,
+            "out_tag": args.out_tag,
         },
     )
 
