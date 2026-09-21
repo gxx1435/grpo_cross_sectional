@@ -7,8 +7,13 @@ rl:
   epochs: 2
   lr: 1.0e-4
   noise_std: 0.5
-  group_size: 32
+  group_size: 16
   distill_steps: 80
+  # Behavior cloning toward SS-FM samples during RL (0 = off).
+  bc_coef: 0.0
+  teacher_bc_samples: 4
+  # How to roll prev weights: mean | best_reward | select_candidate
+  prev_mode: mean
   ppo:
     cliprange: 0.2
     vf_coef: 0.5

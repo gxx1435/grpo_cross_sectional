@@ -1,0 +1,148 @@
+# S&P500 overlay — merged after default configs when GRPO_MARKET=sp500
+
+experiment:
+  name: sp500_minute_transformer_ssfm
+  market: sp500
+  seed: 42
+  deterministic: true
+  deterministic_warn_only: true
+
+paths:
+  results_dir: results/S&P500
+  cache_dir: files/sp500/.cache
+  sp500_parquet_dir: /home/tom/Documents/SP500/equs_mini_with_adj_factors_202405_202605
+  # disable CSI paths
+  auction_dirs: []
+  minute_pools: []
+  constituents_csv: files/sp500/universe_proxy.txt
+  ohlcv_csv_dir: files/sp500/ohlcv_cache
+
+universe:
+  index: SP500
+  n_stocks_cap: 503
+  join_key: symbol
+  min_rth_bars: 800
+  universe_type: proxy_current_constituents_backfilled
+  survivorship_bias: true
+
+calendar:
+  session_mode: us_rth
+  bars_per_day: 390
+  lookback_days: 10
+  morning: ["09:30", "15:59"]
+  afternoon: ["15:59", "15:58"]
+  drop_minute_times: []
+  close_print: "16:00"
+  auction_available_clock: "09:25:00"
+  decision_clock: "16:00:00"
+  execution_clock: "09:30:00"
+  realization_clock: "16:00:00"
+
+panel:
+  start: "2024-05-01"
+  end: "2026-05-10"
+
+walkforward:
+  test_start: "2025-06"
+  test_end: "2026-05"
+  train_months: 12
+  val_months: 1
+  train_offset_months: 13
+
+oos_modes:
+  - strict_fixed_oos
+
+portfolio:
+  top_k: 30
+  rank_k: 30
+  allocation_pools: [all]
+  long_only: true
+  max_weight: 0.15
+  cost_bps: 3.0
+  cost_on_turnover_l1: true
+  initial_turnover_mode: vs_cash
+  return_type: log
+  hist_risk_lookback_days: 60
+  sharpe_window: 20
+  sharpe_min_obs: 5
+  smooth_dd_temperature: 20.0
+
+reward:
+  w_return: 0.4
+  w_sharpe: 0.4
+  # Soft friction: keep Pure SS-FM alpha; was 0.15 (over-smoothed RL).
+  w_turnover: 0.05
+  w_smooth_mdd: 0.05
+  zmax: 5.0
+  eps: 1.0e-8
+  fit_on: train_only
+
+# RL overlay: stay near SS-FM, avoid mean-collapse of G samples.
+rl:
+  bc_coef: 0.2
+  teacher_bc_samples: 4
+  prev_mode: best_reward
+  noise_std: 0.25
+  epochs: 3
+
+prediction:
+  target: next_open_to_close_log
+  formula: log(Close_{D+1}/Open_{D+1})
+  lookback_bars: 3900
+  feat_dim: auto
+  d_model: 64
+  n_heads: 4
+  n_layers_temporal: 2
+  n_layers_cross: 1
+  patch: 30
+  dropout: 0.1
+  stock_chunk: 32
+  epochs: 3
+  early_stopping_patience: 2
+  seeds: [42]
+  models:
+    - standard_transformer
+  primary_model: standard_transformer
+
+ssfm:
+  group_sizes: [8, 16, 32, 64, 128]
+  default_g_source: validation
+  default_g: 16
+  teachers: [mvo, max_sharpe, risk_parity]
+  n_teachers: 3
+
+matrix:
+  A_prediction:
+    - standard_transformer
+  B_portfolio:
+    - equal_weight
+    - mvo
+    - max_sharpe
+    - risk_parity
+    - black_litterman
+    - kelly
+  C_generative:
+    - mlp
+    - gaussian
+    - standard_fm
+    - diffusion
+    - ssfm
+  D_rl:
+    - ssfm
+    - ssfm_ppo
+    - ssfm_grpo
+  E_g: [8, 16, 32, 64, 128]
+  F_oos:
+    - strict_fixed_oos
+  allocation_pools:
+    - all
+
+disabled:
+  auction: true
+  fusion: true
+  gate: true
+  lstm: true
+  tcn: true
+  patchtst: true
+  friday_retrain: true
+  sequential_oos: true
