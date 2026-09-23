@@ -683,6 +683,28 @@ def select_candidate(ws: np.ndarray, alpha: np.ndarray, sigma: np.ndarray, cfg: 
     return j, ws[j]
 
 
+def select_candidate_meta(
+    ws: np.ndarray,
+    alpha: np.ndarray,
+    sigma: np.ndarray,
+    cfg: dict,
+    teachers: Optional[dict] = None,
+    teacher_names: Optional[Tuple[str, ...]] = None,
+) -> Tuple[int, np.ndarray]:
+    """pred_utility over generative samples ∪ teacher closed-form weights (Meta)."""
+    names = teacher_names or TEACHER_NAMES
+    parts = [np.asarray(ws, dtype=np.float64)]
+    if teachers:
+        for tn in names:
+            if tn not in teachers:
+                continue
+            w = np.asarray(teachers[tn], dtype=np.float64).reshape(-1)
+            if w.size == parts[0].shape[-1]:
+                parts.append(w.reshape(1, -1))
+    pool = np.concatenate(parts, axis=0) if len(parts) > 1 else parts[0]
+    return select_candidate(pool, alpha, sigma, cfg)
+
+
 def distill_and_rl(ss_fm, cache, cfg, device, algo: str, k: Optional[int] = None, compact: bool = False) -> WeightPolicy:
     k = int(k if k is not None else cfg["portfolio"]["top_k"])
     cd = cond_dim(k, compact=compact)
@@ -1352,23 +1374,26 @@ def run_month(
                 daily_all.append(backtest_items(test_cache, ws, cfg, f"rl_ssfm_{algo}_{pool}", oos_mode, default_g))
                 _flush_partial_daily(f"D-backtest-{algo}-{pool}")
         if g_grid:
-            if "ssfm" not in gen_models:
-                raise RuntimeError("G experiments require trained SS-FM")
-            log(f"==== 实验E G-grid {g_grid} | pool={pool} | {month} ====")
-            for g in g_grid:
-                t_s = time.time()
-                ws = []
-                for it in test_cache:
-                    cond = torch.from_numpy(it["cond"]).to(device)
-                    w, _ = sample_and_audit(lambda: sample_ss_fm_mixed(gen_models["ssfm"], cond, int(g), int(cfg["ssfm"]["n_sample_steps"])))
-                    arr = w.detach().cpu().numpy()
-                    _, wsel = select_candidate(arr, it["alpha"][it["idx"]], it["sigma"], cfg)
-                    ws.append(apply_valid_mask(wsel, it["valid"][it["idx"]]))
-                df = backtest_items(test_cache, ws, cfg, f"ssfm_G{g}_{pool}", oos_mode, int(g))
-                df["sampling_time_sec"] = time.time() - t_s
-                daily_all.append(df)
-                month_bar.update(msg=f"E {pool} G={g}")
-                _flush_partial_daily(f"E-G{g}-{pool}")
+            g_gens = [n for n in ("ssfm", "standard_fm") if n in gen_models]
+            if not g_gens:
+                raise RuntimeError("G experiments require trained SS-FM or standard_fm")
+            log(f"==== 实验E G-grid {g_grid} gens={g_gens} | pool={pool} | {month} ====")
+            for gname in g_gens:
+                tag = "ssfm" if gname == "ssfm" else "fm"
+                for g in g_grid:
+                    t_s = time.time()
+                    ws = []
+                    for it in test_cache:
+                        cond = torch.from_numpy(it["cond"]).to(device)
+                        w, _ = sample_and_audit(lambda gg=g, gn=gname: sample_model(gn, gen_models[gn], cond, int(gg), cfg))
+                        arr = w.detach().cpu().numpy()
+                        _, wsel = select_candidate(arr, it["alpha"][it["idx"]], it["sigma"], cfg)
+                        ws.append(apply_valid_mask(wsel, it["valid"][it["idx"]]))
+                    df = backtest_items(test_cache, ws, cfg, f"{tag}_G{g}_{pool}", oos_mode, int(g))
+                    df["sampling_time_sec"] = time.time() - t_s
+                    daily_all.append(df)
+                    month_bar.update(msg=f"E {pool} {tag} G={g}")
+                    _flush_partial_daily(f"E-{tag}-G{g}-{pool}")
 
     daily = pd.concat(daily_all, ignore_index=True) if daily_all else pd.DataFrame()
     if cand_rows:
