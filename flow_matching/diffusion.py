@@ -35,11 +35,22 @@ def diffusion_loss(model: WeightDiffusion, w: torch.Tensor, cond: torch.Tensor) 
 
 
 @torch.no_grad()
-def sample_diffusion(model: WeightDiffusion, cond: torch.Tensor, n_samples: int) -> torch.Tensor:
+def sample_diffusion(
+    model: WeightDiffusion,
+    cond: torch.Tensor,
+    n_samples: int,
+    seed: int | None = None,
+) -> torch.Tensor:
     if cond.dim() == 1:
         cond = cond.unsqueeze(0)
     g, k = int(n_samples), model.n_assets
-    x = torch.randn(g, k, device=cond.device)
+    if seed is None:
+        x = torch.randn(g, k, device=cond.device)
+        gen = None
+    else:
+        gen = torch.Generator(device="cpu")
+        gen.manual_seed(int(seed) & 0xFFFFFFFF)
+        x = torch.randn(g, k, generator=gen).to(device=cond.device, dtype=torch.float32)
     cond_g = cond.expand(g, -1)
     for i in reversed(range(model.n_steps)):
         t = torch.full((g,), i, device=cond.device, dtype=torch.long)
@@ -47,5 +58,12 @@ def sample_diffusion(model: WeightDiffusion, cond: torch.Tensor, n_samples: int)
         a = model.alphas_cumprod[i]
         a_prev = model.alphas_cumprod[i - 1] if i > 0 else torch.tensor(1.0, device=cond.device)
         x0 = (x - torch.sqrt(1 - a) * eps) / torch.sqrt(a).clamp_min(1e-8)
-        x = x0 if i == 0 else torch.sqrt(a_prev) * x0 + torch.sqrt(1.0 - a_prev) * torch.randn_like(x)
+        if i == 0:
+            x = x0
+        else:
+            if gen is None:
+                noise = torch.randn_like(x)
+            else:
+                noise = torch.randn(g, k, generator=gen).to(device=cond.device, dtype=torch.float32)
+            x = torch.sqrt(a_prev) * x0 + torch.sqrt(1.0 - a_prev) * noise
     return F.softmax(x, dim=-1)

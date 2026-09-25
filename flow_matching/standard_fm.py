@@ -32,11 +32,22 @@ def std_fm_loss(model: StandardFlowMatching, w: torch.Tensor, cond: torch.Tensor
 
 
 @torch.no_grad()
-def sample_std_fm(model: StandardFlowMatching, cond: torch.Tensor, n_samples: int, n_steps: int) -> torch.Tensor:
+def sample_std_fm(
+    model: StandardFlowMatching,
+    cond: torch.Tensor,
+    n_samples: int,
+    n_steps: int,
+    seed: int | None = None,
+) -> torch.Tensor:
     if cond.dim() == 1:
         cond = cond.unsqueeze(0)
     g, k = int(n_samples), model.n_assets
-    x = torch.randn(g, k, device=cond.device)
+    if seed is None:
+        x = torch.randn(g, k, device=cond.device)
+    else:
+        gen = torch.Generator(device="cpu")
+        gen.manual_seed(int(seed) & 0xFFFFFFFF)
+        x = torch.randn(g, k, generator=gen).to(device=cond.device, dtype=torch.float32)
     cond_g = cond.expand(g, -1)
     dt = 1.0 / max(n_steps, 1)
     for s in range(n_steps):
