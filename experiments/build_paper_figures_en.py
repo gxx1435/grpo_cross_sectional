@@ -102,7 +102,7 @@ def clean_label(name: str) -> str:
         return "Risk Parity"
     if "max" in raw and "sharpe" in raw:
         return "Max Sharpe"
-    if re.search(r"\bmvo\b", raw):
+    if re.search(r"(^|[^a-z])mvo([^a-z]|$)", raw) or raw.endswith("_mvo") or "_mvo_" in raw or raw.startswith("mvo"):
         return "MVO"
     if "diffusion" in raw:
         return "Diffusion"
