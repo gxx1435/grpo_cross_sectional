@@ -3,7 +3,8 @@
 > **论文可用稿（完整版）**。统一口径：除非另注，收益为 OOS **单利 Σ**（`Σ net_return`）；配权池 **Top30**；SS-FM 主设定 **G=32**。  
 > 覆盖市场：**CSI500**（2025-05…2026-05，≈245 日）与 **S&P500**（2025-06…2026-05，≈235 日）。  
 > Teacher：闭式解 **MVO / Max-Sharpe / Risk-Parity**。  
-> 本报告整合：Teacher Exp1–3、diversity、生成/Teacher/RL 对照，以及**近两日** Meta / 无 Teacher 稳定性与 Softmax 全生成对照。图路径相对 `results/`。
+> 本报告整合：Teacher Exp1–3、diversity、生成/Teacher/RL 对照，以及**近两日** Meta / 无 Teacher 稳定性与 Softmax 全生成对照。  
+> **图**：`paper_figures_en/`（英文标题/坐标轴；图例已去掉 G=32、Meta 等协议字样）。再生：`experiments/build_paper_figures_en.py`。
 
 ---
 
@@ -94,11 +95,11 @@ u(w)=\hat\alpha^\top w-\tfrac12\lambda\, w^\top \Sigma_{t-1} w.
 | 64 | 0.0702 | 1.413 | 1.285 | 1.226 | 0.645 |
 | 128 | 0.0914 | 1.411 | 1.160 | 1.127 | 0.612 |
 
-![Coverage by G](S&P500/strict_fixed_oos_top30_ssfm_teacher_exps_s50/exp1_diagnose/figures/exp1_coverage_by_G.png)
+![Teacher coverage vs candidates](paper_figures_en/exp1_coverage_by_candidates.png)
 
-![Diversity by G](S&P500/strict_fixed_oos_top30_ssfm_teacher_exps_s50/exp1_diagnose/figures/exp1_diversity_by_G.png)
+![Diversity vs candidates](paper_figures_en/exp1_diversity_by_candidates.png)
 
-![CLR–PCA G=32](S&P500/strict_fixed_oos_top30_ssfm_teacher_exps_s50/exp1_diagnose/figures/exp1_clr_pca_G32.png)
+![CLR–PCA of SS-FM and teachers](paper_figures_en/exp1_clr_pca.png)
 
 - Coverage 随 G 升但仍极低；Diversity≈1.41 几乎不变 → 增大 \(G\) **填满同一云团**。  
 - 距 RP 最近、距 MVO/MS 更远；CLR–PCA **无稳定三簇**。约 24% 样本 \(u(w)\) 不低于最优 Teacher（≠ OOS 收益）。
@@ -128,9 +129,9 @@ u(w)=\hat\alpha^\top w-\tfrac12\lambda\, w^\top \Sigma_{t-1} w.
 | random | 0.019 | 0.050 | 0.091 |
 | teacher_aware | **0.039** | **0.081** | **0.112** |
 
-![Exp2 Pred-Utility](S&P500/strict_fixed_oos_top30_ssfm_teacher_exps_s50/exp2_sampling/figures/exp2_pred_utility_total_mean.png)
+![Exp2 Pred-Utility](paper_figures_en/exp2_pred_utility_total_mean.png)
 
-![Exp2 Coverage](S&P500/strict_fixed_oos_top30_ssfm_teacher_exps_s50/exp2_sampling/figures/exp2_coverage_by_sampling.png)
+![Exp2 Coverage](paper_figures_en/exp2_coverage_by_sampling.png)
 
 | sampling | G | Pred-Util total | 备注 |
 | --- | --- | ---: | --- |
@@ -147,7 +148,7 @@ u(w)=\hat\alpha^\top w-\tfrac12\lambda\, w^\top \Sigma_{t-1} w.
 
 \(L=L_{\mathrm{FM}}+\lambda_T L_{\mathrm{cov}}+\lambda_D L_{\mathrm{div}}\)（\(\lambda_T=0.2,\lambda_D=0.05\)）。
 
-![Exp3 G=32 four-way](S&P500/strict_fixed_oos_top30_ssfm_teacher_exps_s50/exp3_retrain/figures/exp3_G32_pred_utility_four_way.png)
+![Exp3 four-way Pred-Utility](paper_figures_en/exp3_pred_utility_four_way.png)
 
 | model | sampling | G=8 | G=32 | G=64 |
 | --- | --- | ---: | ---: | ---: |
@@ -179,11 +180,11 @@ flowchart LR
 | 4 | MLP (default) | 0.366 | 1.85 |
 | 5 | Diffusion (default) | 0.319 | 1.10 |
 
-![CSI Pure G32 vs default](CSI500/strict_fixed_oos_ssfm_g32_vs_default_gens/analysis/figures/cumulative_return.png)
+![CSI SS-FM vs default gens](paper_figures_en/csi_ssfm_vs_default_gens_cum.png)
 
 默认 G 下 SS-FM≈0.37 **弱于** FM(0.49)；**G=32 后跃至 0.61** → 优势来自候选规模+选仓。
 
-![FM vs SS-FM G](CSI500/strict_fixed_oos/analysis/全年总览/figures/fm_vs_ssfm_g_cumulative_return.png)
+![FM vs SS-FM across candidates](paper_figures_en/csi_fm_vs_ssfm_candidates_cum.png)
 
 ### 4.2 CSI：G=32 Meta Pred-Utility（近两日）— Meta 可伤害 SS-FM
 
@@ -195,11 +196,11 @@ flowchart LR
 | 4 | SS-FM Meta | **0.186** | 0.52 |
 | 5 | MLP Meta | 0.091 | 0.29 |
 
-![CSI Meta Pred-Util](CSI500/strict_fixed_oos_g32_meta/analysis/figures/csi_g32_meta_gens_cumulative_return.png)
+![CSI gens Pred-Utility](paper_figures_en/csi_gens_pred_utility_cum.png)
 
 同设定下 SS-FM Meta vs 默认生成族：**Meta 垫底（0.19）**，默认 FM/Gauss/MLP/Diff 均更高：
 
-![SS-FM Meta vs default](CSI500/strict_fixed_oos_ssfm_g32_meta_vs_default_gens/analysis/figures/cumulative_return.png)
+![SS-FM with teachers vs default gens](paper_figures_en/csi_ssfm_with_teachers_vs_default_gens_cum.png)
 
 → **C3**：勿把「加 Teacher」当成单调改进。
 
@@ -215,7 +216,7 @@ flowchart LR
 | MLP | 0.462 | 2.20 |
 | Gaussian | 0.453 | 2.27 |
 
-![CSI Softmax](CSI500/strict_fixed_oos_g32_meta_softmax/analysis/figures/csi_g32_meta_softmax_gens_cumulative_return.png)
+![CSI Softmax gens](paper_figures_en/csi_gens_softmax_cum.png)
 
 **SP**（仅 SS-FM 明显为正）：
 
@@ -227,7 +228,7 @@ flowchart LR
 | Gaussian | −0.024 | −0.22 |
 | Diffusion | −0.046 | −0.41 |
 
-![SP Softmax](S&P500/strict_fixed_oos_top30_g32_meta_softmax/analysis/figures/sp500_g32_meta_softmax_gens_cumulative_return.png)
+![SP Softmax gens](paper_figures_en/sp_gens_softmax_cum.png)
 
 → **C5–C6**：主指标用 Softmax；绝对水平 CSI≫SP；族内排序翻转。
 
@@ -250,7 +251,7 @@ flowchart LR
 | 64 | 0.750±0.280 | 0.466±0.199 | 0.319±0.119 |
 | 128 | **0.883±0.228** | 0.488±0.146 | 0.374±0.113 |
 
-![CSI Diff Meta G32 seeds](CSI500/strict_fixed_oos_diff_stability_meta_seeds/analysis/figures/diff_meta_stability_seeds_G32_pred_utility_seeds_cum.png)
+![CSI Diffusion seed curves](paper_figures_en/csi_diffusion_seed_cum_pred_utility.png)
 
 ### 5.2 CSI 无 Teacher（本轮新跑）
 
@@ -272,9 +273,9 @@ flowchart LR
 | 64 | 0.545±0.029 | 0.530±0.009 | 0.513±0.022 |
 | 128 | 0.553±0.024 | 0.527±0.007 | 0.512±0.015 |
 
-![CSI Diff no-Teacher](CSI500/strict_fixed_oos_diff_stability_seeds/analysis/figures/diff_stability_seeds_total_return_mean.png)
+![CSI Diffusion samples-only](paper_figures_en/csi_diffusion_no_teacher_return_by_candidates.png)
 
-![CSI SS-FM no-Teacher](CSI500/strict_fixed_oos_ssfm_stability_seeds/analysis/figures/ssfm_stability_seeds_total_return_mean.png)
+![CSI SS-FM samples-only](paper_figures_en/csi_ssfm_no_teacher_return_by_candidates.png)
 
 **稳定性结论（C7）**
 
@@ -291,7 +292,7 @@ flowchart LR
 | 64 | 0.022±0.064 | 0.078±0.049 | −0.107±0.079 |
 | 128 | 0.015±0.074 | 0.065±0.064 | **−0.172±0.075** |
 
-![SP SS-FM Meta seeds](S&P500/strict_fixed_oos_top30_ssfm_stability_meta_seeds_rerun/analysis/figures/ssfm_meta_stability_seeds_G32_pred_utility_seeds_cum.png)
+![SP SS-FM seed curves](paper_figures_en/sp_ssfm_seed_cum_pred_utility.png)
 
 → SP：**G↑ + Pred-Utility 对 Diff 有害**；SS-FM 宜小 G；与 CSI 符号相反（**C6**）。
 
@@ -308,7 +309,7 @@ flowchart LR
 | MaxSharpe | 0.369 | 1.19 | 0.220 | 0.917 |
 | MVO | 0.326 | 0.87 | 0.311 | 0.935 |
 
-![CSI Teacher vs gen](CSI500/strict_fixed_oos/analysis/全年总览/figures/teacher_vs_gen_g32_cumulative_return.png)
+![CSI teachers vs SS-FM](paper_figures_en/csi_teachers_vs_ssfm_cum.png)
 
 收益：SS-FM > RP > MS ≈ MVO；RP 换手/Sharpe 更稳。CSI Meta 点估计：MVO 0.55 / RP 0.53 / MS 0.20；SS-FM Meta 0.19（再次印证 Meta Pred-Util 伤害 SS-FM）。
 
@@ -322,7 +323,7 @@ flowchart LR
 | FM Meta | 0.144 | 1.07 | 0.679 |
 | Risk Parity | −0.025 | −0.23 | 0.065 |
 
-![SP Teacher vs gen](S&P500/strict_fixed_oos_top30_g32_meta/analysis/figures/g32_meta_teacher_vs_gen_cumulative_return.png)
+![SP teachers vs gens](paper_figures_en/sp_teachers_vs_gens_cum.png)
 
 薄机会下闭式 MVO 可赢 Meta Pred-Util 单点；**不等于** Softmax 下生成器无用（§4.3 SS-FM 仍第一）。
 
@@ -340,9 +341,9 @@ flowchart LR
 | PPO (cand) | 0.887 | 2.14 | 0.214 |
 | **PPO** | **1.051** | **2.81** | **0.260** |
 
-![CSI RL](CSI500/strict_fixed_oos/analysis/全年总览/figures/rl_g32_vs_pure_cumulative_return.png)
+![CSI RL vs SS-FM](paper_figures_en/csi_rl_vs_ssfm_cum.png)
 
-![CSI RL ablation](CSI500/strict_fixed_oos/analysis/全年总览/figures/rl_ablation_g32_cumulative_return.png)
+![CSI RL ablation](paper_figures_en/csi_rl_ablation_cum.png)
 
 PPO 单利约 **+73%**，换手降至 ≈0.26；消融均优于 Pure。
 
@@ -354,11 +355,11 @@ PPO 单利约 **+73%**，换手降至 ≈0.26；消融均优于 Pure。
 | GRPO (init) | 0.050 | 0.052±0.028 | 0/3 |
 | **PPO (cand)** | **0.247** | **0.179±0.035** | **3/3** |
 
-![SP RL](S&P500/strict_fixed_oos_top30_g32_meta/analysis/figures/g32_meta_rl_vs_ssfm_cumulative_return.png)
+![SP RL vs SS-FM](paper_figures_en/sp_rl_vs_ssfm_cum.png)
 
-![SP r06 mean](S&P500/strict_fixed_oos_top30_rl_r06_stability/analysis/figures/rl_r06_stability_total_mean.png)
+![SP RL stability mean](paper_figures_en/sp_rl_stability_mean_cum.png)
 
-![SP r06 seeds](S&P500/strict_fixed_oos_top30_rl_r06_stability/analysis/figures/rl_r06_stability_cumulative_seeds.png)
+![SP RL stability seeds](paper_figures_en/sp_rl_stability_seeds_cum.png)
 
 Meta seed 方差极大；**cand-PPO 均值更高、方差更小、换手≈1/4**。
 
@@ -428,6 +429,7 @@ Meta seed 方差极大；**cand-PPO 均值更高、方差更小、换手≈1/4**
 
 | 主题 | 路径 |
 | --- | --- |
+| 英文论文图（本报告引用） | `paper_figures_en/` |
 | 近两日汇总（本报告已并入） | `近两日实验汇总报告.md` |
 | Meta 稳定性总表 | `CSI500_SP500_生成模型Meta稳定性汇总.md` |
 | CSI 无 Teacher 稳定性 | `CSI500/CSI500_*_stability实验报告.md` |
